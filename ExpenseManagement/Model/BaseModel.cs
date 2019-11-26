@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Model
 {
-    class Contact : BaseModel
+    public class BaseModel
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
     }
 }

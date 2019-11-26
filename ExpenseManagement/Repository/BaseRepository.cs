@@ -11,6 +11,9 @@ namespace ExpenseManagement.Repository
     public class BaseRepository
     {
         public SqlConnection sqlConnection;
+        protected string Message;
+        protected string Query;
+
         public BaseRepository()
         {
             string connection = ConfigurationManager.ConnectionStrings["AzureConnection"].ConnectionString;

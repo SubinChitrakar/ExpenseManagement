@@ -12,21 +12,19 @@ namespace ExpenseManagement.Repository
 {
     class ContactRepository : BaseRepository
     {
-        private string Message;
-        private string Query;
-
         //Constructor
         public ContactRepository() :  base() { }
 
         //Read All Contacts
-        public List<Contact> GetContacts()
+        public List<Contact> GetContacts(int userId)
         {
             List<Contact> ContactList = new List<Contact>();
-            Query = "SELECT * FROM CONTACTS";
+            Query = "SELECT * FROM CONTACTS WHERE [UserId] = @UserId";
 
             try
             {
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = userId;
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 DataTable dataTable = new DataTable();
 
@@ -38,7 +36,8 @@ namespace ExpenseManagement.Repository
                                select new Contact()
                                {
                                    Id = Convert.ToInt32(dataRow["Id"]),
-                                   Name = Convert.ToString(dataRow["Name"])
+                                   Name = Convert.ToString(dataRow["Name"]),
+                                   UserId = Convert.ToInt32(dataRow["UserId"])
                                }).ToList();
             }
             catch (Exception ex)
@@ -52,19 +51,20 @@ namespace ExpenseManagement.Repository
         public string AddContact(Contact contact)
         {
             Message = "";
-            Query = "INSERT INTO CONTACTS([Name]) VALUES(@Name);";
+            Query = "INSERT INTO CONTACTS([Name], [UserId]) VALUES(@Name, @UserId);";
 
             try
             {
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
                 sqlCommand.Parameters.Add("@Name", SqlDbType.NVarChar).Value = contact.Name;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = contact.UserId;
 
                 sqlConnection.Open();
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
-                   Message = "Added Successfully!!";
+                    Message = "Added Successfully!!";
                 else
-                   Message = "Error, Data Not Added!";
+                    throw new Exception("Error, Data Not Added!");                   
                 sqlConnection.Close();
             }
             catch(Exception ex)
@@ -92,7 +92,7 @@ namespace ExpenseManagement.Repository
                 if (i > 0)
                     Message = "Updated Successfully!!";
                 else
-                    Message = "Error, Data Not Updated!";
+                    throw new Exception("Error, Data Not Updated!");
                 sqlConnection.Close();
             }
             catch (Exception ex)
@@ -119,7 +119,7 @@ namespace ExpenseManagement.Repository
                 if (i > 0)
                     Message = "Deleted Successfully!!";
                 else
-                    Message = "Error, Data Not Deleted!";
+                    throw new Exception("Error, Data Not Deleted!");
                 sqlConnection.Close();
             }
             catch (Exception ex)
