@@ -52,42 +52,36 @@ namespace ExpenseManagement.Repository
 
         public MessageStatus VerifyUser(string username, string password)
         {
-            Query = "SELECT * FROM Users";
-            //try {
+            Query = "SELECT * FROM Users WHERE [Username] = @Username AND [Password] = @Password";
+            try {
                 sqlConnection.Open();
 
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
-                //sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
-                //sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = password;
+                sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
+                sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = password;
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
                 
-                List<User>UserList = (from DataRow dataRow in dataTable.Rows
-                              select new User()
-                              {
-                                  Id = Convert.ToInt32(dataRow["Id"]),
-                                  UserName = Convert.ToString(dataRow["UserName"])  
-                              }).ToList();
-
-                Console.WriteLine("Count"+UserList.Count);
-                if (UserList.Count == 0)
+                if (dataTable.Rows.Count == 0)
                 {
-                    //throw new Exception("USERNAME or PASSWORD incorrect");
+                    throw new Exception("USERNAME or PASSWORD incorrect");
                 }
                 else
                 {
-                    messageStatus.Message = "Successfully Logged In";
+                    DataRow dataRow = dataTable.Rows[0];
+                    messageStatus.Message = Convert.ToString(dataRow["Id"]);
                     messageStatus.ErrorStatus = false;
                 }
-            /* }
-         catch(Exception ex) {
-             messageStatus.Message = ex.Message;
-             messageStatus.ErrorStatus = true;
-         }
-         finally
-         {
-             sqlConnection.Close();
-         }*/
+            }
+            catch(Exception ex) {
+                messageStatus.Message = ex.Message;
+                messageStatus.ErrorStatus = true;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
             sqlConnection.Close();
             return messageStatus;
         }

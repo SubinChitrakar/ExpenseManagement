@@ -2,9 +2,9 @@ D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\ExpenseManagement.e
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\ExpenseManagement.exe
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\ExpenseManagement.pdb
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csprojAssemblyReference.cache
-D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.MainForm.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.Properties.Resources.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csproj.GenerateResource.cache
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csproj.CoreCompileInputs.cache
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.exe
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.pdb
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.LoginForm.resources

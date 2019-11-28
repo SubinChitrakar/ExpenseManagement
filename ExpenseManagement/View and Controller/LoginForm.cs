@@ -1,6 +1,7 @@
 ﻿using ExpenseManagement.Model;
 using ExpenseManagement.Repository;
 using ExpenseManagement.Utilities;
+using ExpenseManagement.View_and_Controller;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +14,12 @@ using System.Windows.Forms;
 
 namespace ExpenseManagement
 {
-    public partial class MainForm : Form
+    public partial class LoginForm : Form
     {
 
         private UserRepository userRepository;
         private MessageStatus messageStatus;
-        public MainForm()
+        public LoginForm()
         {
             InitializeComponent();
             userRepository = new UserRepository();
@@ -136,14 +137,22 @@ namespace ExpenseManagement
             if (messageStatus.ErrorStatus)
             {
                 DialogResult result = MessageBox.Show(messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-                if (result == DialogResult.Cancel)
+                if (result == DialogResult.Retry)
+                {
+                    txtPasswordLogin.Text = "";
+                }
+                else
                 {
                     this.Dispose();
                 }
             }
             else
             {
-                MessageBox.Show("USER Sucessfully Logged In", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                UserSession.UserId = Convert.ToInt32(messageStatus.Message);
+                this.Hide();
+                Dashboard dashboard = new Dashboard();
+                dashboard.Closed += (s, args) => this.Close();
+                dashboard.Show();
             }
         }
     }

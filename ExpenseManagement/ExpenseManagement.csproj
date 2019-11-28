@@ -55,17 +55,24 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
     <Compile Include="Utilities\MessageStatus.cs" />
+    <Compile Include="Utilities\UserSession.cs" />
     <Compile Include="Utilities\Validator.cs" />
-    <Compile Include="View and Controller\MainForm.cs">
+    <Compile Include="View and Controller\Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View and Controller\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="View and Controller\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View and Controller\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View and Controller\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="View and Controller\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="View and Controller\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
