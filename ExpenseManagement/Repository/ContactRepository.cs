@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using ExpenseManagement.Model;
 using System.Data;
+using ExpenseManagement.Utilities;
 
 namespace ExpenseManagement.Repository
 {
@@ -23,15 +24,15 @@ namespace ExpenseManagement.Repository
 
             try
             {
+                sqlConnection.Open();
+
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
-                sqlCommand.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = userId;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 DataTable dataTable = new DataTable();
 
-                sqlConnection.Open();
                 sqlDataAdapter.Fill(dataTable);
-                sqlConnection.Close();
-
+                
                 ContactList = (from DataRow dataRow in dataTable.Rows
                                select new Contact()
                                {
@@ -42,92 +43,115 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
-                
+                Console.WriteLine("Exception: "+ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
             }
             return ContactList;
         }
 
         //Add Contact 
-        public string AddContact(Contact contact)
+        public MessageStatus AddContact(Contact contact)
         {
-            Message = "";
             Query = "INSERT INTO CONTACTS([Name], [UserId]) VALUES(@Name, @UserId);";
 
             try
             {
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
-                sqlCommand.Parameters.Add("@Name", SqlDbType.NVarChar).Value = contact.Name;
-                sqlCommand.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = contact.UserId;
-
                 sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = contact.Name;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = contact.UserId;
+
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
-                    Message = "Added Successfully!!";
+                {
+                    messageStatus.Message = "Added Successfully!!";
+                    messageStatus.ErrorStatus = false;
+                }
                 else
-                    throw new Exception("Error, Data Not Added!");                   
-                sqlConnection.Close();
+                    throw new Exception("Error, Data Not Added!");    
             }
             catch(Exception ex)
             {
-                Message = "Exception: "+ex.Message;
+                messageStatus.Message = ex.Message;
+                messageStatus.ErrorStatus = true;
             }
-
-            return Message;
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return messageStatus;
         }
 
         //Update Contact
-        public string UpdateContact(Contact contact)
+        public MessageStatus UpdateContact(Contact contact)
         {
-            Message = "";
             Query = "UPDATE CONTACTS SET [Name] = @Name WHERE [Id] = @Id ;";
 
             try
             {
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
-                sqlCommand.Parameters.Add("@Name", SqlDbType.NVarChar).Value = contact.Name;
-                sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
-
                 sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = contact.Name;
+                sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
+                                
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
-                    Message = "Updated Successfully!!";
+                {
+                    messageStatus.Message = "Updated Successfully!!";
+                    messageStatus.ErrorStatus = false;
+                }
                 else
                     throw new Exception("Error, Data Not Updated!");
-                sqlConnection.Close();
             }
             catch (Exception ex)
             {
-                Message = "Exception: " + ex.Message;
+                messageStatus.Message = ex.Message;
+                messageStatus.ErrorStatus = true;
+            }
+            finally
+            {
+                sqlConnection.Close();
             }
 
-            return Message;
+            return messageStatus;
         }
 
         //Delete Contact
-        public string DeleteContact(Contact contact)
+        public MessageStatus DeleteContact(Contact contact)
         {
-            Message = "";
             Query = "DELETE FROM Contacts WHERE [Id] = @Id;";
 
             try
             {
+                sqlConnection.Open();
+
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
                 sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
-
-                sqlConnection.Open();
+                
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
-                    Message = "Deleted Successfully!!";
+                {
+                    messageStatus.Message = "Deleted Successfully!!";
+                    messageStatus.ErrorStatus = false;
+                }
                 else
                     throw new Exception("Error, Data Not Deleted!");
-                sqlConnection.Close();
             }
             catch (Exception ex)
             {
-                Message = "Exception: " + ex.Message;
+                messageStatus.Message = ex.Message;
+                messageStatus.ErrorStatus = true;
             }
-
-            return Message;
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return messageStatus;
         }
     }
 }

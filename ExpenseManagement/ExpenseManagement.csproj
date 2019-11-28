@@ -52,7 +52,10 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
-    <Compile Include="Utilities\EncryptDecrypt.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Utilities\Encrypt.cs" />
+    <Compile Include="Utilities\MessageStatus.cs" />
+    <Compile Include="Utilities\Validator.cs" />
     <Compile Include="View and Controller\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +89,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Images\Logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

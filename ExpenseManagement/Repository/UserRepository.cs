@@ -1,4 +1,5 @@
 ﻿using ExpenseManagement.Model;
+using ExpenseManagement.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,33 +15,77 @@ namespace ExpenseManagement.Repository
         public UserRepository() : base() { }
 
         //Add Contact 
-        public string AddUser(User user)
+        public MessageStatus AddUser(User user)
         {
-            Message = "";
-            Query = "INSERT INTO Users([FirstName],[LastName],[Email],[Password]) VALUES(@FirstName, @LastName, @Email, @Password);";
+            Query = "INSERT INTO Users([FirstName],[LastName],[Username],[Password]) VALUES(@FirstName, @LastName, @Username, @Password);";
 
             try
             {
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
-                sqlCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = user.FirstName;
-                sqlCommand.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = user.LastName;
-                sqlCommand.Parameters.Add("@Email", SqlDbType.NVarChar).Value = user.UserName;
-                sqlCommand.Parameters.Add("@Password", SqlDbType.NVarChar).Value = user.Password;
-                               
                 sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = user.FirstName;
+                sqlCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = user.LastName;
+                sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = user.UserName;
+                sqlCommand.Parameters.Add("@Password", SqlDbType.Text).Value = user.Password;         
+                
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
-                    Message = "Added Successfully!!";
+                {
+                    messageStatus.Message = "Added Successfully!!";
+                    messageStatus.ErrorStatus = false;
+                }
                 else
                     throw new Exception("Error, Data Not Added!");
-                sqlConnection.Close();
             }
             catch (Exception ex)
             {
-                Message = "Exception: " + ex.Message;
+                messageStatus.Message = ex.Message;
+                messageStatus.ErrorStatus = true;
             }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return messageStatus;
+        }
 
-            return Message;
+
+        public MessageStatus CheckUserName(String username)
+        {
+            Query = "SELECT Username FROM Users WHERE [Username] = @Username";
+
+            try
+            {
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                DataTable dataTable = new DataTable();
+
+                sqlDataAdapter.Fill(dataTable);
+                
+                if (dataTable.Rows.Count == 0)
+                {
+                    messageStatus.Message = "Username doesn't Exist";
+                    messageStatus.ErrorStatus = false;
+                }
+                else
+                {
+                    throw new Exception("USERNAME already Taken!!");
+                }
+            }
+            catch (Exception ex)
+            {
+                messageStatus.Message = ex.Message;
+                messageStatus.ErrorStatus = true;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return messageStatus;
         }
     }
 }
