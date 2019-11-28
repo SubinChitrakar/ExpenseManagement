@@ -15,15 +15,18 @@ namespace ExpenseManagement
 {
     public partial class MainForm : Form
     {
+
+        private UserRepository userRepository;
+        private MessageStatus messageStatus;
         public MainForm()
         {
             InitializeComponent();
+            userRepository = new UserRepository();
+            messageStatus = new MessageStatus();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            UserRepository userRepository = new UserRepository();
-
             //Assigning Values
             string firstName = txtFirstName.Text;
             string lastName = txtLastName.Text;
@@ -92,7 +95,7 @@ namespace ExpenseManagement
             };
 
             //Adding User
-            MessageStatus messageStatus = userRepository.AddUser(newUser);
+            messageStatus = userRepository.AddUser(newUser);
             if(messageStatus.ErrorStatus)
             {
                 DialogResult result = MessageBox.Show(messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
@@ -108,6 +111,39 @@ namespace ExpenseManagement
                 txtUsername.Text = "";
                 txtPassword.Text = "";
                 txtConfirmPassword.Text = "";
+                MessageBox.Show("USER Sucessfully Registered", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string username = txtUsernameLogin.Text;
+            string password = txtPasswordLogin.Text;
+
+            if(string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("Please enter USERNAME", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Please enter PASSWORD", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            messageStatus = userRepository.VerifyUser(username, Encrypt.EncryptData(password));
+            if (messageStatus.ErrorStatus)
+            {
+                DialogResult result = MessageBox.Show(messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                if (result == DialogResult.Cancel)
+                {
+                    this.Dispose();
+                }
+            }
+            else
+            {
+                MessageBox.Show("USER Sucessfully Logged In", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

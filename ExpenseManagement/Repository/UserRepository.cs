@@ -27,7 +27,7 @@ namespace ExpenseManagement.Repository
                 sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = user.FirstName;
                 sqlCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = user.LastName;
                 sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = user.UserName;
-                sqlCommand.Parameters.Add("@Password", SqlDbType.Text).Value = user.Password;         
+                sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = user.Password;         
                 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
@@ -50,6 +50,47 @@ namespace ExpenseManagement.Repository
             return messageStatus;
         }
 
+        public MessageStatus VerifyUser(string username, string password)
+        {
+            Query = "SELECT * FROM Users";
+            //try {
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                //sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
+                //sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = password;
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                DataTable dataTable = new DataTable();
+                
+                List<User>UserList = (from DataRow dataRow in dataTable.Rows
+                              select new User()
+                              {
+                                  Id = Convert.ToInt32(dataRow["Id"]),
+                                  UserName = Convert.ToString(dataRow["UserName"])  
+                              }).ToList();
+
+                Console.WriteLine("Count"+UserList.Count);
+                if (UserList.Count == 0)
+                {
+                    //throw new Exception("USERNAME or PASSWORD incorrect");
+                }
+                else
+                {
+                    messageStatus.Message = "Successfully Logged In";
+                    messageStatus.ErrorStatus = false;
+                }
+            /* }
+         catch(Exception ex) {
+             messageStatus.Message = ex.Message;
+             messageStatus.ErrorStatus = true;
+         }
+         finally
+         {
+             sqlConnection.Close();
+         }*/
+            sqlConnection.Close();
+            return messageStatus;
+        }
 
         public MessageStatus CheckUserName(String username)
         {
