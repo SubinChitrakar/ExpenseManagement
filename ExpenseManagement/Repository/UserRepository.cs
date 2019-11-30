@@ -70,7 +70,12 @@ namespace ExpenseManagement.Repository
                 else
                 {
                     DataRow dataRow = dataTable.Rows[0];
-                    messageStatus.Message = Convert.ToString(dataRow["Id"]);
+                    User user = new User
+                    {
+                        Id = Convert.ToInt32(dataRow["Id"]),
+                        UserName = Convert.ToString(dataRow["Username"])
+                    };
+                    UserSession.UserData = user;
                     messageStatus.ErrorStatus = false;
                 }
             }

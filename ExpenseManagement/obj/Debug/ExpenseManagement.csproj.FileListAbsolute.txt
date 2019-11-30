@@ -8,3 +8,4 @@ D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.c
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.exe
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.pdb
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.LoginForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.Dashboard.resources

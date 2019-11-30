@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Model
 {
-    class Contact : BaseModel
+    public class Contact : BaseModel
     {
         public string Name { get; set; }
     }

@@ -1,15 +1,7 @@
 ﻿using ExpenseManagement.Model;
 using ExpenseManagement.Repository;
 using ExpenseManagement.Utilities;
-using ExpenseManagement.View_and_Controller;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ExpenseManagement
@@ -22,10 +14,14 @@ namespace ExpenseManagement
         public LoginForm()
         {
             InitializeComponent();
+            UserSession.ParentForm.Hide();
             userRepository = new UserRepository();
             messageStatus = new MessageStatus();
         }
 
+        /*
+         * Register User
+         */
         private void btnRegister_Click(object sender, EventArgs e)
         {
             //Assigning Values
@@ -103,6 +99,7 @@ namespace ExpenseManagement
                 if (result == DialogResult.Cancel)
                 {
                     this.Dispose();
+                    UserSession.ParentForm.Dispose();
                 }
             }
             else
@@ -116,6 +113,9 @@ namespace ExpenseManagement
             }
         }
 
+        /*
+         * Login Button
+         */
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsernameLogin.Text;
@@ -144,16 +144,23 @@ namespace ExpenseManagement
                 else
                 {
                     this.Dispose();
+                    UserSession.ParentForm.Dispose();
                 }
             }
             else
             {
-                UserSession.UserId = Convert.ToInt32(messageStatus.Message);
-                this.Hide();
-                Dashboard dashboard = new Dashboard();
-                dashboard.Closed += (s, args) => this.Close();
-                dashboard.Show();
+                this.Dispose();
+                UserSession.ParentForm.Activate();
+                UserSession.ParentForm.Show();
             }
+        }
+
+        /*
+         * Form Close
+         */
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            UserSession.ParentForm.Dispose();
         }
     }
 }
