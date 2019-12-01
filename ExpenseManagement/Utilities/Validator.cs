@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Utilities
 {
-    public class Validator
+    public static class Validator
     {
         public static bool ValidatePassword(string password)
         {

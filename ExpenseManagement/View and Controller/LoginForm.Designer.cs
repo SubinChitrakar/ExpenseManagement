@@ -29,404 +29,374 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
-            this.tabLogin = new System.Windows.Forms.TabControl();
-            this.Login = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.txtPasswordLogin = new System.Windows.Forms.TextBox();
-            this.lblPasswordLogin = new System.Windows.Forms.Label();
-            this.txtUsernameLogin = new System.Windows.Forms.TextBox();
-            this.lblUsernameLogin = new System.Windows.Forms.Label();
-            this.lblTitleManagement = new System.Windows.Forms.Label();
-            this.txtTitleExpense = new System.Windows.Forms.Label();
-            this.imgLogoLogin = new System.Windows.Forms.PictureBox();
-            this.tabRegister = new System.Windows.Forms.TabPage();
-            this.btnRegister = new System.Windows.Forms.Button();
-            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
-            this.lblConfirmPassword = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.txtLastName = new System.Windows.Forms.TextBox();
-            this.lblLastName = new System.Windows.Forms.Label();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.TabRegister = new System.Windows.Forms.TabPage();
             this.lblFirstName = new System.Windows.Forms.Label();
-            this.lblRegisterManagement = new System.Windows.Forms.Label();
-            this.lblRegisterExpense = new System.Windows.Forms.Label();
-            this.imgLogoRegister = new System.Windows.Forms.PictureBox();
-            this.tabLogin.SuspendLayout();
-            this.Login.SuspendLayout();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.lblLastName = new System.Windows.Forms.Label();
+            this.txtLastName = new System.Windows.Forms.TextBox();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.lblConfirmPassword = new System.Windows.Forms.Label();
+            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
+            this.btnRegister = new MaterialSkin.Controls.MaterialFlatButton();
+            this.TabLogin = new System.Windows.Forms.TabPage();
+            this.lblUsernameLogin = new System.Windows.Forms.Label();
+            this.txtUsernameLogin = new System.Windows.Forms.TextBox();
+            this.lblPasswordLogin = new System.Windows.Forms.Label();
+            this.txtPasswordLogin = new System.Windows.Forms.TextBox();
+            this.btnLogin = new MaterialSkin.Controls.MaterialFlatButton();
+            this.StartUpTab = new MaterialSkin.Controls.MaterialTabControl();
+            this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogoLogin)).BeginInit();
-            this.tabRegister.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogoRegister)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.TabRegister.SuspendLayout();
+            this.TabLogin.SuspendLayout();
+            this.StartUpTab.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tabLogin
-            // 
-            this.tabLogin.Controls.Add(this.Login);
-            this.tabLogin.Controls.Add(this.tabRegister);
-            this.tabLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tabLogin.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabLogin.Location = new System.Drawing.Point(15, 14);
-            this.tabLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabLogin.Name = "tabLogin";
-            this.tabLogin.Padding = new System.Drawing.Point(10, 6);
-            this.tabLogin.SelectedIndex = 0;
-            this.tabLogin.Size = new System.Drawing.Size(480, 603);
-            this.tabLogin.TabIndex = 0;
-            // 
-            // Login
-            // 
-            this.Login.Controls.Add(this.panel1);
-            this.Login.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Login.Location = new System.Drawing.Point(4, 34);
-            this.Login.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Login.Name = "Login";
-            this.Login.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Login.Size = new System.Drawing.Size(472, 565);
-            this.Login.TabIndex = 0;
-            this.Login.Text = "Login";
-            this.Login.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.btnLogin);
-            this.panel1.Controls.Add(this.txtPasswordLogin);
-            this.panel1.Controls.Add(this.lblPasswordLogin);
-            this.panel1.Controls.Add(this.txtUsernameLogin);
-            this.panel1.Controls.Add(this.lblUsernameLogin);
-            this.panel1.Controls.Add(this.lblTitleManagement);
-            this.panel1.Controls.Add(this.txtTitleExpense);
-            this.panel1.Controls.Add(this.imgLogoLogin);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(0, 30);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(492, 471);
-            this.panel1.TabIndex = 0;
+            this.panel1.Size = new System.Drawing.Size(550, 160);
+            this.panel1.TabIndex = 3;
             // 
-            // btnLogin
+            // label1
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(109)))), ((int)(((byte)(166)))));
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(312, 382);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(137, 42);
-            this.btnLogin.TabIndex = 11;
-            this.btnLogin.Text = "Log In";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(276, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(202, 39);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Management";
             // 
-            // txtPasswordLogin
+            // label2
             // 
-            this.txtPasswordLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtPasswordLogin.Location = new System.Drawing.Point(31, 324);
-            this.txtPasswordLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPasswordLogin.Name = "txtPasswordLogin";
-            this.txtPasswordLogin.PasswordChar = '*';
-            this.txtPasswordLogin.Size = new System.Drawing.Size(417, 29);
-            this.txtPasswordLogin.TabIndex = 10;
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(191, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(201, 57);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Expense";
             // 
-            // lblPasswordLogin
+            // pictureBox1
             // 
-            this.lblPasswordLogin.AutoSize = true;
-            this.lblPasswordLogin.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPasswordLogin.Location = new System.Drawing.Point(25, 297);
-            this.lblPasswordLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPasswordLogin.Name = "lblPasswordLogin";
-            this.lblPasswordLogin.Size = new System.Drawing.Size(88, 22);
-            this.lblPasswordLogin.TabIndex = 9;
-            this.lblPasswordLogin.Text = "Password";
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(55, 20);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(136, 117);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
             // 
-            // txtUsernameLogin
+            // TabRegister
             // 
-            this.txtUsernameLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtUsernameLogin.Location = new System.Drawing.Point(31, 249);
-            this.txtUsernameLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUsernameLogin.Name = "txtUsernameLogin";
-            this.txtUsernameLogin.Size = new System.Drawing.Size(417, 29);
-            this.txtUsernameLogin.TabIndex = 8;
-            // 
-            // lblUsernameLogin
-            // 
-            this.lblUsernameLogin.AutoSize = true;
-            this.lblUsernameLogin.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsernameLogin.Location = new System.Drawing.Point(25, 222);
-            this.lblUsernameLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblUsernameLogin.Name = "lblUsernameLogin";
-            this.lblUsernameLogin.Size = new System.Drawing.Size(88, 22);
-            this.lblUsernameLogin.TabIndex = 1;
-            this.lblUsernameLogin.Text = "Username";
-            // 
-            // lblTitleManagement
-            // 
-            this.lblTitleManagement.AutoSize = true;
-            this.lblTitleManagement.Font = new System.Drawing.Font("Times New Roman", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitleManagement.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(109)))), ((int)(((byte)(166)))));
-            this.lblTitleManagement.Location = new System.Drawing.Point(237, 105);
-            this.lblTitleManagement.Name = "lblTitleManagement";
-            this.lblTitleManagement.Size = new System.Drawing.Size(202, 39);
-            this.lblTitleManagement.TabIndex = 6;
-            this.lblTitleManagement.Text = "Management";
-            // 
-            // txtTitleExpense
-            // 
-            this.txtTitleExpense.AutoSize = true;
-            this.txtTitleExpense.BackColor = System.Drawing.Color.Transparent;
-            this.txtTitleExpense.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitleExpense.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(109)))), ((int)(((byte)(166)))));
-            this.txtTitleExpense.Location = new System.Drawing.Point(152, 60);
-            this.txtTitleExpense.Name = "txtTitleExpense";
-            this.txtTitleExpense.Size = new System.Drawing.Size(201, 57);
-            this.txtTitleExpense.TabIndex = 7;
-            this.txtTitleExpense.Text = "Expense";
-            // 
-            // imgLogoLogin
-            // 
-            this.imgLogoLogin.Image = ((System.Drawing.Image)(resources.GetObject("imgLogoLogin.Image")));
-            this.imgLogoLogin.Location = new System.Drawing.Point(20, 43);
-            this.imgLogoLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.imgLogoLogin.Name = "imgLogoLogin";
-            this.imgLogoLogin.Size = new System.Drawing.Size(144, 123);
-            this.imgLogoLogin.TabIndex = 5;
-            this.imgLogoLogin.TabStop = false;
-            // 
-            // tabRegister
-            // 
-            this.tabRegister.Controls.Add(this.btnRegister);
-            this.tabRegister.Controls.Add(this.txtConfirmPassword);
-            this.tabRegister.Controls.Add(this.lblConfirmPassword);
-            this.tabRegister.Controls.Add(this.txtPassword);
-            this.tabRegister.Controls.Add(this.lblPassword);
-            this.tabRegister.Controls.Add(this.txtUsername);
-            this.tabRegister.Controls.Add(this.lblUsername);
-            this.tabRegister.Controls.Add(this.txtLastName);
-            this.tabRegister.Controls.Add(this.lblLastName);
-            this.tabRegister.Controls.Add(this.txtFirstName);
-            this.tabRegister.Controls.Add(this.lblFirstName);
-            this.tabRegister.Controls.Add(this.lblRegisterManagement);
-            this.tabRegister.Controls.Add(this.lblRegisterExpense);
-            this.tabRegister.Controls.Add(this.imgLogoRegister);
-            this.tabRegister.Location = new System.Drawing.Point(4, 34);
-            this.tabRegister.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabRegister.Name = "tabRegister";
-            this.tabRegister.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabRegister.Size = new System.Drawing.Size(472, 565);
-            this.tabRegister.TabIndex = 1;
-            this.tabRegister.Text = "Register";
-            this.tabRegister.UseVisualStyleBackColor = true;
-            // 
-            // btnRegister
-            // 
-            this.btnRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(109)))), ((int)(((byte)(166)))));
-            this.btnRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRegister.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRegister.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.ForeColor = System.Drawing.Color.White;
-            this.btnRegister.Location = new System.Drawing.Point(312, 476);
-            this.btnRegister.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(137, 42);
-            this.btnRegister.TabIndex = 22;
-            this.btnRegister.Text = "Register";
-            this.btnRegister.UseVisualStyleBackColor = false;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-            // 
-            // txtConfirmPassword
-            // 
-            this.txtConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtConfirmPassword.Location = new System.Drawing.Point(20, 409);
-            this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.PasswordChar = '*';
-            this.txtConfirmPassword.Size = new System.Drawing.Size(428, 29);
-            this.txtConfirmPassword.TabIndex = 21;
-            // 
-            // lblConfirmPassword
-            // 
-            this.lblConfirmPassword.AutoSize = true;
-            this.lblConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfirmPassword.Location = new System.Drawing.Point(15, 382);
-            this.lblConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblConfirmPassword.Name = "lblConfirmPassword";
-            this.lblConfirmPassword.Size = new System.Drawing.Size(158, 22);
-            this.lblConfirmPassword.TabIndex = 20;
-            this.lblConfirmPassword.Text = "Confirm Password";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtPassword.Location = new System.Drawing.Point(20, 348);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(428, 29);
-            this.txtPassword.TabIndex = 19;
-            // 
-            // lblPassword
-            // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(15, 321);
-            this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(88, 22);
-            this.lblPassword.TabIndex = 18;
-            this.lblPassword.Text = "Password";
-            // 
-            // txtUsername
-            // 
-            this.txtUsername.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtUsername.Location = new System.Drawing.Point(20, 288);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(428, 29);
-            this.txtUsername.TabIndex = 17;
-            // 
-            // lblUsername
-            // 
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(15, 261);
-            this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(88, 22);
-            this.lblUsername.TabIndex = 16;
-            this.lblUsername.Text = "Username";
-            // 
-            // txtLastName
-            // 
-            this.txtLastName.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtLastName.Location = new System.Drawing.Point(245, 228);
-            this.txtLastName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(203, 29);
-            this.txtLastName.TabIndex = 15;
-            // 
-            // lblLastName
-            // 
-            this.lblLastName.AutoSize = true;
-            this.lblLastName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastName.Location = new System.Drawing.Point(240, 201);
-            this.lblLastName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(94, 22);
-            this.lblLastName.TabIndex = 14;
-            this.lblLastName.Text = "Last Name";
-            // 
-            // txtFirstName
-            // 
-            this.txtFirstName.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtFirstName.Location = new System.Drawing.Point(20, 228);
-            this.txtFirstName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(203, 29);
-            this.txtFirstName.TabIndex = 13;
+            this.TabRegister.Controls.Add(this.btnRegister);
+            this.TabRegister.Controls.Add(this.txtConfirmPassword);
+            this.TabRegister.Controls.Add(this.txtPassword);
+            this.TabRegister.Controls.Add(this.txtUsername);
+            this.TabRegister.Controls.Add(this.txtLastName);
+            this.TabRegister.Controls.Add(this.txtFirstName);
+            this.TabRegister.Controls.Add(this.lblConfirmPassword);
+            this.TabRegister.Controls.Add(this.lblPassword);
+            this.TabRegister.Controls.Add(this.lblUsername);
+            this.TabRegister.Controls.Add(this.lblLastName);
+            this.TabRegister.Controls.Add(this.lblFirstName);
+            this.TabRegister.Location = new System.Drawing.Point(4, 25);
+            this.TabRegister.Name = "TabRegister";
+            this.TabRegister.Padding = new System.Windows.Forms.Padding(3);
+            this.TabRegister.Size = new System.Drawing.Size(472, 574);
+            this.TabRegister.TabIndex = 1;
+            this.TabRegister.Text = "Register";
+            this.TabRegister.UseVisualStyleBackColor = true;
             // 
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFirstName.Location = new System.Drawing.Point(15, 201);
+            this.lblFirstName.Location = new System.Drawing.Point(20, 35);
             this.lblFirstName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(98, 22);
-            this.lblFirstName.TabIndex = 9;
+            this.lblFirstName.TabIndex = 23;
             this.lblFirstName.Text = "First Name";
             // 
-            // lblRegisterManagement
+            // txtFirstName
             // 
-            this.lblRegisterManagement.AutoSize = true;
-            this.lblRegisterManagement.Font = new System.Drawing.Font("Times New Roman", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegisterManagement.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(109)))), ((int)(((byte)(166)))));
-            this.lblRegisterManagement.Location = new System.Drawing.Point(237, 105);
-            this.lblRegisterManagement.Name = "lblRegisterManagement";
-            this.lblRegisterManagement.Size = new System.Drawing.Size(202, 39);
-            this.lblRegisterManagement.TabIndex = 11;
-            this.lblRegisterManagement.Text = "Management";
+            this.txtFirstName.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.txtFirstName.Location = new System.Drawing.Point(20, 60);
+            this.txtFirstName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(203, 29);
+            this.txtFirstName.TabIndex = 26;
             // 
-            // lblRegisterExpense
+            // lblLastName
             // 
-            this.lblRegisterExpense.AutoSize = true;
-            this.lblRegisterExpense.BackColor = System.Drawing.Color.Transparent;
-            this.lblRegisterExpense.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegisterExpense.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(109)))), ((int)(((byte)(166)))));
-            this.lblRegisterExpense.Location = new System.Drawing.Point(152, 60);
-            this.lblRegisterExpense.Name = "lblRegisterExpense";
-            this.lblRegisterExpense.Size = new System.Drawing.Size(201, 57);
-            this.lblRegisterExpense.TabIndex = 12;
-            this.lblRegisterExpense.Text = "Expense";
+            this.lblLastName.AutoSize = true;
+            this.lblLastName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastName.Location = new System.Drawing.Point(245, 35);
+            this.lblLastName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLastName.Name = "lblLastName";
+            this.lblLastName.Size = new System.Drawing.Size(94, 22);
+            this.lblLastName.TabIndex = 27;
+            this.lblLastName.Text = "Last Name";
             // 
-            // imgLogoRegister
+            // txtLastName
             // 
-            this.imgLogoRegister.Image = ((System.Drawing.Image)(resources.GetObject("imgLogoRegister.Image")));
-            this.imgLogoRegister.Location = new System.Drawing.Point(20, 43);
-            this.imgLogoRegister.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.imgLogoRegister.Name = "imgLogoRegister";
-            this.imgLogoRegister.Size = new System.Drawing.Size(144, 123);
-            this.imgLogoRegister.TabIndex = 10;
-            this.imgLogoRegister.TabStop = false;
+            this.txtLastName.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.txtLastName.Location = new System.Drawing.Point(245, 60);
+            this.txtLastName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(203, 29);
+            this.txtLastName.TabIndex = 28;
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.Location = new System.Drawing.Point(20, 110);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(88, 22);
+            this.lblUsername.TabIndex = 29;
+            this.lblUsername.Text = "Username";
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.txtUsername.Location = new System.Drawing.Point(26, 135);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(422, 29);
+            this.txtUsername.TabIndex = 30;
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(26, 185);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(88, 22);
+            this.lblPassword.TabIndex = 31;
+            this.lblPassword.Text = "Password";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.txtPassword.Location = new System.Drawing.Point(26, 210);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(422, 29);
+            this.txtPassword.TabIndex = 32;
+            // 
+            // lblConfirmPassword
+            // 
+            this.lblConfirmPassword.AutoSize = true;
+            this.lblConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfirmPassword.Location = new System.Drawing.Point(26, 270);
+            this.lblConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblConfirmPassword.Name = "lblConfirmPassword";
+            this.lblConfirmPassword.Size = new System.Drawing.Size(158, 22);
+            this.lblConfirmPassword.TabIndex = 33;
+            this.lblConfirmPassword.Text = "Confirm Password";
+            // 
+            // txtConfirmPassword
+            // 
+            this.txtConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(26, 295);
+            this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.txtConfirmPassword.Name = "txtConfirmPassword";
+            this.txtConfirmPassword.PasswordChar = '*';
+            this.txtConfirmPassword.Size = new System.Drawing.Size(428, 29);
+            this.txtConfirmPassword.TabIndex = 34;
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.AutoSize = true;
+            this.btnRegister.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRegister.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegister.Depth = 0;
+            this.btnRegister.Location = new System.Drawing.Point(363, 356);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRegister.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Primary = false;
+            this.btnRegister.Size = new System.Drawing.Size(91, 36);
+            this.btnRegister.TabIndex = 39;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // TabLogin
+            // 
+            this.TabLogin.Controls.Add(this.btnLogin);
+            this.TabLogin.Controls.Add(this.txtPasswordLogin);
+            this.TabLogin.Controls.Add(this.txtUsernameLogin);
+            this.TabLogin.Controls.Add(this.lblPasswordLogin);
+            this.TabLogin.Controls.Add(this.lblUsernameLogin);
+            this.TabLogin.Location = new System.Drawing.Point(4, 25);
+            this.TabLogin.Name = "TabLogin";
+            this.TabLogin.Padding = new System.Windows.Forms.Padding(3);
+            this.TabLogin.Size = new System.Drawing.Size(472, 574);
+            this.TabLogin.TabIndex = 0;
+            this.TabLogin.Text = "Login";
+            this.TabLogin.UseVisualStyleBackColor = true;
+            // 
+            // lblUsernameLogin
+            // 
+            this.lblUsernameLogin.AutoSize = true;
+            this.lblUsernameLogin.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsernameLogin.Location = new System.Drawing.Point(20, 35);
+            this.lblUsernameLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUsernameLogin.Name = "lblUsernameLogin";
+            this.lblUsernameLogin.Size = new System.Drawing.Size(88, 22);
+            this.lblUsernameLogin.TabIndex = 11;
+            this.lblUsernameLogin.Text = "Username";
+            // 
+            // txtUsernameLogin
+            // 
+            this.txtUsernameLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.txtUsernameLogin.Location = new System.Drawing.Point(26, 60);
+            this.txtUsernameLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUsernameLogin.Name = "txtUsernameLogin";
+            this.txtUsernameLogin.Size = new System.Drawing.Size(417, 29);
+            this.txtUsernameLogin.TabIndex = 12;
+            // 
+            // lblPasswordLogin
+            // 
+            this.lblPasswordLogin.AutoSize = true;
+            this.lblPasswordLogin.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPasswordLogin.Location = new System.Drawing.Point(20, 110);
+            this.lblPasswordLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPasswordLogin.Name = "lblPasswordLogin";
+            this.lblPasswordLogin.Size = new System.Drawing.Size(88, 22);
+            this.lblPasswordLogin.TabIndex = 13;
+            this.lblPasswordLogin.Text = "Password";
+            // 
+            // txtPasswordLogin
+            // 
+            this.txtPasswordLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.txtPasswordLogin.Location = new System.Drawing.Point(26, 135);
+            this.txtPasswordLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPasswordLogin.Name = "txtPasswordLogin";
+            this.txtPasswordLogin.PasswordChar = '*';
+            this.txtPasswordLogin.Size = new System.Drawing.Size(417, 29);
+            this.txtPasswordLogin.TabIndex = 14;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.AutoSize = true;
+            this.btnLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.Depth = 0;
+            this.btnLogin.Location = new System.Drawing.Point(380, 199);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLogin.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Primary = false;
+            this.btnLogin.Size = new System.Drawing.Size(63, 36);
+            this.btnLogin.TabIndex = 15;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // StartUpTab
+            // 
+            this.StartUpTab.Controls.Add(this.TabLogin);
+            this.StartUpTab.Controls.Add(this.TabRegister);
+            this.StartUpTab.Depth = 0;
+            this.StartUpTab.Location = new System.Drawing.Point(32, 244);
+            this.StartUpTab.MouseState = MaterialSkin.MouseState.HOVER;
+            this.StartUpTab.Name = "StartUpTab";
+            this.StartUpTab.SelectedIndex = 0;
+            this.StartUpTab.Size = new System.Drawing.Size(480, 603);
+            this.StartUpTab.TabIndex = 1;
+            // 
+            // materialTabSelector1
+            // 
+            this.materialTabSelector1.BaseTabControl = this.StartUpTab;
+            this.materialTabSelector1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.materialTabSelector1.Depth = 0;
+            this.materialTabSelector1.Location = new System.Drawing.Point(0, 183);
+            this.materialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialTabSelector1.Name = "materialTabSelector1";
+            this.materialTabSelector1.Size = new System.Drawing.Size(550, 69);
+            this.materialTabSelector1.TabIndex = 2;
+            this.materialTabSelector1.Text = "materialTabSelector1";
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(505, 629);
-            this.Controls.Add(this.tabLogin);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.ClientSize = new System.Drawing.Size(547, 753);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.materialTabSelector1);
+            this.Controls.Add(this.StartUpTab);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(547, 753);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(547, 753);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Expense Management";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginForm_FormClosed);
-            this.tabLogin.ResumeLayout(false);
-            this.Login.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogoLogin)).EndInit();
-            this.tabRegister.ResumeLayout(false);
-            this.tabRegister.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogoRegister)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.TabRegister.ResumeLayout(false);
+            this.TabRegister.PerformLayout();
+            this.TabLogin.ResumeLayout(false);
+            this.TabLogin.PerformLayout();
+            this.StartUpTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabLogin;
-        private System.Windows.Forms.TabPage Login;
-        private System.Windows.Forms.TabPage tabRegister;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblTitleManagement;
-        private System.Windows.Forms.Label txtTitleExpense;
-        private System.Windows.Forms.PictureBox imgLogoLogin;
-        private System.Windows.Forms.TextBox txtUsernameLogin;
-        private System.Windows.Forms.Label lblUsernameLogin;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private MaterialSkin.Controls.MaterialTabControl StartUpTab;
+        private System.Windows.Forms.TabPage TabLogin;
+        private MaterialSkin.Controls.MaterialFlatButton btnLogin;
         private System.Windows.Forms.TextBox txtPasswordLogin;
+        private System.Windows.Forms.TextBox txtUsernameLogin;
         private System.Windows.Forms.Label lblPasswordLogin;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.TextBox txtFirstName;
-        private System.Windows.Forms.Label lblFirstName;
-        private System.Windows.Forms.Label lblRegisterManagement;
-        private System.Windows.Forms.Label lblRegisterExpense;
-        private System.Windows.Forms.PictureBox imgLogoRegister;
+        private System.Windows.Forms.Label lblUsernameLogin;
+        private System.Windows.Forms.TabPage TabRegister;
+        private MaterialSkin.Controls.MaterialFlatButton btnRegister;
         private System.Windows.Forms.TextBox txtConfirmPassword;
-        private System.Windows.Forms.Label lblConfirmPassword;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.TextBox txtUsername;
-        private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TextBox txtLastName;
+        private System.Windows.Forms.TextBox txtFirstName;
+        private System.Windows.Forms.Label lblConfirmPassword;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblLastName;
-        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Label lblFirstName;
+        private MaterialSkin.Controls.MaterialTabSelector materialTabSelector1;
     }
 }
 

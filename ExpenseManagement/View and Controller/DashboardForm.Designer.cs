@@ -1,6 +1,6 @@
 ﻿namespace ExpenseManagement.View_and_Controller
 {
-    partial class Dashboard
+    partial class DashboardForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            this.label1 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
+            this.btnContact = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // btnContact
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(227, 125);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.btnContact.Location = new System.Drawing.Point(12, 22);
+            this.btnContact.Name = "btnContact";
+            this.btnContact.Size = new System.Drawing.Size(75, 23);
+            this.btnContact.TabIndex = 0;
+            this.btnContact.Text = "Contact";
+            this.btnContact.UseVisualStyleBackColor = true;
+            this.btnContact.Click += new System.EventHandler(this.btnContact_Click);
             // 
-            // Dashboard
+            // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 544);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnContact);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Dashboard";
+            this.Name = "DashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
             this.Activated += new System.EventHandler(this.Dashboard_Activated);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnContact;
     }
 }

@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -57,11 +60,23 @@
     <Compile Include="Utilities\MessageStatus.cs" />
     <Compile Include="Utilities\UserSession.cs" />
     <Compile Include="Utilities\Validator.cs" />
-    <Compile Include="View and Controller\Dashboard.cs">
+    <Compile Include="View and Controller\ContactActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View and Controller\Dashboard.Designer.cs">
-      <DependentUpon>Dashboard.cs</DependentUpon>
+    <Compile Include="View and Controller\ContactActionForm.Designer.cs">
+      <DependentUpon>ContactActionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View and Controller\ContactListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View and Controller\ContactListForm.Designer.cs">
+      <DependentUpon>ContactListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View and Controller\DashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View and Controller\DashboardForm.Designer.cs">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View and Controller\LoginForm.cs">
       <SubType>Form</SubType>
@@ -71,8 +86,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="View and Controller\Dashboard.resx">
-      <DependentUpon>Dashboard.cs</DependentUpon>
+    <EmbeddedResource Include="View and Controller\ContactActionForm.resx">
+      <DependentUpon>ContactActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View and Controller\ContactListForm.resx">
+      <DependentUpon>ContactListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View and Controller\DashboardForm.resx">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View and Controller\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -86,6 +107,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -99,8 +121,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Resources\Images\Logo.png" />
+    <Content Include="Resources\Images\arrow.png" />
+    <Content Include="Resources\Images\money.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

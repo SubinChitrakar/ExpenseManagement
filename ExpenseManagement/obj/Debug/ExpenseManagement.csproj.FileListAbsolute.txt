@@ -8,4 +8,8 @@ D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.c
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.exe
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.pdb
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.LoginForm.resources
-D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.Dashboard.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.DashboardForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.ContactListForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csproj.CopyComplete
+D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\MaterialSkin.dll
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.ContactActionForm.resources

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Utilities
 {
-    class Encrypt
+    public static class Encrypt
     {
         private static readonly string key = "sblw-3hn8-sqoy19";
 

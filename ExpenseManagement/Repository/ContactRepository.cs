@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Configuration;
 using ExpenseManagement.Model;
 using System.Data;
 using ExpenseManagement.Utilities;
@@ -28,18 +24,17 @@ namespace ExpenseManagement.Repository
 
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                sqlDataAdapter.Fill(dataTable);
-                
-                ContactList = (from DataRow dataRow in dataTable.Rows
-                               select new Contact()
-                               {
-                                   Id = Convert.ToInt32(dataRow["Id"]),
-                                   Name = Convert.ToString(dataRow["Name"]),
-                                   UserId = Convert.ToInt32(dataRow["UserId"])
-                               }).ToList();
+                while (sqlDataReader.Read())
+                {
+                    ContactList.Add(new Contact
+                    {
+                        Id = (int)sqlDataReader["Id"],
+                        Name = sqlDataReader["Name"].ToString(),
+                        UserId = (int)sqlDataReader["UserId"]
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -50,6 +45,39 @@ namespace ExpenseManagement.Repository
                 sqlConnection.Close();
             }
             return ContactList;
+        }
+
+        public Contact GetContactFromName(string contactName)
+        {
+            Contact contact = new Contact();
+            Query = "SELECT * FROM Contacts WHERE [Name] = @ContactName AND [UserId] = @UserId";
+
+            try
+            {
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                sqlCommand.Parameters.Add("@ContactName", SqlDbType.VarChar).Value = contactName;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = UserSession.UserData.Id;
+
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.SingleRow);
+
+                while (sqlDataReader.Read())
+                {
+                    contact.Id = (int)sqlDataReader["Id"];
+                    contact.UserId = (int)sqlDataReader["UserId"];
+                    contact.Name = sqlDataReader["Name"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return contact;
         }
 
         //Add Contact 
@@ -89,7 +117,7 @@ namespace ExpenseManagement.Repository
         //Update Contact
         public MessageStatus UpdateContact(Contact contact)
         {
-            Query = "UPDATE CONTACTS SET [Name] = @Name WHERE [Id] = @Id ;";
+            Query = "UPDATE CONTACTS SET [Name] = @Name WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {
@@ -98,6 +126,7 @@ namespace ExpenseManagement.Repository
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
                 sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = contact.Name;
                 sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = contact.UserId;
                                 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
@@ -124,7 +153,7 @@ namespace ExpenseManagement.Repository
         //Delete Contact
         public MessageStatus DeleteContact(Contact contact)
         {
-            Query = "DELETE FROM Contacts WHERE [Id] = @Id;";
+            Query = "DELETE FROM Contacts WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {
@@ -132,6 +161,7 @@ namespace ExpenseManagement.Repository
 
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
                 sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = contact.UserId;
                 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)

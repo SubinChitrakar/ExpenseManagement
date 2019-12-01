@@ -50,50 +50,12 @@ namespace ExpenseManagement.Repository
             return messageStatus;
         }
 
-        public MessageStatus VerifyUser(string username, string password)
+        //Get Username
+        public User GetUserFromUsername(string username)
         {
-            Query = "SELECT * FROM Users WHERE [Username] = @Username AND [Password] = @Password";
-            try {
-                sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
-                sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
-                sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = password;
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                
-                if (dataTable.Rows.Count == 0)
-                {
-                    throw new Exception("USERNAME or PASSWORD incorrect");
-                }
-                else
-                {
-                    DataRow dataRow = dataTable.Rows[0];
-                    User user = new User
-                    {
-                        Id = Convert.ToInt32(dataRow["Id"]),
-                        UserName = Convert.ToString(dataRow["Username"])
-                    };
-                    UserSession.UserData = user;
-                    messageStatus.ErrorStatus = false;
-                }
-            }
-            catch(Exception ex) {
-                messageStatus.Message = ex.Message;
-                messageStatus.ErrorStatus = true;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-            sqlConnection.Close();
-            return messageStatus;
-        }
-
-        public MessageStatus CheckUserName(String username)
-        {
-            Query = "SELECT Username FROM Users WHERE [Username] = @Username";
+            User user = new User();
+            Query = "SELECT * FROM Users WHERE [Username] = @Username";
 
             try
             {
@@ -101,31 +63,27 @@ namespace ExpenseManagement.Repository
 
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
                 sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-                DataTable dataTable = new DataTable();
 
-                sqlDataAdapter.Fill(dataTable);
-                
-                if (dataTable.Rows.Count == 0)
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.SingleRow);
+
+                while (sqlDataReader.Read())
                 {
-                    messageStatus.Message = "Username doesn't Exist";
-                    messageStatus.ErrorStatus = false;
-                }
-                else
-                {
-                    throw new Exception("USERNAME already Taken!!");
+                    user.Id = (int)sqlDataReader["Id"];
+                    user.FirstName = sqlDataReader["FirstName"].ToString();
+                    user.LastName = sqlDataReader["LastName"].ToString();
+                    user.UserName = sqlDataReader["Username"].ToString();
+                    user.Password = sqlDataReader["Password"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                messageStatus.Message = ex.Message;
-                messageStatus.ErrorStatus = true;
+                Console.WriteLine("Exception: "+ex.Message);
             }
             finally
             {
                 sqlConnection.Close();
             }
-            return messageStatus;
+            return user;
         }
     }
 }
