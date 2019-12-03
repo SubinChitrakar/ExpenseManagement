@@ -50,14 +50,14 @@ namespace ExpenseManagement.Repository
         public Contact GetContactFromName(string contactName)
         {
             Contact contact = new Contact();
-            Query = "SELECT * FROM Contacts WHERE [Name] = @ContactName AND [UserId] = @UserId";
+            Query = "SELECT * FROM Contacts WHERE UPPER(Name) = @ContactName AND [UserId] = @UserId";
 
             try
             {
                 sqlConnection.Open();
 
                 SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
-                sqlCommand.Parameters.Add("@ContactName", SqlDbType.VarChar).Value = contactName;
+                sqlCommand.Parameters.Add("@ContactName", SqlDbType.VarChar).Value = contactName.ToUpper();
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = UserSession.UserData.Id;
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.SingleRow);

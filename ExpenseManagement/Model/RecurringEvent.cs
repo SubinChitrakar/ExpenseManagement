@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Model
 {
-    public class Contact : BaseModel
+    class RecurringEvent : Event
     {
+        public string Status { get; set; }
+        public DateTime EventEndDate { get; set; }
     }
 }

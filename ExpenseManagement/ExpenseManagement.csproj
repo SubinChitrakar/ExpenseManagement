@@ -52,6 +52,10 @@
   <ItemGroup>
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Contact.cs" />
+    <Compile Include="Model\Events.cs" />
+    <Compile Include="Model\NormalTransaction.cs" />
+    <Compile Include="Model\RecurringEvent.cs" />
+    <Compile Include="Model\RecurringTransaction.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
@@ -106,6 +110,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

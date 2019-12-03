@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Model
 {
-    public class Contact : BaseModel
+    class RecurringTransaction : NormalTransaction
     {
+        public string Status { get; set; }
+        public DateTime TransactionEndDate { get; set; }
     }
 }
