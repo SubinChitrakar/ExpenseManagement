@@ -92,6 +92,7 @@
             // 
             this.btnAddContact.AutoSize = true;
             this.btnAddContact.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddContact.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddContact.Depth = 0;
             this.btnAddContact.Icon = null;
             this.btnAddContact.Location = new System.Drawing.Point(514, 154);
@@ -109,6 +110,7 @@
             // 
             this.btnEditContact.AutoSize = true;
             this.btnEditContact.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEditContact.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditContact.Depth = 0;
             this.btnEditContact.Icon = null;
             this.btnEditContact.Location = new System.Drawing.Point(514, 202);
@@ -126,6 +128,7 @@
             // 
             this.btnDeleteContact.AutoSize = true;
             this.btnDeleteContact.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDeleteContact.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDeleteContact.Depth = 0;
             this.btnDeleteContact.Icon = null;
             this.btnDeleteContact.Location = new System.Drawing.Point(514, 250);

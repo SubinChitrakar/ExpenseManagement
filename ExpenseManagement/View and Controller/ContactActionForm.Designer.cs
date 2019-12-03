@@ -92,6 +92,7 @@
             // 
             this.btnContactAction.AutoSize = true;
             this.btnContactAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnContactAction.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnContactAction.Depth = 0;
             this.btnContactAction.Icon = null;
             this.btnContactAction.Location = new System.Drawing.Point(332, 181);
