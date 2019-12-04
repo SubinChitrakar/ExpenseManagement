@@ -57,14 +57,8 @@ namespace ExpenseManagement
                 return;
             }
 
-            user = userRepository.GetUserFromUsername(username);
-            bool status = false;
+            user = userRepository.VerifyUser(username, Encrypt.EncryptData(password));
             if (user.Id > 0)
-            {
-                status = user.Password.Equals(Encrypt.EncryptData(password));
-            }
-
-            if (status)
             {
                 UserSession.UserData = user;
                 this.Dispose();

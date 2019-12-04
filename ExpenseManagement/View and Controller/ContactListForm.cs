@@ -40,11 +40,11 @@ namespace ExpenseManagement.View_and_Controller
             UserSession.ParentForm.Show();
         }
 
-        private void ContactsForm_Activated(object sender, EventArgs e)
+        private async void ContactsForm_Activated(object sender, EventArgs e)
         {
             lblUserName.Text = UserSession.UserData.UserName;
 
-            List<Contact> ListOfContact = contactRepository.GetContacts(UserSession.UserData.Id);
+            List<Contact> ListOfContact = await Task.Run(()=>contactRepository.GetContacts(UserSession.UserData.Id));
             contactsListView.Items.Clear();
             foreach (Contact contact in ListOfContact)
             {
@@ -83,20 +83,25 @@ namespace ExpenseManagement.View_and_Controller
             }
         }
 
-        private void btnDeleteContact_Click(object sender, EventArgs e)
+        private async void btnDeleteContact_Click(object sender, EventArgs e)
         {
             if (contactsListView.SelectedItems.Count > 0)
             {
                 Contact contact = (Contact)contactsListView.SelectedItems[0].Tag;
-                messageStatus = contactRepository.DeleteContact(contact);
 
-                if (messageStatus.ErrorStatus)
+                DialogResult result = MessageBox.Show("Are you sure you want to DELETE?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    MessageBox.Show(messageStatus.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show("CONTACT Deleted Successfully", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    messageStatus = await Task.Run(() => contactRepository.DeleteContact(contact));
+
+                    if (messageStatus.ErrorStatus)
+                    {
+                        MessageBox.Show(messageStatus.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("CONTACT Deleted Successfully", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             else

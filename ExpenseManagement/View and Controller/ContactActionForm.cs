@@ -4,12 +4,6 @@ using ExpenseManagement.Utilities;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -51,7 +45,7 @@ namespace ExpenseManagement.View_and_Controller
             this.Dispose();
         }
 
-        private void btnContactAction_Click(object sender, EventArgs e)
+        private async void btnContactAction_Click(object sender, EventArgs e)
         {
             string contactName = txtContactName.Text;
             ContactRepository contactRepository = new ContactRepository();
@@ -71,14 +65,15 @@ namespace ExpenseManagement.View_and_Controller
             }
 
             contact.Name = contactName;
+            btnContactAction.Enabled = false;
             contact.UserId = UserSession.UserData.Id;
             if (contact.Id > 0)
             {
-                messageStatus = contactRepository.UpdateContact(contact);
+                messageStatus = await Task.Run(() => contactRepository.UpdateContact(contact));
             }
             else
             {
-                messageStatus = contactRepository.AddContact(contact);
+                messageStatus = await Task.Run(() => contactRepository.AddContact(contact));
             }
 
             if (messageStatus.ErrorStatus)

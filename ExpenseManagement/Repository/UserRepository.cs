@@ -85,5 +85,41 @@ namespace ExpenseManagement.Repository
             }
             return user;
         }
+
+        public User VerifyUser(string username, string password)
+        {
+
+            User user = new User();
+            Query = "SELECT * FROM Users WHERE [Username] = @Username AND [Password] = @Password";
+
+            try
+            {
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
+                sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = password;
+
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.SingleRow);
+
+                while (sqlDataReader.Read())
+                {
+                    user.Id = (int)sqlDataReader["Id"];
+                    user.FirstName = sqlDataReader["FirstName"].ToString();
+                    user.LastName = sqlDataReader["LastName"].ToString();
+                    user.UserName = sqlDataReader["Username"].ToString();
+                    user.Password = sqlDataReader["Password"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return user;
+        }
     }
 }

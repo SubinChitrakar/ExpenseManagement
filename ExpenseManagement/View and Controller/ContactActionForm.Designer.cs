@@ -100,9 +100,9 @@
             this.btnContactAction.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnContactAction.Name = "btnContactAction";
             this.btnContactAction.Primary = false;
-            this.btnContactAction.Size = new System.Drawing.Size(139, 36);
+            this.btnContactAction.Size = new System.Drawing.Size(84, 36);
             this.btnContactAction.TabIndex = 2;
-            this.btnContactAction.Text = "Add Contact";
+            this.btnContactAction.Text = "Action";
             this.btnContactAction.UseVisualStyleBackColor = true;
             this.btnContactAction.Click += new System.EventHandler(this.btnContactAction_Click);
             // 

@@ -48,6 +48,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tulpep.NotificationWindow, Version=1.1.25.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tulpep.NotificationWindow.1.1.25\lib\net40\Tulpep.NotificationWindow.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\BaseModel.cs" />
@@ -59,6 +62,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
+    <Compile Include="Repository\EventRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
     <Compile Include="Utilities\MessageStatus.cs" />
