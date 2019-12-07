@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Repository
 {
-    class EventRepository : BaseRepository
+    class TransactionRepository : BaseRepository
     {
         //Constructor
-        public EventRepository() : base() { }
+        public TransactionRepository() : base() { }
 
-        public List<Event> GetEvents(int userId)
+        public List<NormalTransaction> GetTransactions(int userId)
         {
-            List<Event> eventList = new List<Event>();
-            Query = "SELECT Events.*, Contacts.Name FROM Events LEFT JOIN Contacts ON Events.ContactId = Contacts.Id WHERE [UserId] = @UserId";
+            List<NormalTransaction> normalTransactionList = new List<NormalTransaction>();
+            Query = "SELECT NormalTransactions.*, Contacts.Name FROM NormalTransactions LEFT JOIN Contacts ON NormalTransactions.ContactId = Contacts.Id WHERE [NormalTransactions.UserId] = @UserId";
 
             try
             {
@@ -30,14 +30,14 @@ namespace ExpenseManagement.Repository
 
                 while (sqlDataReader.Read())
                 {
-                    eventList.Add(new Event
+                    normalTransactionList.Add(new NormalTransaction
                     {
                         Id = (int)sqlDataReader["Id"],
                         Name = sqlDataReader["Name"].ToString(),
-                        Location = sqlDataReader["Location"].ToString(),
+                        Amount = (double)sqlDataReader["Amount"],
                         Type = sqlDataReader["Type"].ToString(),
                         Note = sqlDataReader["Note"].ToString(),
-                        EventDate = (DateTime)sqlDataReader["EventDate"],
+                        TransactionDate = (DateTime)sqlDataReader["TransactionDate"],
                         ContactId = (int)sqlDataReader["ContactId"],
                         ContactName = sqlDataReader["ContactName"].ToString(),
                         UserId = (int)sqlDataReader["UserId"]
@@ -52,13 +52,13 @@ namespace ExpenseManagement.Repository
             {
                 SqlConnection.Close();
             }
-            return eventList;
+            return normalTransactionList;
         }
 
-        public List<Event> GetEventsFromDate(DateTime date, int userId)
+        public List<NormalTransaction> GetTransactionFromDate(DateTime date, int userId)
         {
-            List<Event> eventList = new List<Event>();
-            Query = "SELECT Events.*, Contacts.Name FROM Events LEFT JOIN Contacts ON Events.ContactId = Contacts.Id WHERE [UserId] = @UserId AND [EventDate] LIKE @EventDate%";
+            List<NormalTransaction> normalTransactionList = new List<NormalTransaction>();
+            Query = "SELECT NormalTransactions.*, Contacts.Name FROM NormalTransactions LEFT JOIN Contacts ON NormalTransactions.ContactId = Contacts.Id WHERE [NormalTransactions.UserId] = @UserId AND [NormalTransactions.TransactionDate] LIKE @TransactionDate%";
 
             try
             {
@@ -66,19 +66,19 @@ namespace ExpenseManagement.Repository
 
                 SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
-                sqlCommand.Parameters.AddWithValue("@EventDate", Convert.ToDateTime(date.Date));
+                sqlCommand.Parameters.AddWithValue("@TransactionDate", Convert.ToDateTime(date.Date));
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
                 while (sqlDataReader.Read())
                 {
-                    eventList.Add(new Event
+                    normalTransactionList.Add(new NormalTransaction
                     {
                         Id = (int)sqlDataReader["Id"],
                         Name = sqlDataReader["Name"].ToString(),
-                        Location = sqlDataReader["Location"].ToString(),
+                        Amount = (double)sqlDataReader["Amount"],
                         Type = sqlDataReader["Type"].ToString(),
                         Note = sqlDataReader["Note"].ToString(),
-                        EventDate = (DateTime)sqlDataReader["EventDate"],
+                        TransactionDate = (DateTime)sqlDataReader["TransactionDate"],
                         ContactId = (int)sqlDataReader["ContactId"],
                         ContactName = sqlDataReader["ContactName"].ToString(),
                         UserId = (int)sqlDataReader["UserId"]
@@ -93,30 +93,30 @@ namespace ExpenseManagement.Repository
             {
                 SqlConnection.Close();
             }
-            return eventList;
+            return normalTransactionList;
         }
 
-        public MessageStatus AddEvent(Event newEvent)
+        public MessageStatus AddNormalTransaction(NormalTransaction normalTransaction)
         {
-            Query = "INSERT INTO Events([Name], [Location], [Type], [Note], [EventDate], [ContactId], [UserId]) VALUES(@Name, @Location, @Type, @Note, @EventDate, @ContactId, @UserId);";
+            Query = "INSERT INTO Transactions([Name], [Amount], [Type], [Note], [TransactionDate], [ContactId], [UserId]) VALUES(@Name, @Amount, @Type, @Note, @TransactionDate, @ContactId, @UserId);";
 
             try
             {
                 SqlConnection.Open();
 
                 SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
-                sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = newEvent.Name;
-                sqlCommand.Parameters.Add("@Location", SqlDbType.VarChar).Value = newEvent.Location;
-                sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = newEvent.Type;
-                sqlCommand.Parameters.Add("@Note", SqlDbType.VarChar).Value = newEvent.Note;
-                sqlCommand.Parameters.AddWithValue("@EventDate", Convert.ToDateTime(newEvent.EventDate));
-                sqlCommand.Parameters.Add("@ContactId", SqlDbType.Int).Value = newEvent.ContactId;
-                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = newEvent.UserId;
+                sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = normalTransaction.Name;
+                sqlCommand.Parameters.Add("@Amount", SqlDbType.Money).Value = normalTransaction.Amount;
+                sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = normalTransaction.Type;
+                sqlCommand.Parameters.Add("@Note", SqlDbType.VarChar).Value = normalTransaction.Note;
+                sqlCommand.Parameters.AddWithValue("@TransactionDate", Convert.ToDateTime(normalTransaction.TransactionDate));
+                sqlCommand.Parameters.Add("@ContactId", SqlDbType.Int).Value = normalTransaction.ContactId;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = normalTransaction.UserId;
 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    MessageStatus.Message = "Event Added Successfully!!";
+                    MessageStatus.Message = "Transaction Added Successfully!!";
                     MessageStatus.ErrorStatus = false;
                 }
                 else
@@ -135,26 +135,29 @@ namespace ExpenseManagement.Repository
         }
 
         //Update Contact
-        public MessageStatus UpdateEvent(Event updatingEvent)
+        public MessageStatus UpdateNormalTransaction(NormalTransaction normalTransaction)
         {
-            Query = "UPDATE Events SET [Name] = @Name, [Location] = @Location, [Type] = @Type, [Note] = @Note, [EventDate] = @EventDate, [ContactId] = @ContactId WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "UPDATE NormalTransactions SET [Name] = @Name, [Amount] = @Amount, [Type] = @Type, [Note] = @Note, [TransactionDate] = @TransactionDate, [ContactId] = @ContactId WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {
                 SqlConnection.Open();
 
                 SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
-                sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = updatingEvent.Name;
-                sqlCommand.Parameters.Add("@Location", SqlDbType.VarChar).Value = updatingEvent.Location;
-                sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = updatingEvent.Type;
-                sqlCommand.Parameters.Add("@Note", SqlDbType.VarChar).Value = updatingEvent.Note;
-                sqlCommand.Parameters.AddWithValue("@EventDate", Convert.ToDateTime(updatingEvent.EventDate));
-                sqlCommand.Parameters.Add("@ContactId", SqlDbType.Int).Value = updatingEvent.ContactId;
+                sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = normalTransaction.Id;
+                sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = normalTransaction.Name;
+                sqlCommand.Parameters.Add("@Amount", SqlDbType.Money).Value = normalTransaction.Amount;
+                sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = normalTransaction.Type;
+                sqlCommand.Parameters.Add("@Note", SqlDbType.VarChar).Value = normalTransaction.Note;
+                sqlCommand.Parameters.AddWithValue("@TransactionDate", Convert.ToDateTime(normalTransaction.TransactionDate));
+                sqlCommand.Parameters.Add("@ContactId", SqlDbType.Int).Value = normalTransaction.ContactId;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = normalTransaction.UserId;
+               
 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    MessageStatus.Message = "Event Updated Successfully!!";
+                    MessageStatus.Message = "Transaction Updated Successfully!!";
                     MessageStatus.ErrorStatus = false;
                 }
                 else
@@ -173,22 +176,22 @@ namespace ExpenseManagement.Repository
             return MessageStatus;
         }
 
-        public MessageStatus DeleteEvent(Event deletingEvent)
+        public MessageStatus DeleteNormalTransaction(NormalTransaction normalTransaction)
         {
-            Query = "DELETE FROM Events WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "DELETE FROM Transactions WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {
                 SqlConnection.Open();
 
                 SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
-                sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = deletingEvent.Id;
-                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = deletingEvent.UserId;
+                sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = normalTransaction.Id;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = normalTransaction.UserId;
 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    MessageStatus.Message = "Event Deleted Successfully!!";
+                    MessageStatus.Message = "Transaction Deleted Successfully!!";
                     MessageStatus.ErrorStatus = false;
                 }
                 else

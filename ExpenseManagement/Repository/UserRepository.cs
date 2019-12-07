@@ -21,9 +21,9 @@ namespace ExpenseManagement.Repository
 
             try
             {
-                sqlConnection.Open();
+                SqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = user.FirstName;
                 sqlCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = user.LastName;
                 sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = user.UserName;
@@ -32,22 +32,22 @@ namespace ExpenseManagement.Repository
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    messageStatus.Message = "Added Successfully!!";
-                    messageStatus.ErrorStatus = false;
+                    MessageStatus.Message = "User Registered Successfully!!";
+                    MessageStatus.ErrorStatus = false;
                 }
                 else
                     throw new Exception("Error, Data Not Added!");
             }
             catch (Exception ex)
             {
-                messageStatus.Message = ex.Message;
-                messageStatus.ErrorStatus = true;
+                MessageStatus.Message = ex.Message;
+                MessageStatus.ErrorStatus = true;
             }
             finally
             {
-                sqlConnection.Close();
+                SqlConnection.Close();
             }
-            return messageStatus;
+            return MessageStatus;
         }
 
         //Get Username
@@ -59,9 +59,9 @@ namespace ExpenseManagement.Repository
 
             try
             {
-                sqlConnection.Open();
+                SqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.SingleRow);
@@ -81,7 +81,7 @@ namespace ExpenseManagement.Repository
             }
             finally
             {
-                sqlConnection.Close();
+                SqlConnection.Close();
             }
             return user;
         }
@@ -94,9 +94,9 @@ namespace ExpenseManagement.Repository
 
             try
             {
-                sqlConnection.Open();
+                SqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
                 sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = password;
 
@@ -117,7 +117,7 @@ namespace ExpenseManagement.Repository
             }
             finally
             {
-                sqlConnection.Close();
+                SqlConnection.Close();
             }
             return user;
         }

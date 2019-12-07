@@ -13,5 +13,6 @@ namespace ExpenseManagement.Model
         public string Note { get; set; }
         public DateTime EventDate { get; set; }
         public int ContactId { get; set; }
+        public string ContactName { get; set;}
     }
 }

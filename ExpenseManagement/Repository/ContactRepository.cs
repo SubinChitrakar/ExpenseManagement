@@ -15,23 +15,23 @@ namespace ExpenseManagement.Repository
         //Read All Contacts
         public List<Contact> GetContacts(int userId)
         {
-            List<Contact> ContactList = new List<Contact>();
+            List<Contact> contactList = new List<Contact>();
             Query = "SELECT * FROM CONTACTS WHERE [UserId] = @UserId";
 
             try
             {
-                sqlConnection.Open();
+                SqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
                 while (sqlDataReader.Read())
                 {
-                    ContactList.Add(new Contact
+                    contactList.Add(new Contact
                     {
                         Id = (int)sqlDataReader["Id"],
-                        Name = sqlDataReader["Name"].ToString(),
+                        Name = sqlDataReader["ContactName"].ToString(),
                         UserId = (int)sqlDataReader["UserId"]
                     });
                 }
@@ -42,21 +42,21 @@ namespace ExpenseManagement.Repository
             }
             finally
             {
-                sqlConnection.Close();
+                SqlConnection.Close();
             }
-            return ContactList;
+            return contactList;
         }
 
         public Contact GetContactFromName(string contactName)
         {
             Contact contact = new Contact();
-            Query = "SELECT * FROM Contacts WHERE UPPER(Name) = @ContactName AND [UserId] = @UserId";
+            Query = "SELECT * FROM Contacts WHERE UPPER(ContactName) = @ContactName AND [UserId] = @UserId";
 
             try
             {
-                sqlConnection.Open();
+                SqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@ContactName", SqlDbType.VarChar).Value = contactName.ToUpper();
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = UserSession.UserData.Id;
 
@@ -66,7 +66,7 @@ namespace ExpenseManagement.Repository
                 {
                     contact.Id = (int)sqlDataReader["Id"];
                     contact.UserId = (int)sqlDataReader["UserId"];
-                    contact.Name = sqlDataReader["Name"].ToString();
+                    contact.Name = sqlDataReader["ContactName"].ToString();
                 }
             }
             catch (Exception ex)
@@ -75,7 +75,7 @@ namespace ExpenseManagement.Repository
             }
             finally
             {
-                sqlConnection.Close();
+                SqlConnection.Close();
             }
             return contact;
         }
@@ -83,47 +83,47 @@ namespace ExpenseManagement.Repository
         //Add Contact 
         public MessageStatus AddContact(Contact contact)
         {
-            Query = "INSERT INTO CONTACTS([Name], [UserId]) VALUES(@Name, @UserId);";
+            Query = "INSERT INTO CONTACTS([ContactName], [UserId]) VALUES(@Name, @UserId);";
 
             try
             {
-                sqlConnection.Open();
+                SqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = contact.Name;
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = contact.UserId;
 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    messageStatus.Message = "Added Successfully!!";
-                    messageStatus.ErrorStatus = false;
+                    MessageStatus.Message = "Contact Added Successfully!!";
+                    MessageStatus.ErrorStatus = false;
                 }
                 else
                     throw new Exception("Error, Data Not Added!");    
             }
             catch(Exception ex)
             {
-                messageStatus.Message = ex.Message;
-                messageStatus.ErrorStatus = true;
+                MessageStatus.Message = ex.Message;
+                MessageStatus.ErrorStatus = true;
             }
             finally
             {
-                sqlConnection.Close();
+                SqlConnection.Close();
             }
-            return messageStatus;
+            return MessageStatus;
         }
 
         //Update Contact
         public MessageStatus UpdateContact(Contact contact)
         {
-            Query = "UPDATE CONTACTS SET [Name] = @Name WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "UPDATE CONTACTS SET [ContactName] = @Name WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {
-                sqlConnection.Open();
+                SqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = contact.Name;
                 sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = contact.UserId;
@@ -131,23 +131,23 @@ namespace ExpenseManagement.Repository
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    messageStatus.Message = "Updated Successfully!!";
-                    messageStatus.ErrorStatus = false;
+                    MessageStatus.Message = "Contact Updated Successfully!!";
+                    MessageStatus.ErrorStatus = false;
                 }
                 else
                     throw new Exception("Error, Data Not Updated!");
             }
             catch (Exception ex)
             {
-                messageStatus.Message = ex.Message;
-                messageStatus.ErrorStatus = true;
+                MessageStatus.Message = ex.Message;
+                MessageStatus.ErrorStatus = true;
             }
             finally
             {
-                sqlConnection.Close();
+                SqlConnection.Close();
             }
 
-            return messageStatus;
+            return MessageStatus;
         }
 
         //Delete Contact
@@ -157,31 +157,31 @@ namespace ExpenseManagement.Repository
 
             try
             {
-                sqlConnection.Open();
+                SqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(Query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = contact.UserId;
                 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    messageStatus.Message = "Deleted Successfully!!";
-                    messageStatus.ErrorStatus = false;
+                    MessageStatus.Message = "Contact Deleted Successfully!!";
+                    MessageStatus.ErrorStatus = false;
                 }
                 else
                     throw new Exception("Error, Data Not Deleted!");
             }
             catch (Exception ex)
             {
-                messageStatus.Message = ex.Message;
-                messageStatus.ErrorStatus = true;
+                MessageStatus.Message = ex.Message;
+                MessageStatus.ErrorStatus = true;
             }
             finally
             {
-                sqlConnection.Close();
+                SqlConnection.Close();
             }
-            return messageStatus;
+            return MessageStatus;
         }
     }
 }

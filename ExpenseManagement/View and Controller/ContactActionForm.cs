@@ -11,43 +11,43 @@ namespace ExpenseManagement.View_and_Controller
 {
     public partial class ContactActionForm : MaterialForm
     {
-        private MaterialSkinManager materialSkinManager;
-        private Contact contact;
+        private MaterialSkinManager _materialSkinManager;
+        private Contact _contact;
 
         public void LoadDesign()
         {
             InitializeComponent();
-            materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            _materialSkinManager = MaterialSkinManager.Instance;
+            _materialSkinManager.AddFormToManage(this);
+            _materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            _materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
         public ContactActionForm()
         {
             LoadDesign();
-            contact = new Contact();
-            lblHeading.Text = "Add Contact";
-            btnContactAction.Text = "Add Contact";
+            _contact = new Contact();
+            LblHeading.Text = "Add Contact";
+            BtnContactAction.Text = "Add Contact";
         }
 
         public ContactActionForm(Contact editContact)
         {
             LoadDesign();
-            contact = editContact;
-            lblHeading.Text = "Edit Contact";
-            btnContactAction.Text = "Edit Contact";
-            txtContactName.Text = contact.Name;
+            _contact = editContact;
+            LblHeading.Text = "Edit Contact";
+            BtnContactAction.Text = "Edit Contact";
+            TxtContactName.Text = _contact.Name;
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
+        private void BtnBack_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
-        private async void btnContactAction_Click(object sender, EventArgs e)
+        private async void BtnContactAction_Click(object sender, EventArgs e)
         {
-            string contactName = txtContactName.Text;
+            string contactName = TxtContactName.Text;
             ContactRepository contactRepository = new ContactRepository();
             MessageStatus messageStatus = new MessageStatus();
 
@@ -64,16 +64,16 @@ namespace ExpenseManagement.View_and_Controller
                 return;
             }
 
-            contact.Name = contactName;
-            btnContactAction.Enabled = false;
-            contact.UserId = UserSession.UserData.Id;
-            if (contact.Id > 0)
+            _contact.Name = contactName;
+            BtnContactAction.Enabled = false;
+            _contact.UserId = UserSession.UserData.Id;
+            if (_contact.Id > 0)
             {
-                messageStatus = await Task.Run(() => contactRepository.UpdateContact(contact));
+                messageStatus = await Task.Run(() => contactRepository.UpdateContact(_contact));
             }
             else
             {
-                messageStatus = await Task.Run(() => contactRepository.AddContact(contact));
+                messageStatus = await Task.Run(() => contactRepository.AddContact(_contact));
             }
 
             if (messageStatus.ErrorStatus)

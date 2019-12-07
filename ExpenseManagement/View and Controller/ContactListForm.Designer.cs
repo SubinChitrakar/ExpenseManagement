@@ -32,11 +32,11 @@
             this.headingPanel = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.PictureBox();
             this.lblHeading = new System.Windows.Forms.Label();
-            this.lblUserName = new System.Windows.Forms.Label();
+            this.LblUserName = new System.Windows.Forms.Label();
             this.btnAddContact = new MaterialSkin.Controls.MaterialFlatButton();
             this.btnEditContact = new MaterialSkin.Controls.MaterialFlatButton();
             this.btnDeleteContact = new MaterialSkin.Controls.MaterialFlatButton();
-            this.contactsListView = new System.Windows.Forms.ListView();
+            this.ContactsListView = new System.Windows.Forms.ListView();
             this.headerContactName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.headingPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
@@ -47,7 +47,7 @@
             this.headingPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
             this.headingPanel.Controls.Add(this.btnBack);
             this.headingPanel.Controls.Add(this.lblHeading);
-            this.headingPanel.Controls.Add(this.lblUserName);
+            this.headingPanel.Controls.Add(this.LblUserName);
             this.headingPanel.Location = new System.Drawing.Point(0, 30);
             this.headingPanel.Name = "headingPanel";
             this.headingPanel.Size = new System.Drawing.Size(687, 94);
@@ -63,7 +63,7 @@
             this.btnBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnBack.TabIndex = 1;
             this.btnBack.TabStop = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // lblHeading
             // 
@@ -78,15 +78,15 @@
             // 
             // lblUserName
             // 
-            this.lblUserName.AutoSize = true;
-            this.lblUserName.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserName.ForeColor = System.Drawing.Color.Transparent;
-            this.lblUserName.Location = new System.Drawing.Point(602, 38);
-            this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(70, 27);
-            this.lblUserName.TabIndex = 1;
-            this.lblUserName.Text = "label1";
-            this.lblUserName.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.LblUserName.AutoSize = true;
+            this.LblUserName.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUserName.ForeColor = System.Drawing.Color.Transparent;
+            this.LblUserName.Location = new System.Drawing.Point(602, 38);
+            this.LblUserName.Name = "lblUserName";
+            this.LblUserName.Size = new System.Drawing.Size(70, 27);
+            this.LblUserName.TabIndex = 1;
+            this.LblUserName.Text = "label1";
+            this.LblUserName.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnAddContact
             // 
@@ -104,7 +104,7 @@
             this.btnAddContact.TabIndex = 3;
             this.btnAddContact.Text = "Add Contact";
             this.btnAddContact.UseVisualStyleBackColor = true;
-            this.btnAddContact.Click += new System.EventHandler(this.btnAddContact_Click);
+            this.btnAddContact.Click += new System.EventHandler(this.BtnAddContact_Click);
             // 
             // btnEditContact
             // 
@@ -122,7 +122,7 @@
             this.btnEditContact.TabIndex = 4;
             this.btnEditContact.Text = "Edit Contact";
             this.btnEditContact.UseVisualStyleBackColor = true;
-            this.btnEditContact.Click += new System.EventHandler(this.btnEditContact_Click);
+            this.btnEditContact.Click += new System.EventHandler(this.BtnEditContact_Click);
             // 
             // btnDeleteContact
             // 
@@ -140,22 +140,22 @@
             this.btnDeleteContact.TabIndex = 5;
             this.btnDeleteContact.Text = "Delete Contact";
             this.btnDeleteContact.UseVisualStyleBackColor = true;
-            this.btnDeleteContact.Click += new System.EventHandler(this.btnDeleteContact_Click);
+            this.btnDeleteContact.Click += new System.EventHandler(this.BtnDeleteContact_Click);
             // 
             // contactsListView
             // 
-            this.contactsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ContactsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.headerContactName});
-            this.contactsListView.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contactsListView.FullRowSelect = true;
-            this.contactsListView.HideSelection = false;
-            this.contactsListView.Location = new System.Drawing.Point(30, 154);
-            this.contactsListView.MultiSelect = false;
-            this.contactsListView.Name = "contactsListView";
-            this.contactsListView.Size = new System.Drawing.Size(462, 522);
-            this.contactsListView.TabIndex = 6;
-            this.contactsListView.UseCompatibleStateImageBehavior = false;
-            this.contactsListView.View = System.Windows.Forms.View.Details;
+            this.ContactsListView.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ContactsListView.FullRowSelect = true;
+            this.ContactsListView.HideSelection = false;
+            this.ContactsListView.Location = new System.Drawing.Point(30, 154);
+            this.ContactsListView.MultiSelect = false;
+            this.ContactsListView.Name = "contactsListView";
+            this.ContactsListView.Size = new System.Drawing.Size(462, 522);
+            this.ContactsListView.TabIndex = 6;
+            this.ContactsListView.UseCompatibleStateImageBehavior = false;
+            this.ContactsListView.View = System.Windows.Forms.View.Details;
             // 
             // headerContactName
             // 
@@ -168,7 +168,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(684, 706);
-            this.Controls.Add(this.contactsListView);
+            this.Controls.Add(this.ContactsListView);
             this.Controls.Add(this.btnDeleteContact);
             this.Controls.Add(this.btnEditContact);
             this.Controls.Add(this.btnAddContact);
@@ -195,12 +195,12 @@
 
         private System.Windows.Forms.Panel headingPanel;
         private System.Windows.Forms.Label lblHeading;
-        private System.Windows.Forms.Label lblUserName;
+        private System.Windows.Forms.Label LblUserName;
         private System.Windows.Forms.PictureBox btnBack;
         private MaterialSkin.Controls.MaterialFlatButton btnAddContact;
         private MaterialSkin.Controls.MaterialFlatButton btnEditContact;
         private MaterialSkin.Controls.MaterialFlatButton btnDeleteContact;
-        private System.Windows.Forms.ListView contactsListView;
+        private System.Windows.Forms.ListView ContactsListView;
         private System.Windows.Forms.ColumnHeader headerContactName;
     }
 }

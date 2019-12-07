@@ -10,9 +10,9 @@ namespace ExpenseManagement
 {
     public partial class LoginForm : MaterialForm
     {
-        private UserRepository userRepository;
-        private MessageStatus messageStatus;
-        private User user;
+        private UserRepository _userRepository;
+        private MessageStatus _messageStatus;
+        private User _user;
 
         private readonly MaterialSkinManager materialSkinManager;
 
@@ -25,8 +25,8 @@ namespace ExpenseManagement
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
 
             UserSession.ParentForm.Hide();
-            userRepository = new UserRepository();
-            messageStatus = new MessageStatus();
+            _userRepository = new UserRepository();
+            _messageStatus = new MessageStatus();
         }
 
         /*
@@ -40,10 +40,10 @@ namespace ExpenseManagement
         /*
          * Login Form
          */
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsernameLogin.Text;
-            string password = txtPasswordLogin.Text;
+            string username = TxtUsernameLogin.Text;
+            string password = TxtPasswordLogin.Text;
 
             if (string.IsNullOrWhiteSpace(username))
             {
@@ -57,10 +57,10 @@ namespace ExpenseManagement
                 return;
             }
 
-            user = userRepository.VerifyUser(username, Encrypt.EncryptData(password));
-            if (user.Id > 0)
+            _user = _userRepository.VerifyUser(username, Encrypt.EncryptData(password));
+            if (_user.Id > 0)
             {
-                UserSession.UserData = user;
+                UserSession.UserData = _user;
                 this.Dispose();
                 UserSession.ParentForm.Activate();
                 UserSession.ParentForm.Show();
@@ -70,7 +70,7 @@ namespace ExpenseManagement
                 DialogResult result = MessageBox.Show("USERNAME / PASSWORD Incorrect", "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                 if (result == DialogResult.Retry)
                 {
-                    txtPasswordLogin.Text = "";
+                    TxtPasswordLogin.Text = "";
                 }
                 else
                 {
@@ -83,14 +83,14 @@ namespace ExpenseManagement
         /*
          * Register User
          */
-        private void btnRegister_Click(object sender, EventArgs e)
+        private void BtnRegister_Click(object sender, EventArgs e)
         {
             //Assigning Values
-            string firstName = txtFirstName.Text;
-            string lastName = txtLastName.Text;
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-            string confirmPassword = txtConfirmPassword.Text;
+            string firstName = TxtFirstName.Text;
+            string lastName = TxtLastName.Text;
+            string username = TxtUsername.Text;
+            string password = TxtPassword.Text;
+            string confirmPassword = TxtConfirmPassword.Text;
 
             //Checking all the Values
             if (string.IsNullOrWhiteSpace(firstName))
@@ -116,8 +116,8 @@ namespace ExpenseManagement
                 return;
             }
 
-            user = userRepository.GetUserFromUsername(username);
-            if (user.Id > 0)
+            _user = _userRepository.GetUserFromUsername(username);
+            if (_user.Id > 0)
             {
                 MessageBox.Show("USERNAME Already Taken", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -155,10 +155,10 @@ namespace ExpenseManagement
             };
 
             //Adding User
-            messageStatus = userRepository.AddUser(newUser);
-            if (messageStatus.ErrorStatus)
+            _messageStatus = _userRepository.AddUser(newUser);
+            if (_messageStatus.ErrorStatus)
             {
-                DialogResult result = MessageBox.Show(messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                DialogResult result = MessageBox.Show(_messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                 if (result == DialogResult.Cancel)
                 {
                     this.Dispose();
@@ -167,12 +167,12 @@ namespace ExpenseManagement
             }
             else
             {
-                txtFirstName.Text = "";
-                txtLastName.Text = "";
-                txtUsername.Text = "";
-                txtPassword.Text = "";
-                txtConfirmPassword.Text = "";
-                MessageBox.Show("USER Sucessfully Registered", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TxtFirstName.Text = "";
+                TxtLastName.Text = "";
+                TxtUsername.Text = "";
+                TxtPassword.Text = "";
+                TxtConfirmPassword.Text = "";
+                MessageBox.Show(_messageStatus.Message, "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

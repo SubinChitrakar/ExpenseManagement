@@ -11,17 +11,17 @@ namespace ExpenseManagement.Repository
 {
     public class BaseRepository
     {
-        protected SqlConnection sqlConnection;
-        protected MessageStatus messageStatus;
+        protected SqlConnection SqlConnection;
+        protected MessageStatus MessageStatus;
         protected string Query;
         
         public BaseRepository()
         {
             //string connection = ConfigurationManager.ConnectionStrings["AzureConnection"].ConnectionString;
             string connection = ConfigurationManager.ConnectionStrings["LocalConnection"].ConnectionString;
-            messageStatus = new MessageStatus();
+            MessageStatus = new MessageStatus();
             Query = "";
-            sqlConnection = new SqlConnection(connection);
+            SqlConnection = new SqlConnection(connection);
         }
     }
 }

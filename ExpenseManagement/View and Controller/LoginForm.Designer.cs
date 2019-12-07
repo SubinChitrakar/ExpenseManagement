@@ -35,11 +35,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.TabRegister = new System.Windows.Forms.TabPage();
             this.btnRegister = new MaterialSkin.Controls.MaterialFlatButton();
-            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.txtLastName = new System.Windows.Forms.TextBox();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.TxtConfirmPassword = new System.Windows.Forms.TextBox();
+            this.TxtPassword = new System.Windows.Forms.TextBox();
+            this.TxtUsername = new System.Windows.Forms.TextBox();
+            this.TxtLastName = new System.Windows.Forms.TextBox();
+            this.TxtFirstName = new System.Windows.Forms.TextBox();
             this.lblConfirmPassword = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
@@ -47,8 +47,8 @@
             this.lblFirstName = new System.Windows.Forms.Label();
             this.TabLogin = new System.Windows.Forms.TabPage();
             this.btnLogin = new MaterialSkin.Controls.MaterialFlatButton();
-            this.txtPasswordLogin = new System.Windows.Forms.TextBox();
-            this.txtUsernameLogin = new System.Windows.Forms.TextBox();
+            this.TxtPasswordLogin = new System.Windows.Forms.TextBox();
+            this.TxtUsernameLogin = new System.Windows.Forms.TextBox();
             this.lblPasswordLogin = new System.Windows.Forms.Label();
             this.lblUsernameLogin = new System.Windows.Forms.Label();
             this.StartUpTab = new MaterialSkin.Controls.MaterialTabControl();
@@ -108,11 +108,11 @@
             // TabRegister
             // 
             this.TabRegister.Controls.Add(this.btnRegister);
-            this.TabRegister.Controls.Add(this.txtConfirmPassword);
-            this.TabRegister.Controls.Add(this.txtPassword);
-            this.TabRegister.Controls.Add(this.txtUsername);
-            this.TabRegister.Controls.Add(this.txtLastName);
-            this.TabRegister.Controls.Add(this.txtFirstName);
+            this.TabRegister.Controls.Add(this.TxtConfirmPassword);
+            this.TabRegister.Controls.Add(this.TxtPassword);
+            this.TabRegister.Controls.Add(this.TxtUsername);
+            this.TabRegister.Controls.Add(this.TxtLastName);
+            this.TabRegister.Controls.Add(this.TxtFirstName);
             this.TabRegister.Controls.Add(this.lblConfirmPassword);
             this.TabRegister.Controls.Add(this.lblPassword);
             this.TabRegister.Controls.Add(this.lblUsername);
@@ -142,54 +142,54 @@
             this.btnRegister.TabIndex = 39;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            this.btnRegister.Click += new System.EventHandler(this.BtnRegister_Click);
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtConfirmPassword.Location = new System.Drawing.Point(26, 295);
-            this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.PasswordChar = '*';
-            this.txtConfirmPassword.Size = new System.Drawing.Size(428, 29);
-            this.txtConfirmPassword.TabIndex = 34;
+            this.TxtConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.TxtConfirmPassword.Location = new System.Drawing.Point(26, 295);
+            this.TxtConfirmPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtConfirmPassword.Name = "txtConfirmPassword";
+            this.TxtConfirmPassword.PasswordChar = '*';
+            this.TxtConfirmPassword.Size = new System.Drawing.Size(428, 29);
+            this.TxtConfirmPassword.TabIndex = 34;
             // 
             // txtPassword
             // 
-            this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtPassword.Location = new System.Drawing.Point(26, 210);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(422, 29);
-            this.txtPassword.TabIndex = 32;
+            this.TxtPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.TxtPassword.Location = new System.Drawing.Point(26, 210);
+            this.TxtPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtPassword.Name = "txtPassword";
+            this.TxtPassword.PasswordChar = '*';
+            this.TxtPassword.Size = new System.Drawing.Size(422, 29);
+            this.TxtPassword.TabIndex = 32;
             // 
             // txtUsername
             // 
-            this.txtUsername.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtUsername.Location = new System.Drawing.Point(26, 135);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(422, 29);
-            this.txtUsername.TabIndex = 30;
+            this.TxtUsername.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.TxtUsername.Location = new System.Drawing.Point(26, 135);
+            this.TxtUsername.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtUsername.Name = "txtUsername";
+            this.TxtUsername.Size = new System.Drawing.Size(422, 29);
+            this.TxtUsername.TabIndex = 30;
             // 
             // txtLastName
             // 
-            this.txtLastName.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtLastName.Location = new System.Drawing.Point(245, 60);
-            this.txtLastName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(203, 29);
-            this.txtLastName.TabIndex = 28;
+            this.TxtLastName.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.TxtLastName.Location = new System.Drawing.Point(245, 60);
+            this.TxtLastName.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtLastName.Name = "txtLastName";
+            this.TxtLastName.Size = new System.Drawing.Size(203, 29);
+            this.TxtLastName.TabIndex = 28;
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtFirstName.Location = new System.Drawing.Point(20, 60);
-            this.txtFirstName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(203, 29);
-            this.txtFirstName.TabIndex = 26;
+            this.TxtFirstName.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.TxtFirstName.Location = new System.Drawing.Point(20, 60);
+            this.TxtFirstName.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtFirstName.Name = "txtFirstName";
+            this.TxtFirstName.Size = new System.Drawing.Size(203, 29);
+            this.TxtFirstName.TabIndex = 26;
             // 
             // lblConfirmPassword
             // 
@@ -249,8 +249,8 @@
             // TabLogin
             // 
             this.TabLogin.Controls.Add(this.btnLogin);
-            this.TabLogin.Controls.Add(this.txtPasswordLogin);
-            this.TabLogin.Controls.Add(this.txtUsernameLogin);
+            this.TabLogin.Controls.Add(this.TxtPasswordLogin);
+            this.TabLogin.Controls.Add(this.TxtUsernameLogin);
             this.TabLogin.Controls.Add(this.lblPasswordLogin);
             this.TabLogin.Controls.Add(this.lblUsernameLogin);
             this.TabLogin.Location = new System.Drawing.Point(4, 25);
@@ -277,26 +277,26 @@
             this.btnLogin.TabIndex = 15;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // txtPasswordLogin
             // 
-            this.txtPasswordLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtPasswordLogin.Location = new System.Drawing.Point(26, 135);
-            this.txtPasswordLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPasswordLogin.Name = "txtPasswordLogin";
-            this.txtPasswordLogin.PasswordChar = '*';
-            this.txtPasswordLogin.Size = new System.Drawing.Size(417, 29);
-            this.txtPasswordLogin.TabIndex = 14;
+            this.TxtPasswordLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.TxtPasswordLogin.Location = new System.Drawing.Point(26, 135);
+            this.TxtPasswordLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtPasswordLogin.Name = "txtPasswordLogin";
+            this.TxtPasswordLogin.PasswordChar = '*';
+            this.TxtPasswordLogin.Size = new System.Drawing.Size(417, 29);
+            this.TxtPasswordLogin.TabIndex = 14;
             // 
             // txtUsernameLogin
             // 
-            this.txtUsernameLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.txtUsernameLogin.Location = new System.Drawing.Point(26, 60);
-            this.txtUsernameLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUsernameLogin.Name = "txtUsernameLogin";
-            this.txtUsernameLogin.Size = new System.Drawing.Size(417, 29);
-            this.txtUsernameLogin.TabIndex = 12;
+            this.TxtUsernameLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
+            this.TxtUsernameLogin.Location = new System.Drawing.Point(26, 60);
+            this.TxtUsernameLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtUsernameLogin.Name = "txtUsernameLogin";
+            this.TxtUsernameLogin.Size = new System.Drawing.Size(417, 29);
+            this.TxtUsernameLogin.TabIndex = 12;
             // 
             // lblPasswordLogin
             // 
@@ -382,17 +382,17 @@
         private MaterialSkin.Controls.MaterialTabControl StartUpTab;
         private System.Windows.Forms.TabPage TabLogin;
         private MaterialSkin.Controls.MaterialFlatButton btnLogin;
-        private System.Windows.Forms.TextBox txtPasswordLogin;
-        private System.Windows.Forms.TextBox txtUsernameLogin;
+        private System.Windows.Forms.TextBox TxtPasswordLogin;
+        private System.Windows.Forms.TextBox TxtUsernameLogin;
         private System.Windows.Forms.Label lblPasswordLogin;
         private System.Windows.Forms.Label lblUsernameLogin;
         private System.Windows.Forms.TabPage TabRegister;
         private MaterialSkin.Controls.MaterialFlatButton btnRegister;
-        private System.Windows.Forms.TextBox txtConfirmPassword;
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox txtUsername;
-        private System.Windows.Forms.TextBox txtLastName;
-        private System.Windows.Forms.TextBox txtFirstName;
+        private System.Windows.Forms.TextBox TxtConfirmPassword;
+        private System.Windows.Forms.TextBox TxtPassword;
+        private System.Windows.Forms.TextBox TxtUsername;
+        private System.Windows.Forms.TextBox TxtLastName;
+        private System.Windows.Forms.TextBox TxtFirstName;
         private System.Windows.Forms.Label lblConfirmPassword;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblUsername;
