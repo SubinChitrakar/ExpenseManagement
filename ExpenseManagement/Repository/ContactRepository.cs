@@ -30,7 +30,7 @@ namespace ExpenseManagement.Repository
                 {
                     contactList.Add(new Contact
                     {
-                        Id = (int)sqlDataReader["Id"],
+                        Id = (int)sqlDataReader["ContactId"],
                         Name = sqlDataReader["ContactName"].ToString(),
                         UserId = (int)sqlDataReader["UserId"]
                     });
@@ -64,7 +64,7 @@ namespace ExpenseManagement.Repository
 
                 while (sqlDataReader.Read())
                 {
-                    contact.Id = (int)sqlDataReader["Id"];
+                    contact.Id = (int)sqlDataReader["ContactId"];
                     contact.UserId = (int)sqlDataReader["UserId"];
                     contact.Name = sqlDataReader["ContactName"].ToString();
                 }
@@ -117,7 +117,7 @@ namespace ExpenseManagement.Repository
         //Update Contact
         public MessageStatus UpdateContact(Contact contact)
         {
-            Query = "UPDATE CONTACTS SET [ContactName] = @Name WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "UPDATE CONTACTS SET [ContactName] = @Name WHERE [ContactId] = @Id AND [UserId] = @UserId;";
 
             try
             {
@@ -153,7 +153,7 @@ namespace ExpenseManagement.Repository
         //Delete Contact
         public MessageStatus DeleteContact(Contact contact)
         {
-            Query = "DELETE FROM Contacts WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "DELETE FROM Contacts WHERE [ContactId] = @Id AND [UserId] = @UserId;";
 
             try
             {

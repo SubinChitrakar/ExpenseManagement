@@ -14,15 +14,13 @@ namespace ExpenseManagement
         private MessageStatus _messageStatus;
         private User _user;
 
-        private readonly MaterialSkinManager materialSkinManager;
+        private readonly MaterialSkinManager _materialSkinManager;
 
         public LoginForm()
         {   
             InitializeComponent();
-            materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+            _materialSkinManager = DesignSettings.GetDesign();
+            _materialSkinManager.AddFormToManage(this);
 
             UserSession.ParentForm.Hide();
             _userRepository = new UserRepository();

@@ -1,7 +1,6 @@
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\ExpenseManagement.exe.config
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\ExpenseManagement.exe
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\ExpenseManagement.pdb
-D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csprojAssemblyReference.cache
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.Properties.Resources.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csproj.GenerateResource.cache
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csproj.CoreCompileInputs.cache
@@ -14,3 +13,6 @@ D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.c
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\MaterialSkin.dll
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.ContactActionForm.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\Tulpep.NotificationWindow.dll
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.TransactionActionForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.TransactionListForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csprojAssemblyReference.cache

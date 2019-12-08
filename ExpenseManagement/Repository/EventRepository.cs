@@ -109,7 +109,7 @@ namespace ExpenseManagement.Repository
                 sqlCommand.Parameters.Add("@Location", SqlDbType.VarChar).Value = newEvent.Location;
                 sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = newEvent.Type;
                 sqlCommand.Parameters.Add("@Note", SqlDbType.VarChar).Value = newEvent.Note;
-                sqlCommand.Parameters.AddWithValue("@EventDate", Convert.ToDateTime(newEvent.EventDate));
+                sqlCommand.Parameters.AddWithValue("@EventDate", SqlDbType.DateTime).Value = newEvent.EventDate;
                 sqlCommand.Parameters.Add("@ContactId", SqlDbType.Int).Value = newEvent.ContactId;
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = newEvent.UserId;
 

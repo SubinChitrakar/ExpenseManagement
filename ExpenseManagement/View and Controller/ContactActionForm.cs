@@ -17,10 +17,8 @@ namespace ExpenseManagement.View_and_Controller
         public void LoadDesign()
         {
             InitializeComponent();
-            _materialSkinManager = MaterialSkinManager.Instance;
+            _materialSkinManager = DesignSettings.GetDesign();
             _materialSkinManager.AddFormToManage(this);
-            _materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            _materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
         public ContactActionForm()

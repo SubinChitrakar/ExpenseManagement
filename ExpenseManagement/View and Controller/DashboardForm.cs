@@ -16,6 +16,15 @@ namespace ExpenseManagement.View_and_Controller
 
         private void Dashboard_Activated(object sender, EventArgs e)
         {
+            UserSession.UserData = new User
+            {
+                Id = 1,
+                FirstName = "Subin",
+                LastName = "Chitrakar",
+                UserName = "Subin",
+                Password = "QtklAYAHoSY="
+            }; 
+
             if (UserSession.UserData == null)
             {
                 LoginForm loginForm = new LoginForm();
@@ -24,11 +33,18 @@ namespace ExpenseManagement.View_and_Controller
             }
         }
 
-        private void btnContact_Click(object sender, EventArgs e)
+        private void BtnContact_Click(object sender, EventArgs e)
         {
             ContactListForm contactsForm = new ContactListForm();
             contactsForm.Activate();
             contactsForm.Show();
+        }
+
+        private void BtnTransaction_Click(object sender, EventArgs e)
+        {
+            TransactionListForm transactionForm = new TransactionListForm();
+            transactionForm.Activate();
+            transactionForm.Show();
         }
     }
 }
