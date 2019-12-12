@@ -42,7 +42,7 @@ namespace ExpenseManagement.View_and_Controller
 
         private void BtnTransaction_Click(object sender, EventArgs e)
         {
-            TransactionListForm transactionListForm = new TransactionListForm();
+            TransactionListForm transactionListForm = new TransactionListForm(false);
             transactionListForm.Activate();
             transactionListForm.Show();
         }
@@ -59,6 +59,13 @@ namespace ExpenseManagement.View_and_Controller
             EventListForm eventListForm = new EventListForm(true);
             eventListForm.Activate();
             eventListForm.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TransactionListForm transactionListForm = new TransactionListForm(true);
+            transactionListForm.Activate();
+            transactionListForm.Show();
         }
     }
 }

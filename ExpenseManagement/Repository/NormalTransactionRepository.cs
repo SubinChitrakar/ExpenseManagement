@@ -12,10 +12,10 @@ namespace ExpenseManagement.Repository
         //Constructor
         public NormalTransactionRepository() : base() { }
 
-        public List<NormalTransaction> GetTransactions(int userId)
+        public List<Transaction> GetTransactions(int userId)
         {
-            List<NormalTransaction> normalTransactionList = new List<NormalTransaction>();
-            Query = "SELECT NormalTransactions.*, Contacts.Name FROM NormalTransactions LEFT JOIN Contacts ON NormalTransactions.ContactId = Contacts.Id WHERE [NormalTransactions.UserId] = @UserId ORDER BY NormalTransaction.TransactionDate DESC" ;
+            List<Transaction> normalTransactionList = new List<Transaction>();
+            Query = "SELECT NormalTransactions.*, Contacts.ContactName FROM NormalTransactions LEFT JOIN Contacts ON NormalTransactions.ContactId = Contacts.ContactId WHERE NormalTransactions.UserId = @UserId ORDER BY NormalTransactions.TransactionDate DESC";
 
             try
             {
@@ -27,62 +27,11 @@ namespace ExpenseManagement.Repository
 
                 while (sqlDataReader.Read())
                 {
-                    NormalTransaction normalTransaction = new NormalTransaction{
-                        Id = (int)sqlDataReader["Id"],
-                        Name = sqlDataReader["Name"].ToString(),
-                        Amount = (double)sqlDataReader["Amount"],
-                        Type = sqlDataReader["Type"].ToString(),
-                        Note = sqlDataReader["Note"].ToString(),
-                        TransactionDate = (DateTime)sqlDataReader["TransactionDate"],
-                        UserId = (int)sqlDataReader["UserId"]
-                    };
-
-                    if (sqlDataReader["ContactId"] == DBNull.Value)
-                        normalTransaction.ContactId = 0;
-                    else
-                        normalTransaction.ContactId = (int)sqlDataReader["ContactId"];
-                  
-
-                    if (sqlDataReader["ContactName"] == DBNull.Value)
-                        normalTransaction.ContactName = "";
-                    else
-                        normalTransaction.ContactName = sqlDataReader["ContactName"].ToString();
-
-                    normalTransactionList.Add(normalTransaction);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception: " + ex.Message);
-            }
-            finally
-            {
-                SqlConnection.Close();
-            }
-            return normalTransactionList;
-        }
-
-        public List<NormalTransaction> GetTransactionFromDate(DateTime date, int userId)
-        {
-            List<NormalTransaction> normalTransactionList = new List<NormalTransaction>();
-            Query = "SELECT NormalTransactions.*, Contacts.Name FROM NormalTransactions LEFT JOIN Contacts ON NormalTransactions.ContactId = Contacts.Id WHERE [NormalTransactions.UserId] = @UserId AND [NormalTransactions.TransactionDate] LIKE @TransactionDate%";
-
-            try
-            {
-                SqlConnection.Open();
-
-                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
-                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
-                sqlCommand.Parameters.AddWithValue("@TransactionDate", Convert.ToDateTime(date.Date));
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-
-                while (sqlDataReader.Read())
-                {
-                    NormalTransaction normalTransaction = new NormalTransaction
+                    Transaction normalTransaction = new Transaction
                     {
                         Id = (int)sqlDataReader["Id"],
                         Name = sqlDataReader["Name"].ToString(),
-                        Amount = (double)sqlDataReader["Amount"],
+                        Amount = Convert.ToDouble(sqlDataReader["Amount"]),
                         Type = sqlDataReader["Type"].ToString(),
                         Note = sqlDataReader["Note"].ToString(),
                         TransactionDate = (DateTime)sqlDataReader["TransactionDate"],
@@ -101,6 +50,7 @@ namespace ExpenseManagement.Repository
                         normalTransaction.ContactName = sqlDataReader["ContactName"].ToString();
 
                     normalTransactionList.Add(normalTransaction);
+
                 }
             }
             catch (Exception ex)
@@ -114,9 +64,9 @@ namespace ExpenseManagement.Repository
             return normalTransactionList;
         }
 
-        public MessageStatus AddNormalTransaction(NormalTransaction normalTransaction)
+        public MessageStatus AddNormalTransaction(Transaction normalTransaction)
         {
-            Query = "INSERT INTO Transactions([Name], [Amount], [Type], [Note], [TransactionDate], [ContactId], [UserId]) VALUES(@Name, @Amount, @Type, @Note, @TransactionDate, @ContactId, @UserId);";
+            Query = "INSERT INTO NormalTransactions([Name], [Amount], [Type], [Note], [TransactionDate], [ContactId], [UserId]) VALUES(@Name, @Amount, @Type, @Note, @TransactionDate, @ContactId, @UserId);";
 
             try
             {
@@ -157,7 +107,7 @@ namespace ExpenseManagement.Repository
         }
 
         //Update Contact
-        public MessageStatus UpdateNormalTransaction(NormalTransaction normalTransaction)
+        public MessageStatus UpdateNormalTransaction(Transaction normalTransaction)
         {
             Query = "UPDATE NormalTransactions SET [Name] = @Name, [Amount] = @Amount, [Type] = @Type, [Note] = @Note, [TransactionDate] = @TransactionDate, [ContactId] = @ContactId WHERE [Id] = @Id AND [UserId] = @UserId;";
 
@@ -201,9 +151,9 @@ namespace ExpenseManagement.Repository
             return MessageStatus;
         }
 
-        public MessageStatus DeleteNormalTransaction(NormalTransaction normalTransaction)
+        public MessageStatus DeleteNormalTransaction(Transaction normalTransaction)
         {
-            Query = "DELETE FROM Transactions WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "DELETE FROM NormalTransactions WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {

@@ -56,7 +56,7 @@
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\Event.cs" />
-    <Compile Include="Model\NormalTransaction.cs" />
+    <Compile Include="Model\Transaction.cs" />
     <Compile Include="Model\RecurringEvent.cs" />
     <Compile Include="Model\RecurringTransaction.cs" />
     <Compile Include="Model\User.cs" />
@@ -65,6 +65,7 @@
     <Compile Include="Repository\NormalTransactionRepository.cs" />
     <Compile Include="Repository\EventRepository.cs" />
     <Compile Include="Repository\RecurringEventRepository.cs" />
+    <Compile Include="Repository\RecurringTransactionRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Utilities\DesignSettings.cs" />
     <Compile Include="Utilities\Encrypt.cs" />

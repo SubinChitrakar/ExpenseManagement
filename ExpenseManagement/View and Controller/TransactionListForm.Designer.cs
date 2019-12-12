@@ -55,14 +55,13 @@
             this.TransactionListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.TransactionListView.FullRowSelect = true;
             this.TransactionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.TransactionListView.HideSelection = false;
             this.TransactionListView.HoverSelection = true;
             this.TransactionListView.Location = new System.Drawing.Point(26, 163);
             this.TransactionListView.MouseLocation = new System.Drawing.Point(-1, -1);
             this.TransactionListView.MouseState = MaterialSkin.MouseState.OUT;
             this.TransactionListView.Name = "TransactionListView";
             this.TransactionListView.OwnerDraw = true;
-            this.TransactionListView.Size = new System.Drawing.Size(688, 677);
+            this.TransactionListView.Size = new System.Drawing.Size(716, 677);
             this.TransactionListView.TabIndex = 0;
             this.TransactionListView.UseCompatibleStateImageBehavior = false;
             this.TransactionListView.View = System.Windows.Forms.View.Details;
@@ -80,12 +79,12 @@
             // clmHeadAmount
             // 
             this.clmHeadAmount.Text = "Amount";
-            this.clmHeadAmount.Width = 100;
+            this.clmHeadAmount.Width = 80;
             // 
             // clmHeadTransactionDate
             // 
             this.clmHeadTransactionDate.Text = "Date";
-            this.clmHeadTransactionDate.Width = 150;
+            this.clmHeadTransactionDate.Width = 200;
             // 
             // BtnAddTransaction
             // 
@@ -123,6 +122,7 @@
             this.BtnViewTransaction.TabIndex = 2;
             this.BtnViewTransaction.Text = "View Transaction Details";
             this.BtnViewTransaction.UseVisualStyleBackColor = true;
+            this.BtnViewTransaction.Click += new System.EventHandler(this.BtnViewTransaction_Click);
             // 
             // headingPanel
             // 
@@ -186,8 +186,8 @@
             this.Name = "TransactionListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TransactionListForm";
+            this.Activated += new System.EventHandler(this.TransactionListForm_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransactionListForm_FormClosed);
-            this.Load += new System.EventHandler(this.TransactionListForm_Load);
             this.headingPanel.ResumeLayout(false);
             this.headingPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).EndInit();

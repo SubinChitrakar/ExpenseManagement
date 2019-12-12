@@ -13,30 +13,50 @@ namespace ExpenseManagement.View_and_Controller
     public partial class TransactionListForm : MaterialForm
     {
         private readonly MaterialSkinManager _materialSkinManager;
-        private NormalTransactionRepository _normalTransactionRepository;
         private MessageStatus _messageStatus;
 
-        public TransactionListForm()
+        private bool _recurringTransactionStatus;
+
+        public TransactionListForm(bool recurringTransactionStatus)
         {
             InitializeComponent();
             _materialSkinManager = DesignSettings.GetDesign();
             _materialSkinManager.AddFormToManage(this);
 
             UserSession.ParentForm.Hide();
-            _normalTransactionRepository = new NormalTransactionRepository();
             _messageStatus = new MessageStatus();
 
+            _recurringTransactionStatus = recurringTransactionStatus;
         }
         
-        private async void TransactionListForm_Load(object sender, EventArgs e)
+        private void TransactionListForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            UserSession.ParentForm.Dispose();
+        }
+
+        private void TransactionListForm_Activated(object sender, EventArgs e)
         {
             LblUserName.Text = UserSession.UserData.UserName;
-
-            List<NormalTransaction> listOfNormalTransaction = await Task.Run(() => _normalTransactionRepository.GetTransactions(UserSession.UserData.Id));
-            TransactionListView.Items.Clear();
-            foreach (NormalTransaction normalTransaction in listOfNormalTransaction)
+            if (_recurringTransactionStatus)
             {
-                ListViewItem listView = new ListViewItem(new string[] {normalTransaction.Name, normalTransaction.Type, normalTransaction.Amount.ToString(), normalTransaction.TransactionDate.ToString()})
+                _getRecurringTransactions();
+            }
+            else
+            {
+                _getNormalTransactions();
+            }
+
+        }
+
+        private async void _getNormalTransactions()
+        {
+
+            NormalTransactionRepository normalTransactionRepository = new NormalTransactionRepository();
+            List<Transaction> listOfNormalTransaction = await Task.Run(() => normalTransactionRepository.GetTransactions(UserSession.UserData.Id));
+            TransactionListView.Items.Clear();
+            foreach (Transaction normalTransaction in listOfNormalTransaction)
+            {
+                ListViewItem listView = new ListViewItem(new string[] { normalTransaction.Name, normalTransaction.Type, normalTransaction.Amount.ToString(), normalTransaction.TransactionDate.ToString() })
                 {
                     Tag = normalTransaction
                 };
@@ -44,9 +64,19 @@ namespace ExpenseManagement.View_and_Controller
             }
         }
 
-        private void TransactionListForm_FormClosed(object sender, FormClosedEventArgs e)
+        private async void _getRecurringTransactions()
         {
-            UserSession.ParentForm.Dispose();
+            RecurringTransactionRepository recurringTransactionRepository = new RecurringTransactionRepository();
+            List<RecurringTransaction> listOfRecurringTransaction = await Task.Run(() => recurringTransactionRepository.GetTransactions(UserSession.UserData.Id));
+            TransactionListView.Items.Clear();
+            foreach (RecurringTransaction recurringTransaction in listOfRecurringTransaction)
+            {
+                ListViewItem listView = new ListViewItem(new string[] { recurringTransaction.Name, recurringTransaction.Type, recurringTransaction.Amount.ToString(), recurringTransaction.TransactionDate.ToString() })
+                {
+                    Tag = recurringTransaction
+                };
+                TransactionListView.Items.Add(listView);
+            }
         }
 
         private void BtnAddTransaction_Click(object sender, EventArgs e)
@@ -60,6 +90,21 @@ namespace ExpenseManagement.View_and_Controller
         {
             this.Dispose();
             UserSession.ParentForm.Show();
+        }
+
+        private void BtnViewTransaction_Click(object sender, EventArgs e)
+        {
+            if (TransactionListView.SelectedItems.Count > 0)
+            {
+                Transaction transaction = (Transaction)TransactionListView.SelectedItems[0].Tag;
+                TransactionActionForm eventActionForm = new TransactionActionForm(transaction);
+                eventActionForm.Activate();
+                eventActionForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Select a EVENT", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

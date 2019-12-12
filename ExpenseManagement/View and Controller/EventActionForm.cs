@@ -45,7 +45,6 @@ namespace ExpenseManagement.View_and_Controller
             BtnDeleteEvent.Visible = false;
             _eventInfo = new Event();
             _recurringEvent = new RecurringEvent();
-
         }
 
         public EventActionForm(Event selectedEvent)

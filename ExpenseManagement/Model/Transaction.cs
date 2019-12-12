@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Model
 {
-    class NormalTransaction : BaseModel
+    public class Transaction : BaseModel
     {
         public int ContactId { get; set; }
         public string ContactName { get; set; }
