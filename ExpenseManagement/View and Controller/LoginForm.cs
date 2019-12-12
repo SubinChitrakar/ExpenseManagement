@@ -4,6 +4,7 @@ using ExpenseManagement.Utilities;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ExpenseManagement
@@ -151,9 +152,13 @@ namespace ExpenseManagement
                 UserName = username,
                 Password = Encrypt.EncryptData(confirmPassword)
             };
+            _addNewUser(newUser);
+        }
 
+        private async void _addNewUser(User newUser)
+        {
             //Adding User
-            _messageStatus = _userRepository.AddUser(newUser);
+            _messageStatus = await Task.Run(() => _userRepository.AddUser(newUser));
             if (_messageStatus.ErrorStatus)
             {
                 DialogResult result = MessageBox.Show(_messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);

@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Repository
 {
-    class EventRepository : BaseRepository
+    class RecurringEventRepository : BaseRepository
     {
         //Constructor
-        public EventRepository() : base() { }
+        public RecurringEventRepository() : base() { }
 
-        public List<Event> GetEvents(int userId)
+        public List<RecurringEvent> GetEvents(int userId)
         {
-            List<Event> eventList = new List<Event>();
-            Query = "SELECT Events.*, Contacts.ContactName FROM Events LEFT JOIN Contacts ON Events.ContactId = Contacts.ContactId WHERE Events.UserId = @UserId";
+            List<RecurringEvent> recurringEventList = new List<RecurringEvent>();
+            Query = "SELECT RecurringEvents.*, Contacts.ContactName FROM RecurringEvents LEFT JOIN Contacts ON RecurringEvents.ContactId = Contacts.ContactId WHERE RecurringEvents.UserId = @UserId";
 
             try
             {
@@ -30,7 +30,7 @@ namespace ExpenseManagement.Repository
 
                 while (sqlDataReader.Read())
                 {
-                    Event normalEvent = new Event
+                    RecurringEvent recurringEvent = new RecurringEvent
                     {
                         Id = (int)sqlDataReader["Id"],
                         Name = sqlDataReader["Name"].ToString(),
@@ -38,21 +38,26 @@ namespace ExpenseManagement.Repository
                         Type = sqlDataReader["Type"].ToString(),
                         Note = sqlDataReader["Note"].ToString(),
                         EventDate = (DateTime)sqlDataReader["EventDate"],
+                        Status = sqlDataReader["Status"].ToString(),
                         UserId = (int)sqlDataReader["UserId"]
                     };
 
                     if (sqlDataReader["ContactId"] == DBNull.Value)
-                        normalEvent.ContactId = 0;
+                        recurringEvent.ContactId = 0;
                     else
-                        normalEvent.ContactId = (int)sqlDataReader["ContactId"];
-
-
+                        recurringEvent.ContactId = (int)sqlDataReader["ContactId"];
+                    
                     if (sqlDataReader["ContactName"] == DBNull.Value)
-                        normalEvent.ContactName = "";
+                        recurringEvent.ContactName = "";
                     else
-                        normalEvent.ContactName = sqlDataReader["ContactName"].ToString();
+                        recurringEvent.ContactName = sqlDataReader["ContactName"].ToString();
 
-                    eventList.Add(normalEvent);
+                    if (sqlDataReader["EventEndDate"] == DBNull.Value)
+                        recurringEvent.EventEndDate = DateTime.MinValue;
+                    else
+                        recurringEvent.EventEndDate = (DateTime)sqlDataReader["EventEndDate"];
+
+                    recurringEventList.Add(recurringEvent);
                 }
             }
             catch (Exception ex)
@@ -63,12 +68,12 @@ namespace ExpenseManagement.Repository
             {
                 SqlConnection.Close();
             }
-            return eventList;
+            return recurringEventList;
         }
 
-        public MessageStatus AddEvent(Event newEvent)
+        public MessageStatus AddEvent(RecurringEvent newEvent)
         {
-            Query = "INSERT INTO Events([Name], [Location], [Type], [Note], [EventDate], [ContactId], [UserId]) VALUES(@Name, @Location, @Type, @Note, @EventDate, @ContactId, @UserId);";
+            Query = "INSERT INTO RecurringEvents([Name], [Location], [Type], [Note], [EventDate], [ContactId], [Status], [EventEndDate], [UserId]) VALUES(@Name, @Location, @Type, @Note, @EventDate, @ContactId, @Status, @EventEndDate, @UserId);";
 
             try
             {
@@ -79,6 +84,7 @@ namespace ExpenseManagement.Repository
                 sqlCommand.Parameters.Add("@Location", SqlDbType.VarChar).Value = newEvent.Location;
                 sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = newEvent.Type;
                 sqlCommand.Parameters.Add("@Note", SqlDbType.VarChar).Value = newEvent.Note;
+                sqlCommand.Parameters.Add("@Status", SqlDbType.VarChar).Value = newEvent.Status;
                 sqlCommand.Parameters.AddWithValue("@EventDate", SqlDbType.DateTime).Value = newEvent.EventDate;
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = newEvent.UserId;
 
@@ -89,6 +95,12 @@ namespace ExpenseManagement.Repository
                     contactId.Value = newEvent.ContactId;
                 sqlCommand.Parameters.Add(contactId);
 
+                SqlParameter eventEndDate = new SqlParameter("@EventEndDate", SqlDbType.DateTime);
+                if (newEvent.EventEndDate == DateTime.MinValue)
+                    eventEndDate.Value = DBNull.Value;
+                else
+                    eventEndDate.Value = newEvent.EventEndDate;
+                sqlCommand.Parameters.Add(eventEndDate);
 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
@@ -112,9 +124,9 @@ namespace ExpenseManagement.Repository
         }
 
         //Update Contact
-        public MessageStatus UpdateEvent(Event updatingEvent)
+        public MessageStatus UpdateEvent(RecurringEvent updatingEvent)
         {
-            Query = "UPDATE Events SET [Name] = @Name, [Location] = @Location, [Type] = @Type, [Note] = @Note, [EventDate] = @EventDate, [ContactId] = @ContactId WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "UPDATE Events SET [Name] = @Name, [Location] = @Location, [Type] = @Type, [Note] = @Note, [EventDate] = @EventDate, [ContactId] = @ContactId, [Status] = @Status, [EventEndDate] = @EventEndDate WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {
@@ -127,6 +139,7 @@ namespace ExpenseManagement.Repository
                 sqlCommand.Parameters.Add("@Location", SqlDbType.VarChar).Value = updatingEvent.Location;
                 sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = updatingEvent.Type;
                 sqlCommand.Parameters.Add("@Note", SqlDbType.VarChar).Value = updatingEvent.Note;
+                sqlCommand.Parameters.Add("@Status", SqlDbType.VarChar).Value = updatingEvent.Status;
                 sqlCommand.Parameters.AddWithValue("@EventDate", SqlDbType.DateTime).Value = updatingEvent.EventDate;
 
                 SqlParameter contactId = new SqlParameter("ContactId", SqlDbType.Int);
@@ -135,6 +148,13 @@ namespace ExpenseManagement.Repository
                 else
                     contactId.Value = updatingEvent.ContactId;
                 sqlCommand.Parameters.Add(contactId);
+
+                SqlParameter eventEndDate = new SqlParameter("@EventEndDate", SqlDbType.DateTime);
+                if (updatingEvent.EventEndDate == DateTime.MinValue)
+                    eventEndDate.Value = DBNull.Value;
+                else
+                    eventEndDate.Value = updatingEvent.EventEndDate;
+                sqlCommand.Parameters.Add(eventEndDate);
 
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
@@ -158,7 +178,7 @@ namespace ExpenseManagement.Repository
             return MessageStatus;
         }
 
-        public MessageStatus DeleteEvent(Event deletingEvent)
+        public MessageStatus DeleteEvent(RecurringEvent deletingEvent)
         {
             Query = "DELETE FROM Events WHERE [Id] = @Id AND [UserId] = @UserId;";
 
@@ -191,4 +211,5 @@ namespace ExpenseManagement.Repository
             return MessageStatus;
         }
     }
+}
 }

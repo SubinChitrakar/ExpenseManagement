@@ -35,16 +35,23 @@ namespace ExpenseManagement.View_and_Controller
 
         private void BtnContact_Click(object sender, EventArgs e)
         {
-            ContactListForm contactsForm = new ContactListForm();
-            contactsForm.Activate();
-            contactsForm.Show();
+            ContactListForm contactListForm = new ContactListForm();
+            contactListForm.Activate();
+            contactListForm.Show();
         }
 
         private void BtnTransaction_Click(object sender, EventArgs e)
         {
-            TransactionListForm transactionForm = new TransactionListForm();
-            transactionForm.Activate();
-            transactionForm.Show();
+            TransactionListForm transactionListForm = new TransactionListForm();
+            transactionListForm.Activate();
+            transactionListForm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            EventListForm eventListForm = new EventListForm(false);
+            eventListForm.Activate();
+            eventListForm.Show();
         }
     }
 }

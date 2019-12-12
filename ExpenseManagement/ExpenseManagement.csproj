@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\Contact.cs" />
-    <Compile Include="Model\Events.cs" />
+    <Compile Include="Model\Event.cs" />
     <Compile Include="Model\NormalTransaction.cs" />
     <Compile Include="Model\RecurringEvent.cs" />
     <Compile Include="Model\RecurringTransaction.cs" />
@@ -64,6 +64,7 @@
     <Compile Include="Repository\ContactRepository.cs" />
     <Compile Include="Repository\NormalTransactionRepository.cs" />
     <Compile Include="Repository\EventRepository.cs" />
+    <Compile Include="Repository\RecurringEventRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Utilities\DesignSettings.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
@@ -87,6 +88,18 @@
     </Compile>
     <Compile Include="View and Controller\DashboardForm.Designer.cs">
       <DependentUpon>DashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View and Controller\EventActionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View and Controller\EventActionForm.Designer.cs">
+      <DependentUpon>EventActionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View and Controller\EventListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View and Controller\EventListForm.Designer.cs">
+      <DependentUpon>EventListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View and Controller\LoginForm.cs">
       <SubType>Form</SubType>
@@ -116,6 +129,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View and Controller\DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View and Controller\EventActionForm.resx">
+      <DependentUpon>EventActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View and Controller\EventListForm.resx">
+      <DependentUpon>EventListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View and Controller\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

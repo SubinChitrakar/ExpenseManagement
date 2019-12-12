@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.NormalTransactionListView = new MaterialSkin.Controls.MaterialListView();
+            this.TransactionListView = new MaterialSkin.Controls.MaterialListView();
             this.clmHeadName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmHeadType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmHeadAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,28 +43,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
             this.SuspendLayout();
             // 
-            // NormalTransactionListView
+            // TransactionListView
             // 
-            this.NormalTransactionListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NormalTransactionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.TransactionListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TransactionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmHeadName,
             this.clmHeadType,
             this.clmHeadAmount,
             this.clmHeadTransactionDate});
-            this.NormalTransactionListView.Depth = 0;
-            this.NormalTransactionListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
-            this.NormalTransactionListView.FullRowSelect = true;
-            this.NormalTransactionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.NormalTransactionListView.HoverSelection = true;
-            this.NormalTransactionListView.Location = new System.Drawing.Point(26, 163);
-            this.NormalTransactionListView.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.NormalTransactionListView.MouseState = MaterialSkin.MouseState.OUT;
-            this.NormalTransactionListView.Name = "NormalTransactionListView";
-            this.NormalTransactionListView.OwnerDraw = true;
-            this.NormalTransactionListView.Size = new System.Drawing.Size(688, 677);
-            this.NormalTransactionListView.TabIndex = 0;
-            this.NormalTransactionListView.UseCompatibleStateImageBehavior = false;
-            this.NormalTransactionListView.View = System.Windows.Forms.View.Details;
+            this.TransactionListView.Depth = 0;
+            this.TransactionListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.TransactionListView.FullRowSelect = true;
+            this.TransactionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.TransactionListView.HideSelection = false;
+            this.TransactionListView.HoverSelection = true;
+            this.TransactionListView.Location = new System.Drawing.Point(26, 163);
+            this.TransactionListView.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.TransactionListView.MouseState = MaterialSkin.MouseState.OUT;
+            this.TransactionListView.Name = "TransactionListView";
+            this.TransactionListView.OwnerDraw = true;
+            this.TransactionListView.Size = new System.Drawing.Size(688, 677);
+            this.TransactionListView.TabIndex = 0;
+            this.TransactionListView.UseCompatibleStateImageBehavior = false;
+            this.TransactionListView.View = System.Windows.Forms.View.Details;
             // 
             // clmHeadName
             // 
@@ -181,12 +182,12 @@
             this.Controls.Add(this.headingPanel);
             this.Controls.Add(this.BtnViewTransaction);
             this.Controls.Add(this.BtnAddTransaction);
-            this.Controls.Add(this.NormalTransactionListView);
+            this.Controls.Add(this.TransactionListView);
             this.Name = "TransactionListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NormalTransactionListForm";
+            this.Text = "TransactionListForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransactionListForm_FormClosed);
-            this.Load += new System.EventHandler(this.NormalTransactionListForm_Load);
+            this.Load += new System.EventHandler(this.TransactionListForm_Load);
             this.headingPanel.ResumeLayout(false);
             this.headingPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).EndInit();
@@ -197,7 +198,7 @@
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialListView NormalTransactionListView;
+        private MaterialSkin.Controls.MaterialListView TransactionListView;
         private System.Windows.Forms.ColumnHeader clmHeadName;
         private System.Windows.Forms.ColumnHeader clmHeadType;
         private System.Windows.Forms.ColumnHeader clmHeadAmount;

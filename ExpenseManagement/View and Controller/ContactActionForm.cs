@@ -62,30 +62,39 @@ namespace ExpenseManagement.View_and_Controller
                 return;
             }
 
+            int id;
             _contact.Name = contactName;
             BtnContactAction.Enabled = false;
             _contact.UserId = UserSession.UserData.Id;
             if (_contact.Id > 0)
             {
-                messageStatus = await Task.Run(() => contactRepository.UpdateContact(_contact));
+                id = await Task.Run(() => contactRepository.UpdateContact(_contact));
             }
             else
             {
-                messageStatus = await Task.Run(() => contactRepository.AddContact(_contact));
+                id = await Task.Run(() => contactRepository.AddContact(_contact));
             }
 
-            if (messageStatus.ErrorStatus)
+            if (id > 0)
             {
-                DialogResult result = MessageBox.Show(messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-                if (result == DialogResult.Cancel)
+                if (id == 1)
                 {
+                    MessageBox.Show("Contact Updated Successfully", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Dispose();
+                }
+                else
+                {
+                    MessageBox.Show("Contact Added Successfully", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Dispose();
                 }
             }
             else
             {
-                MessageBox.Show(messageStatus.Message, "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Dispose();
+                DialogResult result = MessageBox.Show("An Error Occured", "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                if (result == DialogResult.Cancel)
+                {
+                    this.Dispose();
+                }
             }
         }
     }

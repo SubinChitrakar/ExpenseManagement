@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExpenseManagement.Model
 {
-    class Event : BaseModel
+    public class Event : BaseModel
     {
         public string Location { get; set; }
         public string Type { get; set; }

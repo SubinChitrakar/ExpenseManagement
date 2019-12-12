@@ -25,21 +25,22 @@ namespace ExpenseManagement.View_and_Controller
             UserSession.ParentForm.Hide();
             _normalTransactionRepository = new NormalTransactionRepository();
             _messageStatus = new MessageStatus();
+
         }
         
-        private async void NormalTransactionListForm_Load(object sender, EventArgs e)
+        private async void TransactionListForm_Load(object sender, EventArgs e)
         {
             LblUserName.Text = UserSession.UserData.UserName;
 
             List<NormalTransaction> listOfNormalTransaction = await Task.Run(() => _normalTransactionRepository.GetTransactions(UserSession.UserData.Id));
-            NormalTransactionListView.Items.Clear();
+            TransactionListView.Items.Clear();
             foreach (NormalTransaction normalTransaction in listOfNormalTransaction)
             {
                 ListViewItem listView = new ListViewItem(new string[] {normalTransaction.Name, normalTransaction.Type, normalTransaction.Amount.ToString(), normalTransaction.TransactionDate.ToString()})
                 {
                     Tag = normalTransaction
                 };
-                NormalTransactionListView.Items.Add(listView);
+                TransactionListView.Items.Add(listView);
             }
         }
 

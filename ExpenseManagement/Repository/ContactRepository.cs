@@ -81,10 +81,10 @@ namespace ExpenseManagement.Repository
         }
 
         //Add Contact 
-        public MessageStatus AddContact(Contact contact)
+        public int AddContact(Contact contact)
         {
-            Query = "INSERT INTO CONTACTS([ContactName], [UserId]) VALUES(@Name, @UserId);";
-
+            Query = "INSERT INTO CONTACTS([ContactName], [UserId]) OUTPUT INSERTED.ContactId VALUES(@Name,@UserId)";
+            int id = 0;
             try
             {
                 SqlConnection.Open();
@@ -93,61 +93,46 @@ namespace ExpenseManagement.Repository
                 sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = contact.Name;
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = contact.UserId;
 
-                var i = sqlCommand.ExecuteNonQuery();
-                if (i > 0)
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                while (sqlDataReader.Read())
                 {
-                    MessageStatus.Message = "Contact Added Successfully!!";
-                    MessageStatus.ErrorStatus = false;
+                    id = (int)sqlDataReader["ContactId"];
                 }
-                else
-                    throw new Exception("Error, Data Not Added!");    
             }
             catch(Exception ex)
             {
-                MessageStatus.Message = ex.Message;
-                MessageStatus.ErrorStatus = true;
+                Console.WriteLine(ex.Message);
+                id = 0;
             }
             finally
             {
                 SqlConnection.Close();
             }
-            return MessageStatus;
+            return id;
         }
 
         //Update Contact
-        public MessageStatus UpdateContact(Contact contact)
+        public int UpdateContact(Contact contact)
         {
             Query = "UPDATE CONTACTS SET [ContactName] = @Name WHERE [ContactId] = @Id AND [UserId] = @UserId;";
-
             try
             {
-                SqlConnection.Open();
-
                 SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = contact.Name;
                 sqlCommand.Parameters.Add("@Id", SqlDbType.Int).Value = contact.Id;
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = contact.UserId;
-                                
+
+                SqlConnection.Open();
                 var i = sqlCommand.ExecuteNonQuery();
-                if (i > 0)
-                {
-                    MessageStatus.Message = "Contact Updated Successfully!!";
-                    MessageStatus.ErrorStatus = false;
-                }
-                else
-                    throw new Exception("Error, Data Not Updated!");
+                SqlConnection.Close();
+
+                return i;
             }
             catch (Exception ex)
             {
-                MessageStatus.Message = ex.Message;
-                MessageStatus.ErrorStatus = true;
+                Console.WriteLine(ex.Message);
+                return 0;
             }
-            finally
-            {
-                SqlConnection.Close();
-            }
-
-            return MessageStatus;
         }
 
         //Delete Contact

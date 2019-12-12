@@ -16,3 +16,5 @@ D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\Tulpep.Notification
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.TransactionActionForm.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.TransactionListForm.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csprojAssemblyReference.cache
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.EventListForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.EventActionForm.resources

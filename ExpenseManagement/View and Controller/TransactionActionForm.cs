@@ -26,6 +26,7 @@ namespace ExpenseManagement.View_and_Controller
             _materialSkinManager.AddFormToManage(this);
 
             LblUserName.Text = UserSession.UserData.UserName;
+            lblHeading.Text = "Add Transaction";
         }
 
         private void BtnBack_Click(object sender, EventArgs e)

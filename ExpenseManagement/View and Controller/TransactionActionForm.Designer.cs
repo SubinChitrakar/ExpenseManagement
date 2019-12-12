@@ -32,8 +32,12 @@
             this.btnBack = new System.Windows.Forms.PictureBox();
             this.lblHeading = new System.Windows.Forms.Label();
             this.LblUserName = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.NumUpDownNoOfTransaction = new System.Windows.Forms.NumericUpDown();
+            this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
             this.headingPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumUpDownNoOfTransaction)).BeginInit();
             this.SuspendLayout();
             // 
             // headingPanel
@@ -86,11 +90,54 @@
             this.LblUserName.Text = "Username";
             this.LblUserName.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Location = new System.Drawing.Point(30, 240);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(941, 610);
+            this.panel1.TabIndex = 5;
+            // 
+            // NumUpDownNoOfTransaction
+            // 
+            this.NumUpDownNoOfTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NumUpDownNoOfTransaction.Location = new System.Drawing.Point(595, 181);
+            this.NumUpDownNoOfTransaction.Name = "NumUpDownNoOfTransaction";
+            this.NumUpDownNoOfTransaction.Size = new System.Drawing.Size(115, 22);
+            this.NumUpDownNoOfTransaction.TabIndex = 6;
+            this.NumUpDownNoOfTransaction.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // materialFlatButton1
+            // 
+            this.materialFlatButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialFlatButton1.AutoSize = true;
+            this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialFlatButton1.Depth = 0;
+            this.materialFlatButton1.Icon = null;
+            this.materialFlatButton1.Location = new System.Drawing.Point(781, 173);
+            this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialFlatButton1.Name = "materialFlatButton1";
+            this.materialFlatButton1.Primary = false;
+            this.materialFlatButton1.Size = new System.Drawing.Size(207, 36);
+            this.materialFlatButton1.TabIndex = 7;
+            this.materialFlatButton1.Text = "Create Transaction";
+            this.materialFlatButton1.UseVisualStyleBackColor = true;
+            // 
             // TransactionActionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 874);
+            this.Controls.Add(this.materialFlatButton1);
+            this.Controls.Add(this.NumUpDownNoOfTransaction);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.headingPanel);
             this.Name = "TransactionActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -99,7 +146,9 @@
             this.headingPanel.ResumeLayout(false);
             this.headingPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumUpDownNoOfTransaction)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -109,5 +158,8 @@
         private System.Windows.Forms.PictureBox btnBack;
         private System.Windows.Forms.Label lblHeading;
         private System.Windows.Forms.Label LblUserName;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.NumericUpDown NumUpDownNoOfTransaction;
+        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
     }
 }
