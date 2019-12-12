@@ -154,6 +154,12 @@ namespace ExpenseManagement.View_and_Controller
                 return;
             }
 
+            if(NumUpDownAmount.Value <= 0)
+            {
+                MessageBox.Show("Please enter AMOUNT", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             transaction.Name = TxtTransactionName.Text;
             transaction.Amount = Convert.ToDouble(NumUpDownAmount.Text);
             transaction.Type = CmbType.Text;
@@ -193,7 +199,13 @@ namespace ExpenseManagement.View_and_Controller
         {
             if (string.IsNullOrWhiteSpace(TxtTransactionName.Text))
             {
-                MessageBox.Show("Please enter EVENT NAME", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter TRANSACTION NAME", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (NumUpDownAmount.Value <= 0)
+            {
+                MessageBox.Show("Please enter AMOUNT", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
