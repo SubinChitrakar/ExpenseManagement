@@ -13,7 +13,6 @@ namespace ExpenseManagement.View_and_Controller
     public partial class EventListForm : MaterialForm
     {
         private readonly MaterialSkinManager _materialSkinManager;
-        private EventRepository _eventRepository;
         private MessageStatus _messageStatus;
         private bool _recurringEventStatus;
 
@@ -24,9 +23,8 @@ namespace ExpenseManagement.View_and_Controller
             _materialSkinManager.AddFormToManage(this);
 
             UserSession.ParentForm.Hide();
-            _eventRepository = new EventRepository();
+            
             _messageStatus = new MessageStatus();
-
             _recurringEventStatus = recurringStatus;
         }
 
@@ -47,7 +45,7 @@ namespace ExpenseManagement.View_and_Controller
 
             if(_recurringEventStatus)
             {
-
+                _getRecurringEvents();
             }
             else
             {
@@ -57,13 +55,29 @@ namespace ExpenseManagement.View_and_Controller
 
         private async void _getNormalEvents()
         {
-            List<Event> listOfNormalEvent = await Task.Run(() => _eventRepository.GetEvents(UserSession.UserData.Id));
+            EventRepository eventRepository = new EventRepository();
+            List<Event> listOfNormalEvent = await Task.Run(() => eventRepository.GetEvents(UserSession.UserData.Id));
             EventListView.Items.Clear();
             foreach (Event normalEvent in listOfNormalEvent)
             {
                 ListViewItem listView = new ListViewItem(new string[] { normalEvent.Name, normalEvent.Type, normalEvent.EventDate.ToString() })
                 {
                     Tag = normalEvent
+                };
+                EventListView.Items.Add(listView);
+            }
+        }
+
+        private async void _getRecurringEvents()
+        {
+            RecurringEventRepository recurringEventRepository = new RecurringEventRepository();
+            List<RecurringEvent> listOfRecurringEvent = await Task.Run(() => recurringEventRepository.GetEvents(UserSession.UserData.Id));
+            EventListView.Items.Clear();
+            foreach (RecurringEvent recurringEvent in listOfRecurringEvent)
+            {
+                ListViewItem listView = new ListViewItem(new string[] { recurringEvent.Name, recurringEvent.Type, recurringEvent.EventDate.ToString() })
+                {
+                    Tag = recurringEvent
                 };
                 EventListView.Items.Add(listView);
             }

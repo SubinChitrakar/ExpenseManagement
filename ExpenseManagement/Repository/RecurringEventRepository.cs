@@ -18,7 +18,7 @@ namespace ExpenseManagement.Repository
         public List<RecurringEvent> GetEvents(int userId)
         {
             List<RecurringEvent> recurringEventList = new List<RecurringEvent>();
-            Query = "SELECT RecurringEvents.*, Contacts.ContactName FROM RecurringEvents LEFT JOIN Contacts ON RecurringEvents.ContactId = Contacts.ContactId WHERE RecurringEvents.UserId = @UserId";
+            Query = "SELECT RecurringEvents.*, Contacts.ContactName FROM RecurringEvents LEFT JOIN Contacts ON RecurringEvents.ContactId = Contacts.ContactId WHERE RecurringEvents.UserId = @UserId ORDER BY RecurringEvents.EventDate DESC";
 
             try
             {
@@ -126,7 +126,7 @@ namespace ExpenseManagement.Repository
         //Update Contact
         public MessageStatus UpdateEvent(RecurringEvent updatingEvent)
         {
-            Query = "UPDATE Events SET [Name] = @Name, [Location] = @Location, [Type] = @Type, [Note] = @Note, [EventDate] = @EventDate, [ContactId] = @ContactId, [Status] = @Status, [EventEndDate] = @EventEndDate WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "UPDATE RecurringEvents SET [Name] = @Name, [Location] = @Location, [Type] = @Type, [Note] = @Note, [EventDate] = @EventDate, [ContactId] = @ContactId, [Status] = @Status, [EventEndDate] = @EventEndDate WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {
@@ -180,7 +180,7 @@ namespace ExpenseManagement.Repository
 
         public MessageStatus DeleteEvent(RecurringEvent deletingEvent)
         {
-            Query = "DELETE FROM Events WHERE [Id] = @Id AND [UserId] = @UserId;";
+            Query = "DELETE FROM RecurringEvents WHERE [Id] = @Id AND [UserId] = @UserId;";
 
             try
             {
@@ -211,5 +211,4 @@ namespace ExpenseManagement.Repository
             return MessageStatus;
         }
     }
-}
 }

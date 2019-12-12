@@ -21,15 +21,17 @@ namespace ExpenseManagement.View_and_Controller
         private MessageStatus _messageStatus;
 
         private EventRepository _eventRepository;
+        private RecurringEventRepository _recurringEventRepository;
 
         private Event _eventInfo;
         private RecurringEvent _recurringEvent;
 
         private bool _recurringStatus;
         private bool _editingStatus;
+        private bool _recurringPropertySet = false;
 
         public EventActionForm()
-        {            
+        {
             InitializeComponent();
             DPickerDate.Value = DateTime.Now;
 
@@ -43,6 +45,7 @@ namespace ExpenseManagement.View_and_Controller
             BtnDeleteEvent.Visible = false;
             _eventInfo = new Event();
             _recurringEvent = new RecurringEvent();
+
         }
 
         public EventActionForm(Event selectedEvent)
@@ -52,14 +55,26 @@ namespace ExpenseManagement.View_and_Controller
             _materialSkinManager.AddFormToManage(this);
 
             UserSession.ParentForm.Hide();
-            _eventInfo = selectedEvent;
-            _recurringStatus = false;
-            _setPropertiesForEditEvent();
+            
+            if(selectedEvent is RecurringEvent tempRecurringEvent)
+            {
+                _recurringEvent = tempRecurringEvent;
+                _recurringStatus = true;
+                _setPropertiesForEditEvent(_recurringEvent);
+            }
+            else
+            {
+                _eventInfo = selectedEvent;
+                _recurringStatus = false;
+                _setPropertiesForEditEvent(_eventInfo);
+            }
         }
 
         private async void EventActionForm_Load(object sender, EventArgs e)
         {
             ContactRepository contactRepository = new ContactRepository();
+            _eventRepository = new EventRepository();
+            _recurringEventRepository = new RecurringEventRepository();
 
             List<Contact> contactList = await Task.Run(() => contactRepository.GetContacts(UserSession.UserData.Id));
             CmbContact.DataSource = contactList;
@@ -98,19 +113,36 @@ namespace ExpenseManagement.View_and_Controller
 
         private void BtnAction_Click(object sender, EventArgs e)
         {
-            if (_eventInfo.Id == 0)
+            if (_recurringStatus)
             {
-                _checkInfoForEvent(_eventInfo);
-            }
-            else if(_eventInfo.Id > 1)
-            {
-                if(_editingStatus)
-                {
-                    _checkInfoForEvent(_eventInfo);
-                }
+                if (_recurringEvent.Id == 0)
+                    _checkInfoForRecurringEvent(_recurringEvent);
                 else
                 {
-                    _activatePropertiesForEditEvent();
+                    if(_editingStatus)
+                    {
+                        _checkInfoForRecurringEvent(_recurringEvent);
+                    }
+                    else
+                    {
+                        _activatePropertiesForEditEvent();
+                    }
+                }
+            }
+            else 
+            {
+                if (_eventInfo.Id == 0)
+                    _checkInfoForEvent(_eventInfo);
+                else
+                {
+                    if (_editingStatus)
+                    {
+                        _checkInfoForEvent(_eventInfo);
+                    }
+                    else
+                    {
+                        _activatePropertiesForEditEvent();
+                    }
                 }
             }
         }
@@ -120,8 +152,7 @@ namespace ExpenseManagement.View_and_Controller
          */
         private void _checkInfoForEvent(Event eventInfo)
         {
-            _eventRepository = new EventRepository();
-            if(string.IsNullOrWhiteSpace(TxtEventName.Text))
+            if (string.IsNullOrWhiteSpace(TxtEventName.Text))
             {
                 MessageBox.Show("Please enter EVENT NAME", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -133,9 +164,9 @@ namespace ExpenseManagement.View_and_Controller
             eventInfo.Note = TxtNote.Text;
             eventInfo.EventDate = DPickerDate.Value;
             eventInfo.UserId = UserSession.UserData.Id;
-            
+
             Contact selectedContact = (Contact)CmbContact.SelectedItem;
-            if(selectedContact == null)
+            if (selectedContact == null)
             {
                 if (string.IsNullOrWhiteSpace(CmbContact.Text))
                 {
@@ -151,8 +182,8 @@ namespace ExpenseManagement.View_and_Controller
             {
                 eventInfo.ContactId = selectedContact.Id;
             }
-            
-            if(eventInfo.Id>0)
+
+            if (eventInfo.Id > 0)
             {
                 _updateEventInDatabase(eventInfo);
             }
@@ -162,9 +193,63 @@ namespace ExpenseManagement.View_and_Controller
             }
         }
 
+        private void _checkInfoForRecurringEvent(RecurringEvent recurringEvent)
+        {
+            if (string.IsNullOrWhiteSpace(TxtEventName.Text))
+            {
+                MessageBox.Show("Please enter EVENT NAME", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            recurringEvent.Name = TxtEventName.Text;
+            recurringEvent.Location = TxtLocation.Text;
+            recurringEvent.Type = CmbType.Text;
+            recurringEvent.Note = TxtNote.Text;
+            recurringEvent.EventDate = DPickerDate.Value;
+            recurringEvent.UserId = UserSession.UserData.Id;
+            recurringEvent.Status = CmbStatus.Text;
+
+            Contact selectedContact = (Contact)CmbContact.SelectedItem;
+            if (selectedContact == null)
+            {
+                if (string.IsNullOrWhiteSpace(CmbContact.Text))
+                {
+                    recurringEvent.ContactId = 0;
+                }
+                else
+                {
+                    ContactRepository contactRepository = new ContactRepository();
+                    recurringEvent.ContactId = contactRepository.AddContact(new Contact { Name = CmbContact.Text, UserId = UserSession.UserData.Id });
+                }
+            }
+            else
+            {
+                recurringEvent.ContactId = selectedContact.Id;
+            }
+
+            if (ChkEndingStatus.Checked)
+                recurringEvent.EventEndDate = DateTime.MinValue;
+            else
+                recurringEvent.EventEndDate = DPickerEndDate.Value;
+
+
+            if (recurringEvent.Id > 0)
+                _updateEventInDatabase(recurringEvent);
+            else
+                _addEventToDatabase(recurringEvent);
+        }
+
         private async void _addEventToDatabase(Event newEvent)
         {
-            _messageStatus = await Task.Run(() => _eventRepository.AddEvent(newEvent));
+            if (newEvent is RecurringEvent tempRecurring)
+            {
+                _messageStatus = await Task.Run(() => _recurringEventRepository.AddEvent(tempRecurring));
+            }
+            else
+            {
+                _messageStatus = await Task.Run(() => _eventRepository.AddEvent(newEvent));
+            }
+
             if (_messageStatus.ErrorStatus)
             {
                 DialogResult result = MessageBox.Show(_messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
@@ -183,17 +268,17 @@ namespace ExpenseManagement.View_and_Controller
         /*
          * Edit Event
          */
-        private void _setPropertiesForEditEvent()
+        private void _setPropertiesForEditEvent(Event eventInfo)
         {
             LblHeading.Text = "VIEW EVENT";
             BtnAction.Text = "EDIT INFORMATION";
             BtnAction.Left -= 50;
 
-            TxtEventName.Text = _eventInfo.Name;
-            TxtLocation.Text = _eventInfo.Location;
-            TxtNote.Text = _eventInfo.Note;
-            CmbType.Text = _eventInfo.Type;
-            DPickerDate.Value = _eventInfo.EventDate;
+            TxtEventName.Text = eventInfo.Name;
+            TxtLocation.Text = eventInfo.Location;
+            TxtNote.Text = eventInfo.Note;
+            CmbType.Text = eventInfo.Type;
+            DPickerDate.Value = eventInfo.EventDate;
 
             TxtEventName.Enabled = false;
             TxtLocation.Enabled = false;
@@ -203,8 +288,43 @@ namespace ExpenseManagement.View_and_Controller
             DPickerDate.Enabled = false;
 
             BtnDeleteEvent.Visible = true;
-            ChkRecurring.Visible = false;
             _editingStatus = false;
+            ChkRecurring.Visible = false;
+            
+            if(eventInfo is RecurringEvent recurringEventInfo)
+            {
+                if (!_recurringPropertySet)
+                {
+                    GrpRecurring.Visible = true;
+                    GrpRecurring.Top -= 40;
+                    this.Top -= 170;
+                    this.Height += 170;
+                    BtnAction.Top += 170;
+                    BtnDeleteEvent.Top += 170;
+                    _recurringPropertySet = true;
+                }
+                else
+                {
+                    BtnAction.Left += 10;
+                }
+
+                CmbStatus.Text = recurringEventInfo.Status;
+                CmbStatus.Enabled = false;
+
+                if (recurringEventInfo.EventEndDate <= DPickerEndDate.MinDate)
+                {
+                    ChkEndingStatus.Checked = true;
+                    DPickerEndDate.Value = DPickerEndDate.MaxDate;
+                }
+                else
+                {
+                    ChkEndingStatus.Checked = false;
+                    DPickerEndDate.Value = recurringEventInfo.EventEndDate;
+                }
+
+                DPickerEndDate.Enabled = false;
+                ChkEndingStatus.Enabled = false;
+            }
         }
 
         private void _activatePropertiesForEditEvent()
@@ -218,15 +338,30 @@ namespace ExpenseManagement.View_and_Controller
             CmbContact.Enabled = true;
             DPickerDate.Enabled = true;
 
+            _editingStatus = true;
             BtnDeleteEvent.Visible = false;
             BtnAction.Text = "Save Event";
             BtnAction.Left += 40;
-            _editingStatus = true;
+
+            if (_recurringStatus)
+            {
+                CmbStatus.Enabled = true;
+                DPickerEndDate.Enabled = true;
+                ChkEndingStatus.Enabled = true;
+            }
         }
 
         private async void _updateEventInDatabase(Event updateEvent)
         {
-            _messageStatus = await Task.Run(() => _eventRepository.UpdateEvent(updateEvent));
+            if (updateEvent is RecurringEvent recurringEvent)
+            {
+                _messageStatus = await Task.Run(() => _recurringEventRepository.UpdateEvent(recurringEvent));
+            }
+            else
+            {
+                _messageStatus = await Task.Run(() => _eventRepository.UpdateEvent(updateEvent));
+            }
+
             if (_messageStatus.ErrorStatus)
             {
                 DialogResult result = MessageBox.Show(_messageStatus.Message, "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
@@ -238,7 +373,7 @@ namespace ExpenseManagement.View_and_Controller
             else
             {
                 MessageBox.Show(_messageStatus.Message, "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _setPropertiesForEditEvent();
+                _setPropertiesForEditEvent(updateEvent);
             }
         }
 
@@ -247,22 +382,29 @@ namespace ExpenseManagement.View_and_Controller
          */
         private void BtnDeleteEvent_Click(object sender, EventArgs e)
         {
-            if(_recurringStatus)
+            if (_recurringStatus)
             {
-
+                _deleteEvent(_recurringEvent);
             }
             else
             {
-                _deleteEvent();
+                _deleteEvent(_eventInfo);
             }
         }
 
-        private async void _deleteEvent()
-        {           
+        private async void _deleteEvent(Event eventInfo)
+        {
             DialogResult result = MessageBox.Show("Are you sure you want to DELETE?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                _messageStatus = await Task.Run(() => _eventRepository.DeleteEvent(_eventInfo));
+               if(eventInfo is RecurringEvent recurringEvent)
+                {
+                    _messageStatus = await Task.Run(() => _recurringEventRepository.DeleteEvent(recurringEvent));
+                }
+                else
+                {
+                    _messageStatus = await Task.Run(() => _eventRepository.DeleteEvent(_eventInfo));
+                }
 
                 if (_messageStatus.ErrorStatus)
                 {
@@ -281,11 +423,12 @@ namespace ExpenseManagement.View_and_Controller
             if (ChkRecurring.Checked)
             {
                 GrpRecurring.Visible = true;
-                DPickerEndDate.Value = DateTime.Now;
                 this.Top -= 100;
                 this.Height += 200;
                 BtnAction.Top += 200;
                 BtnDeleteEvent.Top += 200;
+                _recurringStatus = true;
+                DPickerEndDate.Value = DateTime.Now;
             }
             else
             {
@@ -294,6 +437,7 @@ namespace ExpenseManagement.View_and_Controller
                 this.Height -= 200;
                 BtnAction.Top -= 200;
                 BtnDeleteEvent.Top -= 200;
+                _recurringStatus = false;
             }
         }
 

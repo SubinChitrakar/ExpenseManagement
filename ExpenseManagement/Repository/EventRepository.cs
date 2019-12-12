@@ -18,7 +18,7 @@ namespace ExpenseManagement.Repository
         public List<Event> GetEvents(int userId)
         {
             List<Event> eventList = new List<Event>();
-            Query = "SELECT Events.*, Contacts.ContactName FROM Events LEFT JOIN Contacts ON Events.ContactId = Contacts.ContactId WHERE Events.UserId = @UserId";
+            Query = "SELECT Events.*, Contacts.ContactName FROM Events LEFT JOIN Contacts ON Events.ContactId = Contacts.ContactId WHERE Events.UserId = @UserId ORDER BY Events.EventDate DESC";
 
             try
             {
