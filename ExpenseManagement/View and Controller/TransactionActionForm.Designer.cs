@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionActionForm));
             this.headingPanel = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.PictureBox();
             this.lblHeading = new System.Windows.Forms.Label();
@@ -192,9 +193,9 @@
             this.LblDateAndTime.Location = new System.Drawing.Point(19, 309);
             this.LblDateAndTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblDateAndTime.Name = "LblDateAndTime";
-            this.LblDateAndTime.Size = new System.Drawing.Size(175, 22);
+            this.LblDateAndTime.Size = new System.Drawing.Size(222, 22);
             this.LblDateAndTime.TabIndex = 39;
-            this.LblDateAndTime.Text = "Event Date and Time";
+            this.LblDateAndTime.Text = "Transaction Date and Time";
             // 
             // DPickerDate
             // 
@@ -375,6 +376,7 @@
             this.Controls.Add(this.TxtTransactionName);
             this.Controls.Add(this.LblTransactionName);
             this.Controls.Add(this.headingPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TransactionActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NormalTransactionActionForm";

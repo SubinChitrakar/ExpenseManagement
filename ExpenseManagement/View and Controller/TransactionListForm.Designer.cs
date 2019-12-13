@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionListForm));
             this.TransactionListView = new MaterialSkin.Controls.MaterialListView();
             this.clmHeadName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmHeadType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -55,6 +56,7 @@
             this.TransactionListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.TransactionListView.FullRowSelect = true;
             this.TransactionListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.TransactionListView.HideSelection = false;
             this.TransactionListView.HoverSelection = true;
             this.TransactionListView.Location = new System.Drawing.Point(26, 163);
             this.TransactionListView.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -183,6 +185,7 @@
             this.Controls.Add(this.BtnViewTransaction);
             this.Controls.Add(this.BtnAddTransaction);
             this.Controls.Add(this.TransactionListView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TransactionListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TransactionListForm";

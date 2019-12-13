@@ -67,5 +67,12 @@ namespace ExpenseManagement.View_and_Controller
             transactionListForm.Activate();
             transactionListForm.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FinancialReport financialReport = new FinancialReport();
+            financialReport.Activate();
+            financialReport.Show();
+        }
     }
 }

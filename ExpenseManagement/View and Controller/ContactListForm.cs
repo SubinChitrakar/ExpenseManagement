@@ -30,6 +30,7 @@ namespace ExpenseManagement.View_and_Controller
             UserSession.ParentForm.Hide();
             _contactRepository = new ContactRepository();
             _messageStatus = new MessageStatus();
+            ContactsListView.HideSelection = true;
         }
 
         private void BtnBack_Click(object sender, EventArgs e)

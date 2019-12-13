@@ -27,6 +27,7 @@ namespace ExpenseManagement.View_and_Controller
             _messageStatus = new MessageStatus();
 
             _recurringTransactionStatus = recurringTransactionStatus;
+            TransactionListView.HideSelection = true;
         }
         
         private void TransactionListForm_FormClosed(object sender, FormClosedEventArgs e)

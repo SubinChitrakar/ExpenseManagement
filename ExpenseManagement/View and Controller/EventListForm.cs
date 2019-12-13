@@ -26,6 +26,7 @@ namespace ExpenseManagement.View_and_Controller
             
             _messageStatus = new MessageStatus();
             _recurringEventStatus = recurringStatus;
+            EventListView.HideSelection = true;
         }
 
         private void EventListForm_FormClosed(object sender, FormClosedEventArgs e)

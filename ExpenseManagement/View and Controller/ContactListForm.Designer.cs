@@ -151,6 +151,7 @@
             this.ContactsListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.ContactsListView.FullRowSelect = true;
             this.ContactsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.ContactsListView.HideSelection = false;
             this.ContactsListView.HoverSelection = true;
             this.ContactsListView.Location = new System.Drawing.Point(51, 154);
             this.ContactsListView.MouseLocation = new System.Drawing.Point(-1, -1);

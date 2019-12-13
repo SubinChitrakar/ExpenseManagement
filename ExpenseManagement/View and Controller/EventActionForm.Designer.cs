@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventActionForm));
             this.btnBack = new System.Windows.Forms.PictureBox();
             this.LblHeading = new System.Windows.Forms.Label();
             this.headingPanel = new System.Windows.Forms.Panel();
@@ -374,6 +375,7 @@
             this.Controls.Add(this.TxtEventName);
             this.Controls.Add(this.headingPanel);
             this.Controls.Add(this.LblEventName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EventActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EventActionForm";

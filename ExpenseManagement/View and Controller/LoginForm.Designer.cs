@@ -144,50 +144,50 @@
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.BtnRegister_Click);
             // 
-            // txtConfirmPassword
+            // TxtConfirmPassword
             // 
             this.TxtConfirmPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.TxtConfirmPassword.Location = new System.Drawing.Point(26, 295);
             this.TxtConfirmPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtConfirmPassword.Name = "txtConfirmPassword";
+            this.TxtConfirmPassword.Name = "TxtConfirmPassword";
             this.TxtConfirmPassword.PasswordChar = '*';
             this.TxtConfirmPassword.Size = new System.Drawing.Size(428, 29);
             this.TxtConfirmPassword.TabIndex = 34;
             // 
-            // txtPassword
+            // TxtPassword
             // 
             this.TxtPassword.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.TxtPassword.Location = new System.Drawing.Point(26, 210);
             this.TxtPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtPassword.Name = "txtPassword";
+            this.TxtPassword.Name = "TxtPassword";
             this.TxtPassword.PasswordChar = '*';
             this.TxtPassword.Size = new System.Drawing.Size(422, 29);
             this.TxtPassword.TabIndex = 32;
             // 
-            // txtUsername
+            // TxtUsername
             // 
             this.TxtUsername.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.TxtUsername.Location = new System.Drawing.Point(26, 135);
             this.TxtUsername.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtUsername.Name = "txtUsername";
+            this.TxtUsername.Name = "TxtUsername";
             this.TxtUsername.Size = new System.Drawing.Size(422, 29);
             this.TxtUsername.TabIndex = 30;
             // 
-            // txtLastName
+            // TxtLastName
             // 
             this.TxtLastName.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.TxtLastName.Location = new System.Drawing.Point(245, 60);
             this.TxtLastName.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtLastName.Name = "txtLastName";
+            this.TxtLastName.Name = "TxtLastName";
             this.TxtLastName.Size = new System.Drawing.Size(203, 29);
             this.TxtLastName.TabIndex = 28;
             // 
-            // txtFirstName
+            // TxtFirstName
             // 
             this.TxtFirstName.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.TxtFirstName.Location = new System.Drawing.Point(20, 60);
             this.TxtFirstName.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtFirstName.Name = "txtFirstName";
+            this.TxtFirstName.Name = "TxtFirstName";
             this.TxtFirstName.Size = new System.Drawing.Size(203, 29);
             this.TxtFirstName.TabIndex = 26;
             // 
@@ -279,22 +279,22 @@
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
-            // txtPasswordLogin
+            // TxtPasswordLogin
             // 
             this.TxtPasswordLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.TxtPasswordLogin.Location = new System.Drawing.Point(26, 135);
             this.TxtPasswordLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtPasswordLogin.Name = "txtPasswordLogin";
+            this.TxtPasswordLogin.Name = "TxtPasswordLogin";
             this.TxtPasswordLogin.PasswordChar = '*';
             this.TxtPasswordLogin.Size = new System.Drawing.Size(417, 29);
             this.TxtPasswordLogin.TabIndex = 14;
             // 
-            // txtUsernameLogin
+            // TxtUsernameLogin
             // 
             this.TxtUsernameLogin.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.TxtUsernameLogin.Location = new System.Drawing.Point(26, 60);
             this.TxtUsernameLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtUsernameLogin.Name = "txtUsernameLogin";
+            this.TxtUsernameLogin.Name = "TxtUsernameLogin";
             this.TxtUsernameLogin.Size = new System.Drawing.Size(417, 29);
             this.TxtUsernameLogin.TabIndex = 12;
             // 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventListForm));
             this.EventListView = new MaterialSkin.Controls.MaterialListView();
             this.clmHeadName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmHeadType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,6 +54,7 @@
             this.EventListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.EventListView.FullRowSelect = true;
             this.EventListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.EventListView.HideSelection = false;
             this.EventListView.HoverSelection = true;
             this.EventListView.Location = new System.Drawing.Point(15, 163);
             this.EventListView.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -176,6 +178,7 @@
             this.Controls.Add(this.headingPanel);
             this.Controls.Add(this.BtnViewEvent);
             this.Controls.Add(this.BtnAddEvent);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EventListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EventListForm";

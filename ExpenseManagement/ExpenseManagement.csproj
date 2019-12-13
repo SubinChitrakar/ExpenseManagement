@@ -70,6 +70,7 @@
     <Compile Include="Utilities\DesignSettings.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
     <Compile Include="Utilities\MessageStatus.cs" />
+    <Compile Include="Utilities\ReportDetails.cs" />
     <Compile Include="Utilities\UserSession.cs" />
     <Compile Include="Utilities\Validator.cs" />
     <Compile Include="View and Controller\ContactActionForm.cs">
@@ -101,6 +102,12 @@
     </Compile>
     <Compile Include="View and Controller\EventListForm.Designer.cs">
       <DependentUpon>EventListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View and Controller\FinancialReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View and Controller\FinancialReport.Designer.cs">
+      <DependentUpon>FinancialReport.cs</DependentUpon>
     </Compile>
     <Compile Include="View and Controller\LoginForm.cs">
       <SubType>Form</SubType>
@@ -136,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View and Controller\EventListForm.resx">
       <DependentUpon>EventListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View and Controller\FinancialReport.resx">
+      <DependentUpon>FinancialReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View and Controller\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactActionForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.PictureBox();
             this.LblHeading = new System.Windows.Forms.Label();
@@ -59,25 +60,25 @@
             this.btnBack.TabStop = false;
             this.btnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
-            // lblHeading
+            // LblHeading
             // 
             this.LblHeading.AutoSize = true;
             this.LblHeading.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblHeading.ForeColor = System.Drawing.Color.White;
             this.LblHeading.Location = new System.Drawing.Point(73, 42);
-            this.LblHeading.Name = "lblHeading";
+            this.LblHeading.Name = "LblHeading";
             this.LblHeading.Size = new System.Drawing.Size(142, 37);
             this.LblHeading.TabIndex = 4;
             this.LblHeading.Text = "Contacts";
             // 
-            // txtContactName
+            // TxtContactName
             // 
             this.TxtContactName.Depth = 0;
             this.TxtContactName.Hint = "";
             this.TxtContactName.Location = new System.Drawing.Point(21, 188);
             this.TxtContactName.MaxLength = 32767;
             this.TxtContactName.MouseState = MaterialSkin.MouseState.HOVER;
-            this.TxtContactName.Name = "txtContactName";
+            this.TxtContactName.Name = "TxtContactName";
             this.TxtContactName.PasswordChar = '\0';
             this.TxtContactName.SelectedText = "";
             this.TxtContactName.SelectionLength = 0;
@@ -88,7 +89,7 @@
             this.TxtContactName.Text = "Contact Name";
             this.TxtContactName.UseSystemPasswordChar = false;
             // 
-            // btnContactAction
+            // BtnContactAction
             // 
             this.BtnContactAction.AutoSize = true;
             this.BtnContactAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -98,7 +99,7 @@
             this.BtnContactAction.Location = new System.Drawing.Point(332, 181);
             this.BtnContactAction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.BtnContactAction.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BtnContactAction.Name = "btnContactAction";
+            this.BtnContactAction.Name = "BtnContactAction";
             this.BtnContactAction.Primary = false;
             this.BtnContactAction.Size = new System.Drawing.Size(84, 36);
             this.BtnContactAction.TabIndex = 2;
@@ -114,6 +115,7 @@
             this.Controls.Add(this.BtnContactAction);
             this.Controls.Add(this.TxtContactName);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(500, 300);
             this.MinimumSize = new System.Drawing.Size(500, 300);
             this.Name = "ContactActionForm";

@@ -18,3 +18,4 @@ D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.V
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.csprojAssemblyReference.cache
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.EventListForm.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.EventActionForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.FinancialReport.resources
