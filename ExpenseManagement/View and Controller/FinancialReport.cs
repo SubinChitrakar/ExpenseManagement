@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ExpenseManagement.View_and_Controller
 {
@@ -29,6 +30,9 @@ namespace ExpenseManagement.View_and_Controller
             UserSession.ParentForm.Hide();
             LblUserName.Text = UserSession.UserData.UserName;
             normalTransactionRepository = new NormalTransactionRepository();
+
+            DPickerStartDate.Value = DateTime.Now.AddDays(-1);
+            DPickerEndDate.Value = DateTime.Now;
         }
 
         private void BtnBack_Click(object sender, EventArgs e)
@@ -55,7 +59,15 @@ namespace ExpenseManagement.View_and_Controller
             }
             else if(ReportTabs.SelectedIndex == 1)
             {
-                _loadWeeksReport();
+                _loadWeekReport();
+            }
+            else if (ReportTabs.SelectedIndex == 3)
+            {
+                _loadMonthReport();
+            }
+            else
+            {
+                ListViewSelectedDate.Clear();
             }
         }
 
@@ -107,16 +119,14 @@ namespace ExpenseManagement.View_and_Controller
             ListViewToday.Items.Add(total);
         }
 
-        private async void _loadWeeksReport()
+        private async void _loadWeekReport()
         {
-            DateTime startDate = DateTime.Now.AddDays(-7);
-
-            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionsFromDates(UserSession.UserData.Id, startDate, DateTime.Now));
+            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionsFromDates(UserSession.UserData.Id, DateTime.Now.AddDays(-7), DateTime.Now));
             
             if(transactionList.Count > 0)
             {
                 List<ReportDetails> detailsOfThisWeek = _generateDetails(transactionList);
-
+                _generateGraph(WeeklyChart, detailsOfThisWeek, 7);
             }
             else
             {
@@ -124,15 +134,124 @@ namespace ExpenseManagement.View_and_Controller
             }
         }
 
+        private async void _loadMonthReport()
+        {
+            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionsFromDates(UserSession.UserData.Id, DateTime.Now.AddDays(-30), DateTime.Now));
+            if (transactionList.Count > 0)
+            {
+                List<ReportDetails> detailsOfThisMonth = _generateDetails(transactionList);
+                _generateGraph(MonthlyChart, detailsOfThisMonth, 30);
+            }
+            else
+            {
+                MessageBox.Show("THERE WERE NO TRANSACTIONS THIS MONTH", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void _generateGraph(Chart chart, List<ReportDetails> reportDetailList, int numberOfDays)
+        {
+            chart.Series[0].XValueType = ChartValueType.DateTime;
+
+            var chartDetails = chart.ChartAreas[0];
+            chartDetails.AxisX.LabelStyle.Format = "MM/dd/yyyy";
+            chartDetails.AxisX.Interval = (int)numberOfDays/7;
+            chartDetails.AxisX.IntervalType = DateTimeIntervalType.Days;
+            chartDetails.AxisX.IntervalOffset = (int)numberOfDays / 7;
+            chartDetails.AxisX.MajorGrid.Enabled = false;
+            chartDetails.AxisX.MinorGrid.Enabled = false;
+            chartDetails.AxisX.Minimum = DateTime.Now.AddDays(-numberOfDays).ToOADate();
+            chartDetails.AxisX.Maximum = DateTime.Now.AddDays(1).ToOADate();
+
+            chartDetails.AxisY.LabelStyle.Format = "";
+            chartDetails.AxisY.MajorGrid.Enabled = false;
+            chartDetails.AxisY.MinorGrid.Enabled = false;
+            chartDetails.AxisY.Minimum = 0;
+
+            chart.Series.Clear();
+            chart.Series.Add("Expense");
+            chart.Series["Expense"].ChartType = SeriesChartType.Spline;
+            chart.Series["Expense"].Color = Color.Red;
+
+            int maxAmount = 0;
+
+            foreach(ReportDetails reportDetails in reportDetailList)
+            {
+                chart.Series["Expense"].Points.AddXY(reportDetails.Date, reportDetails.Amount);
+
+                if (maxAmount < reportDetails.Amount)
+                {
+                    maxAmount = (int)reportDetails.Amount + 1;
+                }
+                
+            }
+
+            chartDetails.AxisY.Maximum = maxAmount;
+            chartDetails.AxisY.Interval = (int) maxAmount/10;
+        }
+
+        private async void BtnGenerateReport_Click(object sender, EventArgs e)
+        {
+            if(DPickerEndDate.Value < DPickerStartDate.Value)
+            {
+                MessageBox.Show("START DATE cannot be greater than END DATE", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionDetailsFromDates(UserSession.UserData.Id, DPickerStartDate.Value, DPickerEndDate.Value));
+            ListViewToday.HideSelection = true;
+            
+            double income = 0;
+            double expense = 0;
+            ListViewSelectedDate.Columns.Add("Date", 200);
+            ListViewSelectedDate.Columns.Add("Name", 137);
+            ListViewSelectedDate.Columns.Add("Contact", 137);
+            ListViewSelectedDate.Columns.Add("Credit", 100);
+            ListViewSelectedDate.Columns.Add("Debit", 100);
+
+            foreach (Transaction transaction in transactionList)
+            {
+                ListViewItem transactionDetail = new ListViewItem(new string[]
+                {
+                            transaction.TransactionDate.ToString(),
+                            transaction.Name,
+                            transaction.ContactName,
+                });
+
+                if (transaction.Type == "Income")
+                {
+                    transactionDetail.SubItems.Add("£" + transaction.Amount);
+                    income += transaction.Amount;
+                    transactionDetail.SubItems.Add("");
+                }
+                else
+                {
+                    transactionDetail.SubItems.Add("");
+                    transactionDetail.SubItems.Add("£" + transaction.Amount);
+                    expense += transaction.Amount;
+                }
+
+                ListViewSelectedDate.Items.Add(transactionDetail);
+            }
+            ListViewItem total = new ListViewItem(new string[]
+                {
+                            "",
+                            "",
+                            "Total",
+                            "£" +income,
+                            "£" +expense
+                });
+            ListViewSelectedDate.Items.Add(total);
+        }
+
         private List<ReportDetails> _generateDetails(List<Transaction> transactionList)
         {
-            List<ReportDetails> detailsOfThisWeek = new List<ReportDetails>();
+            List<ReportDetails> detailsFromTransaction = new List<ReportDetails>();
             ReportDetails reportDetail = new ReportDetails
             {
-                Date = transactionList[0].TransactionDate,
+                Date = transactionList[0].TransactionDate.Date,
                 Amount = transactionList[0].Amount
             };
-            detailsOfThisWeek.Add(reportDetail);
+            detailsFromTransaction.Add(reportDetail);
 
             for (int i = 0; i < transactionList.Count - 1; i++)
             {
@@ -144,14 +263,15 @@ namespace ExpenseManagement.View_and_Controller
                 {
                     reportDetail = new ReportDetails
                     {
-                        Date = transactionList[i + 1].TransactionDate,
+                        Date = transactionList[i + 1].TransactionDate.Date,
                         Amount = transactionList[i + 1].Amount
                     };
 
-                    detailsOfThisWeek.Add(reportDetail);
+                    detailsFromTransaction.Add(reportDetail);
                 }
             }
-            return detailsOfThisWeek;
+
+            return detailsFromTransaction;
         }
     }
 }

@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinancialReport));
             this.btnBack = new System.Windows.Forms.PictureBox();
             this.lblHeading = new System.Windows.Forms.Label();
@@ -38,13 +44,26 @@
             this.ListViewToday = new MaterialSkin.Controls.MaterialListView();
             this.materialListView2 = new MaterialSkin.Controls.MaterialListView();
             this.WeeklyReport = new System.Windows.Forms.TabPage();
+            this.WeeklyChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.MonthlyReport = new System.Windows.Forms.TabPage();
             this.SelectedDate = new System.Windows.Forms.TabPage();
+            this.ListViewSelectedDate = new MaterialSkin.Controls.MaterialListView();
+            this.DPickerEndDate = new System.Windows.Forms.DateTimePicker();
+            this.BtnGenerateReport = new MaterialSkin.Controls.MaterialFlatButton();
+            this.LblEndDate = new System.Windows.Forms.Label();
+            this.LblStartDate = new System.Windows.Forms.Label();
+            this.DPickerStartDate = new System.Windows.Forms.DateTimePicker();
             this.reportSelector = new MaterialSkin.Controls.MaterialTabSelector();
+            this.MonthlyChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
             this.headingPanel.SuspendLayout();
             this.ReportTabs.SuspendLayout();
             this.dailyReport.SuspendLayout();
+            this.WeeklyReport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WeeklyChart)).BeginInit();
+            this.MonthlyReport.SuspendLayout();
+            this.SelectedDate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MonthlyChart)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBack
@@ -99,7 +118,8 @@
             // 
             // ReportTabs
             // 
-            this.ReportTabs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.ReportTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ReportTabs.Controls.Add(this.dailyReport);
             this.ReportTabs.Controls.Add(this.WeeklyReport);
@@ -164,6 +184,7 @@
             // 
             // WeeklyReport
             // 
+            this.WeeklyReport.Controls.Add(this.WeeklyChart);
             this.WeeklyReport.Location = new System.Drawing.Point(4, 25);
             this.WeeklyReport.Name = "WeeklyReport";
             this.WeeklyReport.Padding = new System.Windows.Forms.Padding(3);
@@ -172,8 +193,28 @@
             this.WeeklyReport.Text = "Week\'s Report";
             this.WeeklyReport.UseVisualStyleBackColor = true;
             // 
+            // WeeklyChart
+            // 
+            this.WeeklyChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "ChartArea1";
+            this.WeeklyChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.WeeklyChart.Legends.Add(legend1);
+            this.WeeklyChart.Location = new System.Drawing.Point(20, 19);
+            this.WeeklyChart.Name = "WeeklyChart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.WeeklyChart.Series.Add(series1);
+            this.WeeklyChart.Size = new System.Drawing.Size(912, 596);
+            this.WeeklyChart.TabIndex = 0;
+            this.WeeklyChart.Text = "WeeklyReport";
+            // 
             // MonthlyReport
             // 
+            this.MonthlyReport.Controls.Add(this.MonthlyChart);
             this.MonthlyReport.Location = new System.Drawing.Point(4, 25);
             this.MonthlyReport.Name = "MonthlyReport";
             this.MonthlyReport.Padding = new System.Windows.Forms.Padding(3);
@@ -184,6 +225,12 @@
             // 
             // SelectedDate
             // 
+            this.SelectedDate.Controls.Add(this.ListViewSelectedDate);
+            this.SelectedDate.Controls.Add(this.DPickerEndDate);
+            this.SelectedDate.Controls.Add(this.BtnGenerateReport);
+            this.SelectedDate.Controls.Add(this.LblEndDate);
+            this.SelectedDate.Controls.Add(this.LblStartDate);
+            this.SelectedDate.Controls.Add(this.DPickerStartDate);
             this.SelectedDate.Location = new System.Drawing.Point(4, 25);
             this.SelectedDate.Name = "SelectedDate";
             this.SelectedDate.Padding = new System.Windows.Forms.Padding(3);
@@ -191,6 +238,88 @@
             this.SelectedDate.TabIndex = 3;
             this.SelectedDate.Text = "Selected Dates";
             this.SelectedDate.UseVisualStyleBackColor = true;
+            // 
+            // ListViewSelectedDate
+            // 
+            this.ListViewSelectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewSelectedDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ListViewSelectedDate.Depth = 0;
+            this.ListViewSelectedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.ListViewSelectedDate.FullRowSelect = true;
+            this.ListViewSelectedDate.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.ListViewSelectedDate.HideSelection = false;
+            this.ListViewSelectedDate.Location = new System.Drawing.Point(25, 104);
+            this.ListViewSelectedDate.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.ListViewSelectedDate.MouseState = MaterialSkin.MouseState.OUT;
+            this.ListViewSelectedDate.Name = "ListViewSelectedDate";
+            this.ListViewSelectedDate.OwnerDraw = true;
+            this.ListViewSelectedDate.Size = new System.Drawing.Size(907, 501);
+            this.ListViewSelectedDate.TabIndex = 47;
+            this.ListViewSelectedDate.UseCompatibleStateImageBehavior = false;
+            this.ListViewSelectedDate.View = System.Windows.Forms.View.Details;
+            // 
+            // DPickerEndDate
+            // 
+            this.DPickerEndDate.CalendarFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DPickerEndDate.CustomFormat = "dddd, dd MMMM yyyy HH:mm";
+            this.DPickerEndDate.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DPickerEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DPickerEndDate.Location = new System.Drawing.Point(353, 50);
+            this.DPickerEndDate.Name = "DPickerEndDate";
+            this.DPickerEndDate.Size = new System.Drawing.Size(294, 28);
+            this.DPickerEndDate.TabIndex = 46;
+            this.DPickerEndDate.Value = new System.DateTime(2019, 12, 11, 22, 11, 32, 0);
+            // 
+            // BtnGenerateReport
+            // 
+            this.BtnGenerateReport.AutoSize = true;
+            this.BtnGenerateReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BtnGenerateReport.Depth = 0;
+            this.BtnGenerateReport.Icon = null;
+            this.BtnGenerateReport.Location = new System.Drawing.Point(739, 42);
+            this.BtnGenerateReport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.BtnGenerateReport.MouseState = MaterialSkin.MouseState.HOVER;
+            this.BtnGenerateReport.Name = "BtnGenerateReport";
+            this.BtnGenerateReport.Primary = false;
+            this.BtnGenerateReport.Size = new System.Drawing.Size(176, 36);
+            this.BtnGenerateReport.TabIndex = 45;
+            this.BtnGenerateReport.Text = "Generate Report";
+            this.BtnGenerateReport.UseVisualStyleBackColor = true;
+            this.BtnGenerateReport.Click += new System.EventHandler(this.BtnGenerateReport_Click);
+            // 
+            // LblEndDate
+            // 
+            this.LblEndDate.AutoSize = true;
+            this.LblEndDate.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblEndDate.Location = new System.Drawing.Point(349, 25);
+            this.LblEndDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblEndDate.Name = "LblEndDate";
+            this.LblEndDate.Size = new System.Drawing.Size(83, 22);
+            this.LblEndDate.TabIndex = 44;
+            this.LblEndDate.Text = "End Date";
+            // 
+            // LblStartDate
+            // 
+            this.LblStartDate.AutoSize = true;
+            this.LblStartDate.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblStartDate.Location = new System.Drawing.Point(25, 25);
+            this.LblStartDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblStartDate.Name = "LblStartDate";
+            this.LblStartDate.Size = new System.Drawing.Size(89, 22);
+            this.LblStartDate.TabIndex = 42;
+            this.LblStartDate.Text = "Start Date";
+            // 
+            // DPickerStartDate
+            // 
+            this.DPickerStartDate.CalendarFont = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DPickerStartDate.CustomFormat = "dddd, dd MMMM yyyy HH:mm";
+            this.DPickerStartDate.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DPickerStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DPickerStartDate.Location = new System.Drawing.Point(29, 50);
+            this.DPickerStartDate.Name = "DPickerStartDate";
+            this.DPickerStartDate.Size = new System.Drawing.Size(294, 28);
+            this.DPickerStartDate.TabIndex = 41;
+            this.DPickerStartDate.Value = new System.DateTime(2019, 12, 11, 22, 11, 32, 0);
             // 
             // reportSelector
             // 
@@ -205,6 +334,25 @@
             this.reportSelector.Size = new System.Drawing.Size(1003, 65);
             this.reportSelector.TabIndex = 6;
             this.reportSelector.Text = "reportSelector";
+            // 
+            // MonthlyChart
+            // 
+            this.MonthlyChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea2.Name = "ChartArea1";
+            this.MonthlyChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.MonthlyChart.Legends.Add(legend2);
+            this.MonthlyChart.Location = new System.Drawing.Point(22, 17);
+            this.MonthlyChart.Name = "MonthlyChart";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.MonthlyChart.Series.Add(series2);
+            this.MonthlyChart.Size = new System.Drawing.Size(912, 596);
+            this.MonthlyChart.TabIndex = 1;
+            this.MonthlyChart.Text = "MonthlyChart";
             // 
             // FinancialReport
             // 
@@ -225,6 +373,12 @@
             this.headingPanel.PerformLayout();
             this.ReportTabs.ResumeLayout(false);
             this.dailyReport.ResumeLayout(false);
+            this.WeeklyReport.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.WeeklyChart)).EndInit();
+            this.MonthlyReport.ResumeLayout(false);
+            this.SelectedDate.ResumeLayout(false);
+            this.SelectedDate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MonthlyChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -243,5 +397,13 @@
         private MaterialSkin.Controls.MaterialTabSelector reportSelector;
         private MaterialSkin.Controls.MaterialListView materialListView2;
         private MaterialSkin.Controls.MaterialListView ListViewToday;
+        private System.Windows.Forms.DateTimePicker DPickerStartDate;
+        private System.Windows.Forms.Label LblStartDate;
+        private System.Windows.Forms.Label LblEndDate;
+        private System.Windows.Forms.DateTimePicker DPickerEndDate;
+        private MaterialSkin.Controls.MaterialFlatButton BtnGenerateReport;
+        private MaterialSkin.Controls.MaterialListView ListViewSelectedDate;
+        private System.Windows.Forms.DataVisualization.Charting.Chart WeeklyChart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart MonthlyChart;
     }
 }
