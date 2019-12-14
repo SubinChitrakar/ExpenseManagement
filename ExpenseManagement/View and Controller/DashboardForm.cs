@@ -1,6 +1,9 @@
 ﻿using ExpenseManagement.Model;
+using ExpenseManagement.Repository;
 using ExpenseManagement.Utilities;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace ExpenseManagement.View_and_Controller
@@ -31,7 +34,34 @@ namespace ExpenseManagement.View_and_Controller
                 loginForm.Activate();
                 loginForm.Show();
             }
+
+            if (!RecurringBackground.IsBusy) RecurringBackground.RunWorkerAsync();
         }
+
+        private void _backgroundActivityForRecurring(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker backgroundWorker  = (BackgroundWorker)sender;
+            while (!backgroundWorker.CancellationPending)
+            {
+                _checkRecurringTransaction();
+                UserSession.UserData.LastAccessDate = DateTime.Now;
+            }
+        }
+
+        public void _checkRecurringTransaction()
+        {
+            NormalTransactionRepository normalTransactionRepository = new NormalTransactionRepository();
+            RecurringTransactionRepository recurringTransactionRepository = new RecurringTransactionRepository();
+
+            List<RecurringTransaction> recurringTransactionList = recurringTransactionRepository.GetTransactions(UserSession.UserData.Id);
+
+            foreach(RecurringTransaction recurringTransaction in recurringTransactionList)
+            {
+
+            }
+
+        }
+
 
         private void BtnContact_Click(object sender, EventArgs e)
         {

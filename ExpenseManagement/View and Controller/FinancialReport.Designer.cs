@@ -46,6 +46,7 @@
             this.WeeklyReport = new System.Windows.Forms.TabPage();
             this.WeeklyChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.MonthlyReport = new System.Windows.Forms.TabPage();
+            this.MonthlyChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.SelectedDate = new System.Windows.Forms.TabPage();
             this.ListViewSelectedDate = new MaterialSkin.Controls.MaterialListView();
             this.DPickerEndDate = new System.Windows.Forms.DateTimePicker();
@@ -54,7 +55,6 @@
             this.LblStartDate = new System.Windows.Forms.Label();
             this.DPickerStartDate = new System.Windows.Forms.DateTimePicker();
             this.reportSelector = new MaterialSkin.Controls.MaterialTabSelector();
-            this.MonthlyChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
             this.headingPanel.SuspendLayout();
             this.ReportTabs.SuspendLayout();
@@ -62,8 +62,8 @@
             this.WeeklyReport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WeeklyChart)).BeginInit();
             this.MonthlyReport.SuspendLayout();
-            this.SelectedDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MonthlyChart)).BeginInit();
+            this.SelectedDate.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBack
@@ -118,19 +118,18 @@
             // 
             // ReportTabs
             // 
-            this.ReportTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ReportTabs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ReportTabs.Controls.Add(this.dailyReport);
             this.ReportTabs.Controls.Add(this.WeeklyReport);
             this.ReportTabs.Controls.Add(this.MonthlyReport);
             this.ReportTabs.Controls.Add(this.SelectedDate);
             this.ReportTabs.Depth = 0;
-            this.ReportTabs.Location = new System.Drawing.Point(12, 193);
+            this.ReportTabs.Location = new System.Drawing.Point(11, 175);
             this.ReportTabs.MouseState = MaterialSkin.MouseState.HOVER;
             this.ReportTabs.Name = "ReportTabs";
             this.ReportTabs.SelectedIndex = 0;
-            this.ReportTabs.Size = new System.Drawing.Size(965, 660);
+            this.ReportTabs.Size = new System.Drawing.Size(965, 701);
             this.ReportTabs.TabIndex = 5;
             this.ReportTabs.SelectedIndexChanged += new System.EventHandler(this.ReportTabs_SelectedIndexChanged);
             // 
@@ -141,7 +140,7 @@
             this.dailyReport.Location = new System.Drawing.Point(4, 25);
             this.dailyReport.Name = "dailyReport";
             this.dailyReport.Padding = new System.Windows.Forms.Padding(3);
-            this.dailyReport.Size = new System.Drawing.Size(957, 631);
+            this.dailyReport.Size = new System.Drawing.Size(957, 672);
             this.dailyReport.TabIndex = 0;
             this.dailyReport.Text = "Today\'s Report";
             this.dailyReport.UseVisualStyleBackColor = true;
@@ -188,7 +187,7 @@
             this.WeeklyReport.Location = new System.Drawing.Point(4, 25);
             this.WeeklyReport.Name = "WeeklyReport";
             this.WeeklyReport.Padding = new System.Windows.Forms.Padding(3);
-            this.WeeklyReport.Size = new System.Drawing.Size(957, 631);
+            this.WeeklyReport.Size = new System.Drawing.Size(957, 672);
             this.WeeklyReport.TabIndex = 1;
             this.WeeklyReport.Text = "Week\'s Report";
             this.WeeklyReport.UseVisualStyleBackColor = true;
@@ -208,7 +207,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.WeeklyChart.Series.Add(series1);
-            this.WeeklyChart.Size = new System.Drawing.Size(912, 596);
+            this.WeeklyChart.Size = new System.Drawing.Size(912, 667);
             this.WeeklyChart.TabIndex = 0;
             this.WeeklyChart.Text = "WeeklyReport";
             // 
@@ -218,10 +217,29 @@
             this.MonthlyReport.Location = new System.Drawing.Point(4, 25);
             this.MonthlyReport.Name = "MonthlyReport";
             this.MonthlyReport.Padding = new System.Windows.Forms.Padding(3);
-            this.MonthlyReport.Size = new System.Drawing.Size(957, 631);
+            this.MonthlyReport.Size = new System.Drawing.Size(957, 672);
             this.MonthlyReport.TabIndex = 2;
             this.MonthlyReport.Text = "Month\'s Report";
             this.MonthlyReport.UseVisualStyleBackColor = true;
+            // 
+            // MonthlyChart
+            // 
+            this.MonthlyChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea2.Name = "ChartArea1";
+            this.MonthlyChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.MonthlyChart.Legends.Add(legend2);
+            this.MonthlyChart.Location = new System.Drawing.Point(22, 17);
+            this.MonthlyChart.Name = "MonthlyChart";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.MonthlyChart.Series.Add(series2);
+            this.MonthlyChart.Size = new System.Drawing.Size(912, 659);
+            this.MonthlyChart.TabIndex = 1;
+            this.MonthlyChart.Text = "MonthlyChart";
             // 
             // SelectedDate
             // 
@@ -335,25 +353,6 @@
             this.reportSelector.TabIndex = 6;
             this.reportSelector.Text = "reportSelector";
             // 
-            // MonthlyChart
-            // 
-            this.MonthlyChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.MonthlyChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.MonthlyChart.Legends.Add(legend2);
-            this.MonthlyChart.Location = new System.Drawing.Point(22, 17);
-            this.MonthlyChart.Name = "MonthlyChart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.MonthlyChart.Series.Add(series2);
-            this.MonthlyChart.Size = new System.Drawing.Size(912, 596);
-            this.MonthlyChart.TabIndex = 1;
-            this.MonthlyChart.Text = "MonthlyChart";
-            // 
             // FinancialReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -376,9 +375,9 @@
             this.WeeklyReport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.WeeklyChart)).EndInit();
             this.MonthlyReport.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MonthlyChart)).EndInit();
             this.SelectedDate.ResumeLayout(false);
             this.SelectedDate.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MonthlyChart)).EndInit();
             this.ResumeLayout(false);
 
         }
