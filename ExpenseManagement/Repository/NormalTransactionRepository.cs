@@ -64,6 +64,46 @@ namespace ExpenseManagement.Repository
             return normalTransactionList;
         }
 
+        public List<Transaction> GetExpenseTransactions(int userId)
+        {
+            List<Transaction> normalTransactionList = new List<Transaction>();
+            Query = "SELECT * FROM NormalTransactions WHERE UserId = @UserId AND Type = @Type ORDER BY TransactionDate DESC";
+
+            try
+            {
+                SqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
+                sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = "Expense";
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    Transaction normalTransaction = new Transaction
+                    {
+                        Id = (int)sqlDataReader["Id"],
+                        Name = sqlDataReader["Name"].ToString(),
+                        Amount = Convert.ToDouble(sqlDataReader["Amount"]),
+                        Type = sqlDataReader["Type"].ToString(),
+                        Note = sqlDataReader["Note"].ToString(),
+                        TransactionDate = (DateTime)sqlDataReader["TransactionDate"],
+                        UserId = (int)sqlDataReader["UserId"]
+                    };
+                    normalTransactionList.Add(normalTransaction);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
+            finally
+            {
+                SqlConnection.Close();
+            }
+            return normalTransactionList;
+        }
+
         public MessageStatus AddNormalTransaction(Transaction normalTransaction)
         {
             Query = "INSERT INTO NormalTransactions([Name], [Amount], [Type], [Note], [TransactionDate], [ContactId], [UserId]) VALUES(@Name, @Amount, @Type, @Note, @TransactionDate, @ContactId, @UserId);";

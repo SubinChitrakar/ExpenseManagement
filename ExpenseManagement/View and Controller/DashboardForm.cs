@@ -4,38 +4,37 @@ using ExpenseManagement.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ExpenseManagement.View_and_Controller
 {
     public partial class DashboardForm : Form
     {
+        private bool _previouslyAdded = false;
+        private MessageStatus _messageStatus;
+       
         public DashboardForm()
         {
-
             InitializeComponent();
             UserSession.ParentForm = this;
+            _messageStatus = new MessageStatus();
         }
 
         private void Dashboard_Activated(object sender, EventArgs e)
         {
-            UserSession.UserData = new User
-            {
-                Id = 1,
-                FirstName = "Subin",
-                LastName = "Chitrakar",
-                UserName = "Subin",
-                Password = "QtklAYAHoSY="
-            }; 
-
             if (UserSession.UserData == null)
             {
                 LoginForm loginForm = new LoginForm();
                 loginForm.Activate();
                 loginForm.Show();
             }
-
-            if (!RecurringBackground.IsBusy) RecurringBackground.RunWorkerAsync();
+            else
+            {
+                if (!RecurringBackground.IsBusy)
+                    RecurringBackground.RunWorkerAsync();
+            }
+            
         }
 
         private void _backgroundActivityForRecurring(object sender, DoWorkEventArgs e)
@@ -45,12 +44,13 @@ namespace ExpenseManagement.View_and_Controller
             {
                 _checkRecurringTransaction();
                 _checkRecurringEvent();
+                if (!_previouslyAdded) _previouslyAdded = true;
                 UserSession.UserData.LastAccessDate = DateTime.Now;
                 new UserRepository().UpdateUserAccessDate(UserSession.UserData);
             }
         }
 
-        public void _checkRecurringTransaction()
+        public async void _checkRecurringTransaction()
         {
             NormalTransactionRepository normalTransactionRepository = new NormalTransactionRepository();
             RecurringTransactionRepository recurringTransactionRepository = new RecurringTransactionRepository();
@@ -63,7 +63,7 @@ namespace ExpenseManagement.View_and_Controller
 
                 DateTime recurringTime = UserSession.UserData.LastAccessDate;
                 TimeSpan timeSpan = new TimeSpan(recurringTransaction.TransactionDate.Hour, recurringTransaction.TransactionDate.Minute, recurringTransaction.TransactionDate.Second);
-                recurringTime = recurringTime + timeSpan;
+                recurringTime = recurringTime.Date + timeSpan;
 
                 for(int i =0; i<=noOfDays; i++)
                 {
@@ -98,29 +98,28 @@ namespace ExpenseManagement.View_and_Controller
 
                     if(recurringTime > UserSession.UserData.LastAccessDate && recurringTime <= DateTime.Now && recurringTime > recurringTransaction.TransactionDate)
                     {
-                        Transaction transaction = new Transaction
+                        _messageStatus = await Task.Run(()=>normalTransactionRepository.AddNormalTransaction(new Transaction
                         {
                             Name = recurringTransaction.Name,
                             Amount = recurringTransaction.Amount,
                             Type = recurringTransaction.Type,
-                            TransactionDate = recurringTransaction.TransactionDate,
+                            TransactionDate = recurringTime,
                             Note = recurringTransaction.Note,
                             ContactId = recurringTransaction.ContactId,
                             UserId = recurringTransaction.UserId
-                        };
-                        normalTransactionRepository.AddNormalTransaction(transaction);
+                        }));
+                        RecurringBackground.ReportProgress(1, "New Transaction has been Added");
                     }
                     recurringTime = recurringTime.AddDays(1);
                 }
             }
         }
 
-        public void _checkRecurringEvent()
+        public async void _checkRecurringEvent()
         {
-            EventRepository eventRepository = new EventRepository();
-            RecurringEventRepository recurringEventRepository = new RecurringEventRepository();
-
-            List<RecurringEvent> recurringEventList = recurringEventRepository.GetEvents(UserSession.UserData.Id);
+            EventRepository _eventRepository = new EventRepository();
+            RecurringEventRepository _recurringEventRepository = new RecurringEventRepository();
+            List<RecurringEvent> recurringEventList = _recurringEventRepository.GetEvents(UserSession.UserData.Id);
 
             foreach (RecurringEvent recurringEvent in recurringEventList)
             {
@@ -128,7 +127,7 @@ namespace ExpenseManagement.View_and_Controller
 
                 DateTime recurringTime = UserSession.UserData.LastAccessDate;
                 TimeSpan timeSpan = new TimeSpan(recurringEvent.EventDate.Hour, recurringEvent.EventDate.Minute, recurringEvent.EventDate.Second);
-                recurringTime = recurringTime + timeSpan;
+                recurringTime = recurringTime.Date + timeSpan;
 
                 for (int i = 0; i <= noOfDays; i++)
                 {
@@ -163,17 +162,17 @@ namespace ExpenseManagement.View_and_Controller
 
                     if (recurringTime > UserSession.UserData.LastAccessDate && recurringTime <= DateTime.Now && recurringTime > recurringEvent.EventDate)
                     {
-                        Event newEvent = new Event
+                        _messageStatus = await Task.Run(() => _eventRepository.AddEvent(new Event
                         {
                             Name = recurringEvent.Name,
                             Location = recurringEvent.Location,
                             Type = recurringEvent.Type,
-                            EventDate = recurringEvent.EventDate,
+                            EventDate = recurringTime,
                             Note = recurringEvent.Note,
                             ContactId = recurringEvent.ContactId,
                             UserId = recurringEvent.UserId
-                        };
-                        eventRepository.AddEvent(newEvent);
+                        }));
+                        RecurringBackground.ReportProgress(1, "New Event has been Added");
                     }
                     recurringTime = recurringTime.AddDays(1);
                 }
@@ -220,6 +219,29 @@ namespace ExpenseManagement.View_and_Controller
             FinancialReport financialReport = new FinancialReport();
             financialReport.Activate();
             financialReport.Show();
+        }
+
+        private void Prediction_Click(object sender, EventArgs e)
+        {
+            PredictionForm predictionForm = new PredictionForm();
+            predictionForm.Activate();
+            predictionForm.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            NotificationForm notificationForm = new NotificationForm("New Transaction Added");
+            notificationForm.Activate();
+            notificationForm.Show();
+        }
+
+        private void RecurringBackground_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if(_previouslyAdded)
+            {
+                string message = (string)e.UserState;
+                new NotificationForm(message).Show();
+            }
         }
     }
 }

@@ -301,8 +301,8 @@ namespace ExpenseManagement.View_and_Controller
                 {
                     GrpRecurring.Visible = true;
                     GrpRecurring.Top -= 40;
-                    this.Top -= 170;
-                    this.Height += 170;
+                    this.Top -= 100;
+                    this.Height += 180;
                     BtnAction.Top += 170;
                     BtnDeleteTransaction.Top += 170;
                     _recurringPropertySet = true;
@@ -350,8 +350,11 @@ namespace ExpenseManagement.View_and_Controller
             if (_recurringStatus)
             {
                 CmbStatus.Enabled = true;
-                DPickerEndDate.Enabled = true;
                 ChkEndingStatus.Enabled = true;
+                if(!ChkEndingStatus.Checked)
+                {
+                    DPickerEndDate.Enabled = true;
+                }
             }
         }
 
@@ -426,7 +429,7 @@ namespace ExpenseManagement.View_and_Controller
                 GrpRecurring.Visible = true;
                 this.Top -= 100;
                 this.Height += 200;
-                BtnAction.Top += 170;
+                BtnAction.Top += 200;
                 BtnDeleteTransaction.Top += 170;
                 _recurringStatus = true;
                 DPickerEndDate.Value = DateTime.Now;
@@ -436,7 +439,7 @@ namespace ExpenseManagement.View_and_Controller
                 GrpRecurring.Visible = false;
                 this.Top += 100;
                 this.Height -= 200;
-                BtnAction.Top -= 170;
+                BtnAction.Top -= 200;
                 BtnDeleteTransaction.Top -= 170;
                 _recurringStatus = false;
             }
@@ -450,6 +453,14 @@ namespace ExpenseManagement.View_and_Controller
         private void TransactionActionForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             UserSession.ParentForm.Dispose();
+        }
+
+        private void ChkEndingStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChkEndingStatus.Checked)
+                DPickerEndDate.Enabled = false;
+            else
+                DPickerEndDate.Enabled = true;
         }
     }
 }

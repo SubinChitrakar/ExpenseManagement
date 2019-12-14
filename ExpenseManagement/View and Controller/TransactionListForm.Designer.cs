@@ -63,7 +63,7 @@
             this.TransactionListView.MouseState = MaterialSkin.MouseState.OUT;
             this.TransactionListView.Name = "TransactionListView";
             this.TransactionListView.OwnerDraw = true;
-            this.TransactionListView.Size = new System.Drawing.Size(716, 677);
+            this.TransactionListView.Size = new System.Drawing.Size(651, 677);
             this.TransactionListView.TabIndex = 0;
             this.TransactionListView.UseCompatibleStateImageBehavior = false;
             this.TransactionListView.View = System.Windows.Forms.View.Details;
@@ -71,7 +71,7 @@
             // clmHeadName
             // 
             this.clmHeadName.Text = "Name";
-            this.clmHeadName.Width = 100;
+            this.clmHeadName.Width = 80;
             // 
             // clmHeadType
             // 

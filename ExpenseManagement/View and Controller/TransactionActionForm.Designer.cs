@@ -237,7 +237,7 @@
             this.BtnDeleteTransaction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BtnDeleteTransaction.Depth = 0;
             this.BtnDeleteTransaction.Icon = null;
-            this.BtnDeleteTransaction.Location = new System.Drawing.Point(158, 555);
+            this.BtnDeleteTransaction.Location = new System.Drawing.Point(133, 529);
             this.BtnDeleteTransaction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.BtnDeleteTransaction.MouseState = MaterialSkin.MouseState.HOVER;
             this.BtnDeleteTransaction.Name = "BtnDeleteTransaction";
@@ -254,7 +254,7 @@
             this.BtnAction.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BtnAction.Depth = 0;
             this.BtnAction.Icon = null;
-            this.BtnAction.Location = new System.Drawing.Point(391, 555);
+            this.BtnAction.Location = new System.Drawing.Point(369, 529);
             this.BtnAction.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.BtnAction.MouseState = MaterialSkin.MouseState.HOVER;
             this.BtnAction.Name = "BtnAction";
@@ -301,6 +301,7 @@
             this.ChkEndingStatus.TabIndex = 45;
             this.ChkEndingStatus.Text = "Never Ending";
             this.ChkEndingStatus.UseVisualStyleBackColor = true;
+            this.ChkEndingStatus.CheckedChanged += new System.EventHandler(this.ChkEndingStatus_CheckedChanged);
             // 
             // CmbStatus
             // 
@@ -358,8 +359,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 617);
-            this.Controls.Add(this.GrpRecurring);
+            this.ClientSize = new System.Drawing.Size(592, 595);
             this.Controls.Add(this.ChkRecurring);
             this.Controls.Add(this.BtnDeleteTransaction);
             this.Controls.Add(this.BtnAction);
@@ -376,6 +376,7 @@
             this.Controls.Add(this.TxtTransactionName);
             this.Controls.Add(this.LblTransactionName);
             this.Controls.Add(this.headingPanel);
+            this.Controls.Add(this.GrpRecurring);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TransactionActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

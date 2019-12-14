@@ -73,6 +73,52 @@ namespace ExpenseManagement.Repository
             return recurringTransactionList;
         }
 
+        public List<RecurringTransaction> GetExpenseTransactions(int userId)
+        {
+            List<RecurringTransaction> recurringTransactionList = new List<RecurringTransaction>();
+            Query = "SELECT * FROM RecurringTransactions WHERE UserId = @UserId AND Type = @Type ORDER BY TransactionDate DESC";
+
+            try
+            {
+                SqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
+                sqlCommand.Parameters.Add("@Type", SqlDbType.VarChar).Value = "Expense";
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    RecurringTransaction recurringTransaction = new RecurringTransaction
+                    {
+                        Id = (int)sqlDataReader["Id"],
+                        Name = sqlDataReader["Name"].ToString(),
+                        Amount = Convert.ToDouble(sqlDataReader["Amount"]),
+                        Type = sqlDataReader["Type"].ToString(),
+                        Note = sqlDataReader["Note"].ToString(),
+                        TransactionDate = (DateTime)sqlDataReader["TransactionDate"],
+                        Status = sqlDataReader["Status"].ToString(),
+                        UserId = (int)sqlDataReader["UserId"]
+                    };
+                    if (sqlDataReader["TransactionEndDate"] == DBNull.Value)
+                        recurringTransaction.TransactionEndDate = DateTime.MinValue;
+                    else
+                        recurringTransaction.TransactionEndDate = (DateTime)sqlDataReader["TransactionEndDate"];
+
+                    recurringTransactionList.Add(recurringTransaction);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
+            finally
+            {
+                SqlConnection.Close();
+            }
+            return recurringTransactionList;
+        }
+
         public MessageStatus AddRecurringTransaction(RecurringTransaction recurringTransaction)
         {
             Query = "INSERT INTO RecurringTransactions([Name], [Amount], [Type], [Note], [TransactionDate], [ContactId], [Status], [TransactionEndDate], [UserId]) VALUES(@Name, @Amount, @Type, @Note, @TransactionDate, @ContactId, @Status, @TransactionEndDate, @UserId);";

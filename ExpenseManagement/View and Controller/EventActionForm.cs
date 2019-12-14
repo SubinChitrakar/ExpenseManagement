@@ -345,8 +345,11 @@ namespace ExpenseManagement.View_and_Controller
             if (_recurringStatus)
             {
                 CmbStatus.Enabled = true;
-                DPickerEndDate.Enabled = true;
                 ChkEndingStatus.Enabled = true;
+                if (!ChkEndingStatus.Checked)
+                {
+                    DPickerEndDate.Enabled = true;
+                }
             }
         }
 

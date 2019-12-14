@@ -61,7 +61,7 @@
             this.EventListView.MouseState = MaterialSkin.MouseState.OUT;
             this.EventListView.Name = "EventListView";
             this.EventListView.OwnerDraw = true;
-            this.EventListView.Size = new System.Drawing.Size(688, 677);
+            this.EventListView.Size = new System.Drawing.Size(689, 677);
             this.EventListView.TabIndex = 4;
             this.EventListView.UseCompatibleStateImageBehavior = false;
             this.EventListView.View = System.Windows.Forms.View.Details;

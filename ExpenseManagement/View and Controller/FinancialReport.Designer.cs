@@ -118,7 +118,8 @@
             // 
             // ReportTabs
             // 
-            this.ReportTabs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.ReportTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ReportTabs.Controls.Add(this.dailyReport);
             this.ReportTabs.Controls.Add(this.WeeklyReport);
@@ -252,20 +253,20 @@
             this.SelectedDate.Location = new System.Drawing.Point(4, 25);
             this.SelectedDate.Name = "SelectedDate";
             this.SelectedDate.Padding = new System.Windows.Forms.Padding(3);
-            this.SelectedDate.Size = new System.Drawing.Size(957, 631);
+            this.SelectedDate.Size = new System.Drawing.Size(957, 672);
             this.SelectedDate.TabIndex = 3;
             this.SelectedDate.Text = "Selected Dates";
             this.SelectedDate.UseVisualStyleBackColor = true;
             // 
             // ListViewSelectedDate
             // 
-            this.ListViewSelectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewSelectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ListViewSelectedDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListViewSelectedDate.Depth = 0;
             this.ListViewSelectedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.ListViewSelectedDate.FullRowSelect = true;
             this.ListViewSelectedDate.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.ListViewSelectedDate.HideSelection = false;
             this.ListViewSelectedDate.Location = new System.Drawing.Point(25, 104);
             this.ListViewSelectedDate.MouseLocation = new System.Drawing.Point(-1, -1);
             this.ListViewSelectedDate.MouseState = MaterialSkin.MouseState.OUT;

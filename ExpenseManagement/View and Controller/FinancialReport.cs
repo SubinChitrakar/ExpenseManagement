@@ -61,7 +61,7 @@ namespace ExpenseManagement.View_and_Controller
             {
                 _loadWeekReport();
             }
-            else if (ReportTabs.SelectedIndex == 3)
+            else if (ReportTabs.SelectedIndex == 2)
             {
                 _loadMonthReport();
             }
@@ -196,7 +196,7 @@ namespace ExpenseManagement.View_and_Controller
                 MessageBox.Show("START DATE cannot be greater than END DATE", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            ListViewSelectedDate.Clear();
             List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionDetailsFromDates(UserSession.UserData.Id, DPickerStartDate.Value, DPickerEndDate.Value));
             ListViewToday.HideSelection = true;
             

@@ -52,7 +52,7 @@ namespace ExpenseManagement.Repository
 
         public MessageStatus UpdateUserAccessDate(User user)
         {
-            Query = "UPDATE USERS SET [LastAccessDate] = @LastAccessDate WHERE  [UserId]= @UserId";
+            Query = "UPDATE USERS SET [UserAccessDate] = @LastAccessDate WHERE  [Id]= @UserId";
             try
             {
                 SqlConnection.Open();
@@ -105,7 +105,7 @@ namespace ExpenseManagement.Repository
                     user.LastName = sqlDataReader["LastName"].ToString();
                     user.UserName = sqlDataReader["Username"].ToString();
                     user.Password = sqlDataReader["Password"].ToString();
-                    user.LastAccessDate = (DateTime)sqlDataReader["LastAccessDate"];
+                    user.LastAccessDate = (DateTime)sqlDataReader["UserAccessDate"];
                 }
             }
             catch (Exception ex)
@@ -142,7 +142,7 @@ namespace ExpenseManagement.Repository
                     user.LastName = sqlDataReader["LastName"].ToString();
                     user.UserName = sqlDataReader["Username"].ToString();
                     user.Password = sqlDataReader["Password"].ToString();
-                    user.LastAccessDate = (DateTime)sqlDataReader["LastAccessDate"];
+                    user.LastAccessDate = (DateTime)sqlDataReader["UserAccessDate"];
                 }
             }
             catch (Exception ex)

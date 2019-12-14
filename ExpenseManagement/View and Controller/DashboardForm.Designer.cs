@@ -36,6 +36,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.RecurringBackground = new System.ComponentModel.BackgroundWorker();
+            this.Prediction = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnContact
@@ -102,12 +104,36 @@
             // 
             this.RecurringBackground.WorkerReportsProgress = true;
             this.RecurringBackground.WorkerSupportsCancellation = true;
+            this.RecurringBackground.DoWork += new System.ComponentModel.DoWorkEventHandler(this._backgroundActivityForRecurring);
+            this.RecurringBackground.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.RecurringBackground_ProgressChanged);
+            // 
+            // Prediction
+            // 
+            this.Prediction.Location = new System.Drawing.Point(454, 179);
+            this.Prediction.Name = "Prediction";
+            this.Prediction.Size = new System.Drawing.Size(168, 29);
+            this.Prediction.TabIndex = 6;
+            this.Prediction.Text = "Prediction";
+            this.Prediction.UseVisualStyleBackColor = true;
+            this.Prediction.Click += new System.EventHandler(this.Prediction_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(747, 78);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(146, 57);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "Notification";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 544);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.Prediction);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -132,5 +158,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.ComponentModel.BackgroundWorker RecurringBackground;
+        private System.Windows.Forms.Button Prediction;
+        private System.Windows.Forms.Button button5;
     }
 }

@@ -19,3 +19,5 @@ D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.c
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.EventListForm.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.EventActionForm.resources
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.FinancialReport.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.PredictionForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.NotificationForm.resources
