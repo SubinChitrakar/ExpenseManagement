@@ -27,12 +27,44 @@ namespace ExpenseManagement.Repository
                 sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = user.FirstName;
                 sqlCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = user.LastName;
                 sqlCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = user.UserName;
-                sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = user.Password;         
-                
+                sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = user.Password;
+
                 var i = sqlCommand.ExecuteNonQuery();
                 if (i > 0)
                 {
                     MessageStatus.Message = "User Registered Successfully!!";
+                    MessageStatus.ErrorStatus = false;
+                }
+                else
+                    throw new Exception("Error, Data Not Added!");
+            }
+            catch (Exception ex)
+            {
+                MessageStatus.Message = ex.Message;
+                MessageStatus.ErrorStatus = true;
+            }
+            finally
+            {
+                SqlConnection.Close();
+            }
+            return MessageStatus;
+        }
+
+        public MessageStatus UpdateUserAccessDate(User user)
+        {
+            Query = "UPDATE USERS SET [LastAccessDate] = @LastAccessDate WHERE  [UserId]= @UserId";
+            try
+            {
+                SqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
+                sqlCommand.Parameters.Add("@LastAccessDate", SqlDbType.VarChar).Value = user.LastAccessDate;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.VarChar).Value = user.Id;
+
+                var i = sqlCommand.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    MessageStatus.Message = "User Updated Successfully!!";
                     MessageStatus.ErrorStatus = false;
                 }
                 else
@@ -73,11 +105,12 @@ namespace ExpenseManagement.Repository
                     user.LastName = sqlDataReader["LastName"].ToString();
                     user.UserName = sqlDataReader["Username"].ToString();
                     user.Password = sqlDataReader["Password"].ToString();
+                    user.LastAccessDate = (DateTime)sqlDataReader["LastAccessDate"];
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: "+ex.Message);
+                Console.WriteLine("Exception: " + ex.Message);
             }
             finally
             {
@@ -109,6 +142,7 @@ namespace ExpenseManagement.Repository
                     user.LastName = sqlDataReader["LastName"].ToString();
                     user.UserName = sqlDataReader["Username"].ToString();
                     user.Password = sqlDataReader["Password"].ToString();
+                    user.LastAccessDate = (DateTime)sqlDataReader["LastAccessDate"];
                 }
             }
             catch (Exception ex)

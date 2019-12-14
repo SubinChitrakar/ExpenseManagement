@@ -160,7 +160,7 @@ namespace ExpenseManagement.View_and_Controller
             chartDetails.AxisX.MajorGrid.Enabled = false;
             chartDetails.AxisX.MinorGrid.Enabled = false;
             chartDetails.AxisX.Minimum = DateTime.Now.AddDays(-numberOfDays).ToOADate();
-            chartDetails.AxisX.Maximum = DateTime.Now.AddDays(1).ToOADate();
+            chartDetails.AxisX.Maximum = DateTime.Now.ToOADate();
 
             chartDetails.AxisY.LabelStyle.Format = "";
             chartDetails.AxisY.MajorGrid.Enabled = false;

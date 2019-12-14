@@ -44,7 +44,9 @@ namespace ExpenseManagement.View_and_Controller
             while (!backgroundWorker.CancellationPending)
             {
                 _checkRecurringTransaction();
+                _checkRecurringEvent();
                 UserSession.UserData.LastAccessDate = DateTime.Now;
+                new UserRepository().UpdateUserAccessDate(UserSession.UserData);
             }
         }
 
@@ -57,11 +59,126 @@ namespace ExpenseManagement.View_and_Controller
 
             foreach(RecurringTransaction recurringTransaction in recurringTransactionList)
             {
+                int noOfDays = (DateTime.Now - UserSession.UserData.LastAccessDate).Days;
 
+                DateTime recurringTime = UserSession.UserData.LastAccessDate;
+                TimeSpan timeSpan = new TimeSpan(recurringTransaction.TransactionDate.Hour, recurringTransaction.TransactionDate.Minute, recurringTransaction.TransactionDate.Second);
+                recurringTime = recurringTime + timeSpan;
+
+                for(int i =0; i<=noOfDays; i++)
+                {
+                    if(recurringTransaction.Status.Equals("Weekly"))
+                    {
+                        if(recurringTime.DayOfWeek != recurringTransaction.TransactionDate.DayOfWeek)
+                        {
+                            recurringTime = recurringTime.AddDays(1);
+                            continue;
+                        }
+                    }
+
+                    if (recurringTransaction.Status.Equals("Monthly"))
+                    {
+                        if (recurringTime.Day != recurringTransaction.TransactionDate.Day)
+                        {
+                            recurringTime = recurringTime.AddDays(1);
+                            continue;
+                        }
+                    }
+
+                    if (recurringTransaction.Status.Equals("Yearly"))
+                    {
+                        string recurringTimeString = recurringTime.ToString("dd/MM");
+                        string createdDateString = recurringTransaction.TransactionDate.ToString("dd/MM");
+                        if (!recurringTimeString.Equals(createdDateString))
+                        {
+                            recurringTime = recurringTime.AddDays(1);
+                            continue;
+                        }
+                    }
+
+                    if(recurringTime > UserSession.UserData.LastAccessDate && recurringTime <= DateTime.Now && recurringTime > recurringTransaction.TransactionDate)
+                    {
+                        Transaction transaction = new Transaction
+                        {
+                            Name = recurringTransaction.Name,
+                            Amount = recurringTransaction.Amount,
+                            Type = recurringTransaction.Type,
+                            TransactionDate = recurringTransaction.TransactionDate,
+                            Note = recurringTransaction.Note,
+                            ContactId = recurringTransaction.ContactId,
+                            UserId = recurringTransaction.UserId
+                        };
+                        normalTransactionRepository.AddNormalTransaction(transaction);
+                    }
+                    recurringTime = recurringTime.AddDays(1);
+                }
             }
-
         }
 
+        public void _checkRecurringEvent()
+        {
+            EventRepository eventRepository = new EventRepository();
+            RecurringEventRepository recurringEventRepository = new RecurringEventRepository();
+
+            List<RecurringEvent> recurringEventList = recurringEventRepository.GetEvents(UserSession.UserData.Id);
+
+            foreach (RecurringEvent recurringEvent in recurringEventList)
+            {
+                int noOfDays = (DateTime.Now - UserSession.UserData.LastAccessDate).Days;
+
+                DateTime recurringTime = UserSession.UserData.LastAccessDate;
+                TimeSpan timeSpan = new TimeSpan(recurringEvent.EventDate.Hour, recurringEvent.EventDate.Minute, recurringEvent.EventDate.Second);
+                recurringTime = recurringTime + timeSpan;
+
+                for (int i = 0; i <= noOfDays; i++)
+                {
+                    if (recurringEvent.Status.Equals("Weekly"))
+                    {
+                        if (recurringTime.DayOfWeek != recurringEvent.EventDate.DayOfWeek)
+                        {
+                            recurringTime = recurringTime.AddDays(1);
+                            continue;
+                        }
+                    }
+
+                    if (recurringEvent.Status.Equals("Monthly"))
+                    {
+                        if (recurringTime.Day != recurringEvent.EventDate.Day)
+                        {
+                            recurringTime = recurringTime.AddDays(1);
+                            continue;
+                        }
+                    }
+
+                    if (recurringEvent.Status.Equals("Yearly"))
+                    {
+                        string recurringTimeString = recurringTime.ToString("dd/MM");
+                        string createdDateString = recurringEvent.EventDate.ToString("dd/MM");
+                        if (!recurringTimeString.Equals(createdDateString))
+                        {
+                            recurringTime = recurringTime.AddDays(1);
+                            continue;
+                        }
+                    }
+
+                    if (recurringTime > UserSession.UserData.LastAccessDate && recurringTime <= DateTime.Now && recurringTime > recurringEvent.EventDate)
+                    {
+                        Event newEvent = new Event
+                        {
+                            Name = recurringEvent.Name,
+                            Location = recurringEvent.Location,
+                            Type = recurringEvent.Type,
+                            EventDate = recurringEvent.EventDate,
+                            Note = recurringEvent.Note,
+                            ContactId = recurringEvent.ContactId,
+                            UserId = recurringEvent.UserId
+                        };
+                        eventRepository.AddEvent(newEvent);
+                    }
+                    recurringTime = recurringTime.AddDays(1);
+                }
+            }
+        }
 
         private void BtnContact_Click(object sender, EventArgs e)
         {
