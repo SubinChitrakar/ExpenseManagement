@@ -4,11 +4,14 @@ using System.Data.SqlClient;
 using ExpenseManagement.Model;
 using System.Data;
 using ExpenseManagement.Utilities;
+using NLog;
 
 namespace ExpenseManagement.Repository
 {
     class ContactRepository : BaseRepository
     {
+        private Logger _logger = LogManager.GetCurrentClassLogger();
+
         //Constructor
         public ContactRepository() :  base() { }
 
@@ -38,7 +41,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: "+ex.Message);
+                _logger.Error(ex);
             }
             finally
             {
@@ -71,7 +74,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                _logger.Error(ex);
             }
             finally
             {
@@ -101,7 +104,7 @@ namespace ExpenseManagement.Repository
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _logger.Error(ex);
                 id = 0;
             }
             finally
@@ -130,7 +133,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _logger.Error(ex);
                 return 0;
             }
         }
@@ -159,6 +162,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 MessageStatus.Message = ex.Message;
                 MessageStatus.ErrorStatus = true;
             }

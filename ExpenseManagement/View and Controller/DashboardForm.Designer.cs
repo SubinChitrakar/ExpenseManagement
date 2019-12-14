@@ -42,7 +42,7 @@
             // 
             // btnContact
             // 
-            this.btnContact.Location = new System.Drawing.Point(12, 22);
+            this.btnContact.Location = new System.Drawing.Point(100, 276);
             this.btnContact.Name = "btnContact";
             this.btnContact.Size = new System.Drawing.Size(75, 23);
             this.btnContact.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             // BtnTransaction
             // 
-            this.BtnTransaction.Location = new System.Drawing.Point(12, 70);
+            this.BtnTransaction.Location = new System.Drawing.Point(12, 376);
             this.BtnTransaction.Name = "BtnTransaction";
             this.BtnTransaction.Size = new System.Drawing.Size(140, 23);
             this.BtnTransaction.TabIndex = 1;
@@ -82,7 +82,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(186, 60);
+            this.button3.Location = new System.Drawing.Point(239, 366);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(193, 43);
             this.button3.TabIndex = 4;

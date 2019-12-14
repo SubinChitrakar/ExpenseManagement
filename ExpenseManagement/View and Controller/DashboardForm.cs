@@ -1,6 +1,8 @@
 ﻿using ExpenseManagement.Model;
 using ExpenseManagement.Repository;
 using ExpenseManagement.Utilities;
+using MaterialSkin;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,14 +11,18 @@ using System.Windows.Forms;
 
 namespace ExpenseManagement.View_and_Controller
 {
-    public partial class DashboardForm : Form
+    public partial class DashboardForm : MaterialForm
     {
+        private MaterialSkinManager _materialSkinManager;
         private bool _previouslyAdded = false;
         private MessageStatus _messageStatus;
        
         public DashboardForm()
         {
             InitializeComponent();
+            _materialSkinManager = DesignSettings.GetDesign();
+            _materialSkinManager.AddFormToManage(this);
+
             UserSession.ParentForm = this;
             _messageStatus = new MessageStatus();
         }

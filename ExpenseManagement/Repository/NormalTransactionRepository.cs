@@ -1,5 +1,6 @@
 ﻿using ExpenseManagement.Model;
 using ExpenseManagement.Utilities;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,7 @@ namespace ExpenseManagement.Repository
 {
     class NormalTransactionRepository : BaseRepository
     {
+        private Logger _logger = LogManager.GetCurrentClassLogger();
         //Constructor
         public NormalTransactionRepository() : base() { }
 
@@ -55,7 +57,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                _logger.Error(ex);
             }
             finally
             {
@@ -95,7 +97,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                _logger.Error(ex);
             }
             finally
             {
@@ -136,6 +138,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 MessageStatus.Message = ex.Message;
                 MessageStatus.ErrorStatus = true;
             }
@@ -180,6 +183,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 MessageStatus.Message = ex.Message;
                 MessageStatus.ErrorStatus = true;
             }
@@ -214,6 +218,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 MessageStatus.Message = ex.Message;
                 MessageStatus.ErrorStatus = true;
             }
@@ -268,7 +273,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                _logger.Error(ex);
             }
             finally
             {
@@ -322,7 +327,7 @@ namespace ExpenseManagement.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                _logger.Error(ex);
             }
             finally
             {
@@ -359,7 +364,7 @@ namespace ExpenseManagement.Repository
         }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                _logger.Error(ex);
             }
             finally
             {

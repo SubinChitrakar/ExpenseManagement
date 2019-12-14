@@ -51,7 +51,7 @@ namespace ExpenseManagement.View_and_Controller
 
         private async void _getNormalTransactions()
         {
-
+            lblHeading.Text = "Normal Transaction";
             NormalTransactionRepository normalTransactionRepository = new NormalTransactionRepository();
             List<Transaction> listOfNormalTransaction = await Task.Run(() => normalTransactionRepository.GetTransactions(UserSession.UserData.Id));
             TransactionListView.Items.Clear();
@@ -104,7 +104,7 @@ namespace ExpenseManagement.View_and_Controller
             }
             else
             {
-                MessageBox.Show("Select a EVENT", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Select a TRANSACTION", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
