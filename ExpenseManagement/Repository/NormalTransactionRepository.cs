@@ -229,7 +229,7 @@ namespace ExpenseManagement.Repository
             return MessageStatus;
         }
 
-        public List<Transaction> GetTodaysTransaction(int userId)
+        public List<Transaction> GetTransactionFromDate(DateTime date, int userId)
         {
             List<Transaction> normalTransactionList = new List<Transaction>();
             Query = "SELECT NormalTransactions.*, Contacts.ContactName FROM NormalTransactions LEFT JOIN Contacts ON NormalTransactions.ContactId = Contacts.ContactId WHERE NormalTransactions.UserId = @UserId AND CONVERT(Date, NormalTransactions.TransactionDate, 1) = @Date ORDER BY NormalTransactions.TransactionDate DESC";
@@ -240,7 +240,7 @@ namespace ExpenseManagement.Repository
 
                 SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
                 sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
-                sqlCommand.Parameters.Add("@Date", SqlDbType.DateTime).Value = DateTime.Now.ToShortDateString();
+                sqlCommand.Parameters.Add("@Date", SqlDbType.DateTime).Value = date.ToShortDateString();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
                 while (sqlDataReader.Read())
@@ -281,65 +281,11 @@ namespace ExpenseManagement.Repository
             }
             return normalTransactionList;
         }
-
-        public List<Transaction> GetTransactionDetailsFromDates(int userId, DateTime startDate, DateTime endDate)
-        {
-            List<Transaction> normalTransactionList = new List<Transaction>();
-            Query = "SELECT NormalTransactions.*, Contacts.ContactName FROM NormalTransactions LEFT JOIN Contacts ON NormalTransactions.ContactId = Contacts.ContactId WHERE NormalTransactions.UserId = @UserId AND CONVERT(Date, TransactionDate, 1) BETWEEN @StartDate AND @EndDate ORDER BY NormalTransactions.TransactionDate DESC";
-
-            try
-            {
-                SqlConnection.Open();
-
-                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
-                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
-                sqlCommand.Parameters.Add("@StartDate", SqlDbType.DateTime).Value = startDate.ToShortDateString();
-                sqlCommand.Parameters.Add("@EndDate", SqlDbType.DateTime).Value = endDate.ToShortDateString();
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-
-                while (sqlDataReader.Read())
-                {
-                    Transaction normalTransaction = new Transaction
-                    {
-                        Id = (int)sqlDataReader["Id"],
-                        Name = sqlDataReader["Name"].ToString(),
-                        Amount = Convert.ToDouble(sqlDataReader["Amount"]),
-                        Type = sqlDataReader["Type"].ToString(),
-                        Note = sqlDataReader["Note"].ToString(),
-                        TransactionDate = (DateTime)sqlDataReader["TransactionDate"],
-                        UserId = (int)sqlDataReader["UserId"]
-                    };
-
-                    if (sqlDataReader["ContactId"] == DBNull.Value)
-                        normalTransaction.ContactId = 0;
-                    else
-                        normalTransaction.ContactId = (int)sqlDataReader["ContactId"];
-
-
-                    if (sqlDataReader["ContactName"] == DBNull.Value)
-                        normalTransaction.ContactName = "";
-                    else
-                        normalTransaction.ContactName = sqlDataReader["ContactName"].ToString();
-
-                    normalTransactionList.Add(normalTransaction);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-            }
-            finally
-            {
-                SqlConnection.Close();
-            }
-            return normalTransactionList;
-        }
-
+        
         public List<Transaction> GetTransactionsFromDates(int userId, DateTime startDate, DateTime endDate)
         {
             List<Transaction> normalTransactionList = new List<Transaction>();
-            Query = "SELECT Amount, TransactionDate FROM NormalTransactions WHERE Type = @Type AND UserId = @UserId AND CONVERT(Date, TransactionDate, 1) BETWEEN @StartDate AND @EndDate ORDER BY TransactionDate";
+            Query = "SELECT NormalTransactions.*, Contacts.ContactName FROM NormalTransactions LEFT JOIN Contacts ON NormalTransactions.ContactId = Contacts.ContactId WHERE NormalTransactions.Type = @Type AND NormalTransactions.UserId = @UserId AND CONVERT(Date, NormalTransactions.TransactionDate, 1) BETWEEN @StartDate AND @EndDate ORDER BY NormalTransactions.TransactionDate";
             try
             {
                 SqlConnection.Open();
@@ -355,13 +301,29 @@ namespace ExpenseManagement.Repository
                 {
                     Transaction normalTransaction = new Transaction
                     {
+                        Id = (int)sqlDataReader["Id"],
+                        Name = sqlDataReader["Name"].ToString(),
                         Amount = Convert.ToDouble(sqlDataReader["Amount"]),
-                        TransactionDate = (DateTime)sqlDataReader["TransactionDate"]
+                        Type = sqlDataReader["Type"].ToString(),
+                        Note = sqlDataReader["Note"].ToString(),
+                        TransactionDate = (DateTime)sqlDataReader["TransactionDate"],
+                        UserId = (int)sqlDataReader["UserId"]
                     };
-                    
+
+                    if (sqlDataReader["ContactId"] == DBNull.Value)
+                        normalTransaction.ContactId = 0;
+                    else
+                        normalTransaction.ContactId = (int)sqlDataReader["ContactId"];
+
+
+                    if (sqlDataReader["ContactName"] == DBNull.Value)
+                        normalTransaction.ContactName = "";
+                    else
+                        normalTransaction.ContactName = sqlDataReader["ContactName"].ToString();
+
                     normalTransactionList.Add(normalTransaction);
                 }
-        }
+            }
             catch (Exception ex)
             {
                 _logger.Error(ex);

@@ -46,6 +46,8 @@
             // 
             // TransactionListView
             // 
+            this.TransactionListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TransactionListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TransactionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmHeadName,
@@ -67,6 +69,7 @@
             this.TransactionListView.TabIndex = 0;
             this.TransactionListView.UseCompatibleStateImageBehavior = false;
             this.TransactionListView.View = System.Windows.Forms.View.Details;
+            this.TransactionListView.SizeChanged += new System.EventHandler(this.TransactionListView_SizeChanged);
             // 
             // clmHeadName
             // 

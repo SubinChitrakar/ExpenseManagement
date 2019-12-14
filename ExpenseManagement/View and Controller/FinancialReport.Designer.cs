@@ -28,12 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinancialReport));
             this.btnBack = new System.Windows.Forms.PictureBox();
             this.lblHeading = new System.Windows.Forms.Label();
@@ -44,9 +38,11 @@
             this.ListViewToday = new MaterialSkin.Controls.MaterialListView();
             this.materialListView2 = new MaterialSkin.Controls.MaterialListView();
             this.WeeklyReport = new System.Windows.Forms.TabPage();
-            this.WeeklyChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.BtnShowWeekGraph = new MaterialSkin.Controls.MaterialFlatButton();
+            this.ListViewWeekly = new MaterialSkin.Controls.MaterialListView();
             this.MonthlyReport = new System.Windows.Forms.TabPage();
-            this.MonthlyChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.BtnShowMonthGraph = new MaterialSkin.Controls.MaterialFlatButton();
+            this.ListViewMonthly = new MaterialSkin.Controls.MaterialListView();
             this.SelectedDate = new System.Windows.Forms.TabPage();
             this.ListViewSelectedDate = new MaterialSkin.Controls.MaterialListView();
             this.DPickerEndDate = new System.Windows.Forms.DateTimePicker();
@@ -60,9 +56,7 @@
             this.ReportTabs.SuspendLayout();
             this.dailyReport.SuspendLayout();
             this.WeeklyReport.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WeeklyChart)).BeginInit();
             this.MonthlyReport.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MonthlyChart)).BeginInit();
             this.SelectedDate.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,6 +142,8 @@
             // 
             // ListViewToday
             // 
+            this.ListViewToday.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ListViewToday.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListViewToday.Depth = 0;
             this.ListViewToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
@@ -163,6 +159,7 @@
             this.ListViewToday.TabIndex = 2;
             this.ListViewToday.UseCompatibleStateImageBehavior = false;
             this.ListViewToday.View = System.Windows.Forms.View.Details;
+            this.ListViewToday.SizeChanged += new System.EventHandler(this.ListViewToday_SizeChanged);
             // 
             // materialListView2
             // 
@@ -184,7 +181,8 @@
             // 
             // WeeklyReport
             // 
-            this.WeeklyReport.Controls.Add(this.WeeklyChart);
+            this.WeeklyReport.Controls.Add(this.BtnShowWeekGraph);
+            this.WeeklyReport.Controls.Add(this.ListViewWeekly);
             this.WeeklyReport.Location = new System.Drawing.Point(4, 25);
             this.WeeklyReport.Name = "WeeklyReport";
             this.WeeklyReport.Padding = new System.Windows.Forms.Padding(3);
@@ -193,28 +191,49 @@
             this.WeeklyReport.Text = "Week\'s Report";
             this.WeeklyReport.UseVisualStyleBackColor = true;
             // 
-            // WeeklyChart
+            // BtnShowWeekGraph
             // 
-            this.WeeklyChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.BtnShowWeekGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnShowWeekGraph.AutoSize = true;
+            this.BtnShowWeekGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BtnShowWeekGraph.Depth = 0;
+            this.BtnShowWeekGraph.Icon = null;
+            this.BtnShowWeekGraph.Location = new System.Drawing.Point(785, 27);
+            this.BtnShowWeekGraph.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.BtnShowWeekGraph.MouseState = MaterialSkin.MouseState.HOVER;
+            this.BtnShowWeekGraph.Name = "BtnShowWeekGraph";
+            this.BtnShowWeekGraph.Primary = false;
+            this.BtnShowWeekGraph.Size = new System.Drawing.Size(133, 36);
+            this.BtnShowWeekGraph.TabIndex = 5;
+            this.BtnShowWeekGraph.Text = "Show Graph";
+            this.BtnShowWeekGraph.UseVisualStyleBackColor = true;
+            this.BtnShowWeekGraph.Click += new System.EventHandler(this.BtnShowWeekGraph_Click);
+            // 
+            // ListViewWeekly
+            // 
+            this.ListViewWeekly.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.WeeklyChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.WeeklyChart.Legends.Add(legend1);
-            this.WeeklyChart.Location = new System.Drawing.Point(20, 19);
-            this.WeeklyChart.Name = "WeeklyChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.WeeklyChart.Series.Add(series1);
-            this.WeeklyChart.Size = new System.Drawing.Size(912, 667);
-            this.WeeklyChart.TabIndex = 0;
-            this.WeeklyChart.Text = "WeeklyReport";
+            this.ListViewWeekly.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ListViewWeekly.Depth = 0;
+            this.ListViewWeekly.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.ListViewWeekly.FullRowSelect = true;
+            this.ListViewWeekly.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.ListViewWeekly.HideSelection = false;
+            this.ListViewWeekly.Location = new System.Drawing.Point(25, 88);
+            this.ListViewWeekly.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.ListViewWeekly.MouseState = MaterialSkin.MouseState.OUT;
+            this.ListViewWeekly.Name = "ListViewWeekly";
+            this.ListViewWeekly.OwnerDraw = true;
+            this.ListViewWeekly.Size = new System.Drawing.Size(907, 538);
+            this.ListViewWeekly.TabIndex = 4;
+            this.ListViewWeekly.UseCompatibleStateImageBehavior = false;
+            this.ListViewWeekly.View = System.Windows.Forms.View.Details;
+            this.ListViewWeekly.SizeChanged += new System.EventHandler(this.ListViewWeekly_SizeChanged);
             // 
             // MonthlyReport
             // 
-            this.MonthlyReport.Controls.Add(this.MonthlyChart);
+            this.MonthlyReport.Controls.Add(this.BtnShowMonthGraph);
+            this.MonthlyReport.Controls.Add(this.ListViewMonthly);
             this.MonthlyReport.Location = new System.Drawing.Point(4, 25);
             this.MonthlyReport.Name = "MonthlyReport";
             this.MonthlyReport.Padding = new System.Windows.Forms.Padding(3);
@@ -223,24 +242,44 @@
             this.MonthlyReport.Text = "Month\'s Report";
             this.MonthlyReport.UseVisualStyleBackColor = true;
             // 
-            // MonthlyChart
+            // BtnShowMonthGraph
             // 
-            this.MonthlyChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.BtnShowMonthGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnShowMonthGraph.AutoSize = true;
+            this.BtnShowMonthGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BtnShowMonthGraph.Depth = 0;
+            this.BtnShowMonthGraph.Icon = null;
+            this.BtnShowMonthGraph.Location = new System.Drawing.Point(785, 27);
+            this.BtnShowMonthGraph.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.BtnShowMonthGraph.MouseState = MaterialSkin.MouseState.HOVER;
+            this.BtnShowMonthGraph.Name = "BtnShowMonthGraph";
+            this.BtnShowMonthGraph.Primary = false;
+            this.BtnShowMonthGraph.Size = new System.Drawing.Size(133, 36);
+            this.BtnShowMonthGraph.TabIndex = 7;
+            this.BtnShowMonthGraph.Text = "Show Graph";
+            this.BtnShowMonthGraph.UseVisualStyleBackColor = true;
+            this.BtnShowMonthGraph.Click += new System.EventHandler(this.BtnShowMonthGraph_Click);
+            // 
+            // ListViewMonthly
+            // 
+            this.ListViewMonthly.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.MonthlyChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.MonthlyChart.Legends.Add(legend2);
-            this.MonthlyChart.Location = new System.Drawing.Point(22, 17);
-            this.MonthlyChart.Name = "MonthlyChart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.MonthlyChart.Series.Add(series2);
-            this.MonthlyChart.Size = new System.Drawing.Size(912, 659);
-            this.MonthlyChart.TabIndex = 1;
-            this.MonthlyChart.Text = "MonthlyChart";
+            this.ListViewMonthly.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ListViewMonthly.Depth = 0;
+            this.ListViewMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.ListViewMonthly.FullRowSelect = true;
+            this.ListViewMonthly.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.ListViewMonthly.HideSelection = false;
+            this.ListViewMonthly.Location = new System.Drawing.Point(25, 88);
+            this.ListViewMonthly.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.ListViewMonthly.MouseState = MaterialSkin.MouseState.OUT;
+            this.ListViewMonthly.Name = "ListViewMonthly";
+            this.ListViewMonthly.OwnerDraw = true;
+            this.ListViewMonthly.Size = new System.Drawing.Size(907, 538);
+            this.ListViewMonthly.TabIndex = 6;
+            this.ListViewMonthly.UseCompatibleStateImageBehavior = false;
+            this.ListViewMonthly.View = System.Windows.Forms.View.Details;
+            this.ListViewMonthly.SizeChanged += new System.EventHandler(this.ListViewMonthly_SizeChanged);
             // 
             // SelectedDate
             // 
@@ -267,6 +306,7 @@
             this.ListViewSelectedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.ListViewSelectedDate.FullRowSelect = true;
             this.ListViewSelectedDate.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.ListViewSelectedDate.HideSelection = false;
             this.ListViewSelectedDate.Location = new System.Drawing.Point(25, 104);
             this.ListViewSelectedDate.MouseLocation = new System.Drawing.Point(-1, -1);
             this.ListViewSelectedDate.MouseState = MaterialSkin.MouseState.OUT;
@@ -276,6 +316,7 @@
             this.ListViewSelectedDate.TabIndex = 47;
             this.ListViewSelectedDate.UseCompatibleStateImageBehavior = false;
             this.ListViewSelectedDate.View = System.Windows.Forms.View.Details;
+            this.ListViewSelectedDate.SizeChanged += new System.EventHandler(this.ListViewSelectedDate_SizeChanged);
             // 
             // DPickerEndDate
             // 
@@ -374,9 +415,9 @@
             this.ReportTabs.ResumeLayout(false);
             this.dailyReport.ResumeLayout(false);
             this.WeeklyReport.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.WeeklyChart)).EndInit();
+            this.WeeklyReport.PerformLayout();
             this.MonthlyReport.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.MonthlyChart)).EndInit();
+            this.MonthlyReport.PerformLayout();
             this.SelectedDate.ResumeLayout(false);
             this.SelectedDate.PerformLayout();
             this.ResumeLayout(false);
@@ -403,7 +444,9 @@
         private System.Windows.Forms.DateTimePicker DPickerEndDate;
         private MaterialSkin.Controls.MaterialFlatButton BtnGenerateReport;
         private MaterialSkin.Controls.MaterialListView ListViewSelectedDate;
-        private System.Windows.Forms.DataVisualization.Charting.Chart WeeklyChart;
-        private System.Windows.Forms.DataVisualization.Charting.Chart MonthlyChart;
+        private MaterialSkin.Controls.MaterialFlatButton BtnShowWeekGraph;
+        private MaterialSkin.Controls.MaterialListView ListViewWeekly;
+        private MaterialSkin.Controls.MaterialFlatButton BtnShowMonthGraph;
+        private MaterialSkin.Controls.MaterialListView ListViewMonthly;
     }
 }

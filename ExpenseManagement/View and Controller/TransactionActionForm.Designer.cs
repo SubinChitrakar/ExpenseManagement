@@ -378,6 +378,7 @@
             this.Controls.Add(this.headingPanel);
             this.Controls.Add(this.GrpRecurring);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "TransactionActionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NormalTransactionActionForm";

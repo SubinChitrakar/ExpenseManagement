@@ -6,6 +6,7 @@ using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,6 +40,7 @@ namespace ExpenseManagement.View_and_Controller
             {
                 if (!RecurringBackground.IsBusy)
                     RecurringBackground.RunWorkerAsync();
+                _createDesign();
             }
             
         }
@@ -248,6 +250,29 @@ namespace ExpenseManagement.View_and_Controller
                 string message = (string)e.UserState;
                 new NotificationForm(message).Show();
             }
+        }
+
+        private async void _getTransactionForDate(DateTime selectedDate)
+        {
+            NormalTransactionRepository normalTransactionRepository = new NormalTransactionRepository();
+            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionFromDate(selectedDate, UserSession.UserData.Id));
+        }
+
+        private void _createDesign()
+        {
+            Panel mainPanel = new Panel();
+            mainPanel.BackColor = Color.Black;
+            mainPanel.Size = new Size(500,500);
+            mainPanel.Location = new Point(300,300);
+            mainPanel.AutoScroll = true;
+            this.Controls.Add(mainPanel);
+
+            Panel insidePanel = new Panel();
+            insidePanel.BackColor = Color.Red;
+            insidePanel.Size = new Size(100, 100);
+            insidePanel.Location = new Point(0, 0);
+            insidePanel.AutoScroll = true;
+            mainPanel.Controls.Add(insidePanel);
         }
     }
 }

@@ -117,6 +117,12 @@
     <Compile Include="View and Controller\FinancialReport.Designer.cs">
       <DependentUpon>FinancialReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="View and Controller\GraphForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View and Controller\GraphForm.Designer.cs">
+      <DependentUpon>GraphForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View and Controller\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View and Controller\FinancialReport.resx">
       <DependentUpon>FinancialReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View and Controller\GraphForm.resx">
+      <DependentUpon>GraphForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View and Controller\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

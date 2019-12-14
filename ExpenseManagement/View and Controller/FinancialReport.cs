@@ -20,6 +20,7 @@ namespace ExpenseManagement.View_and_Controller
     {
         private readonly MaterialSkinManager _materialSkinManager;
         private NormalTransactionRepository normalTransactionRepository;
+        List<Transaction> _transactionList;
 
         public FinancialReport()
         {
@@ -30,6 +31,8 @@ namespace ExpenseManagement.View_and_Controller
             UserSession.ParentForm.Hide();
             LblUserName.Text = UserSession.UserData.UserName;
             normalTransactionRepository = new NormalTransactionRepository();
+
+            _transactionList = new List<Transaction>();
 
             DPickerStartDate.Value = DateTime.Now.AddDays(-1);
             DPickerEndDate.Value = DateTime.Now;
@@ -53,11 +56,11 @@ namespace ExpenseManagement.View_and_Controller
 
         private void ReportTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ReportTabs.SelectedIndex == 0)
+            if (ReportTabs.SelectedIndex == 0)
             {
                 _loadTodaysReport();
             }
-            else if(ReportTabs.SelectedIndex == 1)
+            else if (ReportTabs.SelectedIndex == 1)
             {
                 _loadWeekReport();
             }
@@ -73,60 +76,16 @@ namespace ExpenseManagement.View_and_Controller
 
         private async void _loadTodaysReport()
         {
-            ListViewToday.Clear();
-            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTodaysTransaction(UserSession.UserData.Id));
-            ListViewToday.HideSelection = true;
-            double income = 0;
-            double expense = 0;
-            ListViewToday.Columns.Add("Date", 200);
-            ListViewToday.Columns.Add("Name", 137);
-            ListViewToday.Columns.Add("Contact", 137);
-            ListViewToday.Columns.Add("Credit", 100);
-            ListViewToday.Columns.Add("Debit", 100);
-
-            foreach (Transaction transaction in transactionList)
-            {
-                ListViewItem todaysTransaction = new ListViewItem(new string[]
-                {
-                            transaction.TransactionDate.ToString(),
-                            transaction.Name,
-                            transaction.ContactName,
-                });
-
-                if(transaction.Type == "Income")
-                {
-                    todaysTransaction.SubItems.Add("£" + transaction.Amount);
-                    income += transaction.Amount;
-                    todaysTransaction.SubItems.Add("");
-                }
-                else
-                {
-                    todaysTransaction.SubItems.Add("");
-                    todaysTransaction.SubItems.Add("£" + transaction.Amount);
-                    expense += transaction.Amount;
-                }
-
-                ListViewToday.Items.Add(todaysTransaction);
-            }
-            ListViewItem total = new ListViewItem(new string[]
-                {
-                            "",
-                            "",
-                            "Total",
-                            "£" +income,
-                            "£" +expense
-                });
-            ListViewToday.Items.Add(total);
+            _transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionFromDate(DateTime.Now, UserSession.UserData.Id));
+            _loadData(ListViewToday, _transactionList);
         }
 
         private async void _loadWeekReport()
         {
-            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionsFromDates(UserSession.UserData.Id, DateTime.Now.AddDays(-7), DateTime.Now));
-            
-            if(transactionList.Count > 0)
+            _transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionsFromDates(UserSession.UserData.Id, DateTime.Now.AddDays(-7), DateTime.Now));
+            if (_transactionList.Count > 0)
             {
-                List<ReportDetails> detailsOfThisWeek = _generateDetails(transactionList);
-                _generateGraph(WeeklyChart, detailsOfThisWeek, 7);
+                _loadData(ListViewWeekly, _transactionList);
             }
             else
             {
@@ -136,81 +95,43 @@ namespace ExpenseManagement.View_and_Controller
 
         private async void _loadMonthReport()
         {
-            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionsFromDates(UserSession.UserData.Id, DateTime.Now.AddDays(-30), DateTime.Now));
-            if (transactionList.Count > 0)
+            _transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionsFromDates(UserSession.UserData.Id, DateTime.Now.AddDays(-30), DateTime.Now));
+            if (_transactionList.Count > 0)
             {
-                List<ReportDetails> detailsOfThisMonth = _generateDetails(transactionList);
-                _generateGraph(MonthlyChart, detailsOfThisMonth, 30);
+                _loadData(ListViewMonthly, _transactionList);
             }
             else
             {
-                MessageBox.Show("THERE WERE NO TRANSACTIONS THIS MONTH", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("THERE WERE NO TRANSACTIONS THIS WEEK", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private void _generateGraph(Chart chart, List<ReportDetails> reportDetailList, int numberOfDays)
-        {
-            chart.Series[0].XValueType = ChartValueType.DateTime;
-
-            var chartDetails = chart.ChartAreas[0];
-            chartDetails.AxisX.LabelStyle.Format = "MM/dd/yyyy";
-            chartDetails.AxisX.Interval = (int)numberOfDays/7;
-            chartDetails.AxisX.IntervalType = DateTimeIntervalType.Days;
-            chartDetails.AxisX.IntervalOffset = (int)numberOfDays / 7;
-            chartDetails.AxisX.MajorGrid.Enabled = false;
-            chartDetails.AxisX.MinorGrid.Enabled = false;
-            chartDetails.AxisX.Minimum = DateTime.Now.AddDays(-numberOfDays).ToOADate();
-            chartDetails.AxisX.Maximum = DateTime.Now.ToOADate();
-
-            chartDetails.AxisY.LabelStyle.Format = "";
-            chartDetails.AxisY.MajorGrid.Enabled = false;
-            chartDetails.AxisY.MinorGrid.Enabled = false;
-            chartDetails.AxisY.Minimum = 0;
-
-            chart.Series.Clear();
-            chart.Series.Add("Expense");
-            chart.Series["Expense"].ChartType = SeriesChartType.Spline;
-            chart.Series["Expense"].Color = Color.Red;
-
-            int maxAmount = 0;
-
-            foreach(ReportDetails reportDetails in reportDetailList)
-            {
-                chart.Series["Expense"].Points.AddXY(reportDetails.Date, reportDetails.Amount);
-
-                if (maxAmount < reportDetails.Amount)
-                {
-                    maxAmount = (int)reportDetails.Amount + 1;
-                }
-                
-            }
-
-            chartDetails.AxisY.Maximum = maxAmount;
-            chartDetails.AxisY.Interval = (int) maxAmount/10;
         }
 
         private async void BtnGenerateReport_Click(object sender, EventArgs e)
         {
-            if(DPickerEndDate.Value < DPickerStartDate.Value)
+            if (DPickerEndDate.Value < DPickerStartDate.Value)
             {
                 MessageBox.Show("START DATE cannot be greater than END DATE", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            ListViewSelectedDate.Clear();
-            List<Transaction> transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionDetailsFromDates(UserSession.UserData.Id, DPickerStartDate.Value, DPickerEndDate.Value));
-            ListViewToday.HideSelection = true;
-            
+            _transactionList = await Task.Run(() => normalTransactionRepository.GetTransactionsFromDates(UserSession.UserData.Id, DPickerStartDate.Value, DPickerEndDate.Value));
+            _loadData(ListViewSelectedDate, _transactionList);
+        }
+
+        public void _loadData(ListView listView, List<Transaction> transactionList)
+        {
+            listView.Clear();
+            listView.HideSelection = true;
             double income = 0;
             double expense = 0;
-            ListViewSelectedDate.Columns.Add("Date", 200);
-            ListViewSelectedDate.Columns.Add("Name", 137);
-            ListViewSelectedDate.Columns.Add("Contact", 137);
-            ListViewSelectedDate.Columns.Add("Credit", 100);
-            ListViewSelectedDate.Columns.Add("Debit", 100);
+            listView.Columns.Add("Date", 200);
+            listView.Columns.Add("Name", 137);
+            listView.Columns.Add("Contact", 137);
+            listView.Columns.Add("Credit", 100);
+            listView.Columns.Add("Debit", 100);
 
             foreach (Transaction transaction in transactionList)
             {
-                ListViewItem transactionDetail = new ListViewItem(new string[]
+                ListViewItem listViewItem = new ListViewItem(new string[]
                 {
                             transaction.TransactionDate.ToString(),
                             transaction.Name,
@@ -219,18 +140,18 @@ namespace ExpenseManagement.View_and_Controller
 
                 if (transaction.Type == "Income")
                 {
-                    transactionDetail.SubItems.Add("£" + transaction.Amount);
+                    listViewItem.SubItems.Add("£" + transaction.Amount);
                     income += transaction.Amount;
-                    transactionDetail.SubItems.Add("");
+                    listViewItem.SubItems.Add("");
                 }
                 else
                 {
-                    transactionDetail.SubItems.Add("");
-                    transactionDetail.SubItems.Add("£" + transaction.Amount);
+                    listViewItem.SubItems.Add("");
+                    listViewItem.SubItems.Add("£" + transaction.Amount);
                     expense += transaction.Amount;
                 }
 
-                ListViewSelectedDate.Items.Add(transactionDetail);
+                listView.Items.Add(listViewItem);
             }
             ListViewItem total = new ListViewItem(new string[]
                 {
@@ -240,7 +161,21 @@ namespace ExpenseManagement.View_and_Controller
                             "£" +income,
                             "£" +expense
                 });
-            ListViewSelectedDate.Items.Add(total);
+            listView.Items.Add(total);
+        }
+
+        private void BtnShowWeekGraph_Click(object sender, EventArgs e)
+        {
+            GraphForm graphForm = new GraphForm(_generateDetails(_transactionList), 7);
+            graphForm.Activate();
+            graphForm.Show();
+        }
+
+        private void BtnShowMonthGraph_Click(object sender, EventArgs e)
+        {
+            GraphForm graphForm = new GraphForm(_generateDetails(_transactionList), 30);
+            graphForm.Activate();
+            graphForm.Show();
         }
 
         private List<ReportDetails> _generateDetails(List<Transaction> transactionList)
@@ -272,6 +207,48 @@ namespace ExpenseManagement.View_and_Controller
             }
 
             return detailsFromTransaction;
+        }
+
+        private void _changeSizeOfColumn(ListView listView)
+        {
+            if (listView.Columns.Count > 0)
+            {
+                int totalWidth = listView.Width - 20;
+                int noOfColumn = listView.Columns.Count;
+                int sizeOfAColumn = totalWidth / noOfColumn - 20;
+                int first = totalWidth - (sizeOfAColumn * (noOfColumn - 1));
+                for (int i = 0; i < noOfColumn; i++)
+                {
+                    if (i == 0)
+                    {
+                        listView.Columns[i].Width = first;
+                    }
+                    else
+                    {
+                        listView.Columns[i].Width = sizeOfAColumn;
+                    }
+                }
+            }
+        }
+
+        private void ListViewToday_SizeChanged(object sender, EventArgs e)
+        {
+            _changeSizeOfColumn(ListViewToday);
+        }
+
+        private void ListViewWeekly_SizeChanged(object sender, EventArgs e)
+        {
+            _changeSizeOfColumn(ListViewWeekly);
+        }
+
+        private void ListViewMonthly_SizeChanged(object sender, EventArgs e)
+        {
+            _changeSizeOfColumn(ListViewMonthly);
+        }
+
+        private void ListViewSelectedDate_SizeChanged(object sender, EventArgs e)
+        {
+            _changeSizeOfColumn(ListViewSelectedDate);
         }
     }
 }

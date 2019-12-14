@@ -120,6 +120,8 @@
             this.Controls.Add(this.LblDate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.DPickerDate);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PredictionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PredictionForm";

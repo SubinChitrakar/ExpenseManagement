@@ -37,12 +37,11 @@
             this.button4 = new System.Windows.Forms.Button();
             this.RecurringBackground = new System.ComponentModel.BackgroundWorker();
             this.Prediction = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnContact
             // 
-            this.btnContact.Location = new System.Drawing.Point(100, 276);
+            this.btnContact.Location = new System.Drawing.Point(12, 78);
             this.btnContact.Name = "btnContact";
             this.btnContact.Size = new System.Drawing.Size(75, 23);
             this.btnContact.TabIndex = 0;
@@ -62,7 +61,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 125);
+            this.button1.Location = new System.Drawing.Point(12, 112);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -72,7 +71,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 180);
+            this.button2.Location = new System.Drawing.Point(-1, 141);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(193, 43);
             this.button2.TabIndex = 3;
@@ -82,7 +81,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(239, 366);
+            this.button3.Location = new System.Drawing.Point(-1, 405);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(193, 43);
             this.button3.TabIndex = 4;
@@ -92,7 +91,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(440, 242);
+            this.button4.Location = new System.Drawing.Point(21, 242);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(171, 57);
             this.button4.TabIndex = 5;
@@ -109,7 +108,7 @@
             // 
             // Prediction
             // 
-            this.Prediction.Location = new System.Drawing.Point(454, 179);
+            this.Prediction.Location = new System.Drawing.Point(12, 190);
             this.Prediction.Name = "Prediction";
             this.Prediction.Size = new System.Drawing.Size(168, 29);
             this.Prediction.TabIndex = 6;
@@ -117,22 +116,11 @@
             this.Prediction.UseVisualStyleBackColor = true;
             this.Prediction.Click += new System.EventHandler(this.Prediction_Click);
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(747, 78);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(146, 57);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Notification";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 544);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.Prediction);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -159,6 +147,5 @@
         private System.Windows.Forms.Button button4;
         private System.ComponentModel.BackgroundWorker RecurringBackground;
         private System.Windows.Forms.Button Prediction;
-        private System.Windows.Forms.Button button5;
     }
 }

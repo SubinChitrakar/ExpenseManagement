@@ -107,5 +107,24 @@ namespace ExpenseManagement.View_and_Controller
                 MessageBox.Show("Select a TRANSACTION", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void TransactionListView_SizeChanged(object sender, EventArgs e)
+        {
+            int totalWidth = TransactionListView.Width - 20;
+            int noOfColumn = TransactionListView.Columns.Count;
+            int sizeOfAColumn = totalWidth / noOfColumn - 20;
+            int lastColumn = totalWidth - (sizeOfAColumn * (noOfColumn - 1));
+            for (int i = 0; i < noOfColumn; i++)
+            {
+                if (i == noOfColumn - 1)
+                {
+                    TransactionListView.Columns[i].Width = lastColumn;
+                }
+                else
+                {
+                    TransactionListView.Columns[i].Width = sizeOfAColumn;
+                }
+            }
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace ExpenseManagement.View_and_Controller
             _materialSkinManager.AddFormToManage(this);
 
             UserSession.ParentForm.Hide();
-            
+
             _messageStatus = new MessageStatus();
             _recurringEventStatus = recurringStatus;
             EventListView.HideSelection = true;
@@ -44,7 +44,7 @@ namespace ExpenseManagement.View_and_Controller
         {
             LblUserName.Text = UserSession.UserData.UserName;
 
-            if(_recurringEventStatus)
+            if (_recurringEventStatus)
             {
                 _getRecurringEvents();
             }
@@ -103,6 +103,25 @@ namespace ExpenseManagement.View_and_Controller
             else
             {
                 MessageBox.Show("Select a EVENT", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void EventListView_SizeChanged(object sender, EventArgs e)
+        {
+            int totalWidth = EventListView.Width - 20;
+            int noOfColumn = EventListView.Columns.Count;
+            int sizeOfAColumn = totalWidth / noOfColumn - 20;
+            int lastColumn = totalWidth - (sizeOfAColumn * (noOfColumn - 1));
+            for (int i = 0; i < noOfColumn; i++)
+            {
+                if (i == noOfColumn - 1)
+                {
+                    EventListView.Columns[i].Width = lastColumn;
+                }
+                else
+                {
+                    EventListView.Columns[i].Width = sizeOfAColumn;
+                }
             }
         }
     }
