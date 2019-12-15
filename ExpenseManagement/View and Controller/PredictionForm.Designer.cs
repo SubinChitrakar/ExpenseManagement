@@ -78,9 +78,9 @@
             this.LblDate.Location = new System.Drawing.Point(22, 128);
             this.LblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblDate.Name = "LblDate";
-            this.LblDate.Size = new System.Drawing.Size(47, 22);
+            this.LblDate.Size = new System.Drawing.Size(115, 22);
             this.LblDate.TabIndex = 37;
-            this.LblDate.Text = "Date";
+            this.LblDate.Text = "Select a Date";
             // 
             // DPickerDate
             // 

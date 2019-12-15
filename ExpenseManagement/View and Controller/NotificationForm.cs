@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,8 +22,10 @@ namespace ExpenseManagement.View_and_Controller
             StartPosition = FormStartPosition.Manual;
             Rectangle size = Screen.PrimaryScreen.WorkingArea;
             Location = new Point(size.Width - Width - 10, size.Height - Height - 10);
-
+            
             LblMessage.Text = message;
+
+            SystemSounds.Exclamation.Play();
 
             NotificationBackground.RunWorkerAsync();
         }

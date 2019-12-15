@@ -12,5 +12,6 @@ namespace ExpenseManagement.Utilities
     {
         public static Form ParentForm;
         public static User UserData = null;
+        public static bool signIn = false;
     }
 }

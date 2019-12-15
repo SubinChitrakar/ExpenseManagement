@@ -68,6 +68,41 @@ namespace ExpenseManagement.Repository
             return eventList;
         }
 
+        public List<Event> GetEvents(DateTime date, int userId)
+        {
+            List<Event> eventList = new List<Event>();
+            Query = "SELECT Events.Name FROM Events LEFT JOIN Contacts ON Events.ContactId = Contacts.ContactId WHERE Events.UserId = @UserId AND CONVERT(Date, Events.EventDate, 1) = @Date ORDER BY Events.EventDate DESC";
+
+            try
+            {
+                SqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = userId;
+                sqlCommand.Parameters.Add("@Date", SqlDbType.DateTime).Value = date.ToShortDateString();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    Event normalEvent = new Event
+                    {
+                        Name = sqlDataReader["Name"].ToString()
+                    };
+
+                    eventList.Add(normalEvent);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+            finally
+            {
+                SqlConnection.Close();
+            }
+            return eventList;
+        }
+
         public MessageStatus AddEvent(Event newEvent)
         {
             Query = "INSERT INTO Events([Name], [Location], [Type], [Note], [EventDate], [ContactId], [UserId]) VALUES(@Name, @Location, @Type, @Note, @EventDate, @ContactId, @UserId);";

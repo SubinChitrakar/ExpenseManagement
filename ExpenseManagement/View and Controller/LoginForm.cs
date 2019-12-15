@@ -60,6 +60,7 @@ namespace ExpenseManagement
             if (_user.Id > 0)
             {
                 UserSession.UserData = _user;
+                UserSession.signIn = true;
                 this.Dispose();
                 UserSession.ParentForm.Activate();
                 UserSession.ParentForm.Show();
