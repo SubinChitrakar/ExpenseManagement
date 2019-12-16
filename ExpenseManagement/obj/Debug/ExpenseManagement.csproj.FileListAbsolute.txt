@@ -25,3 +25,4 @@ D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\NLog.config
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\NLog.dll
 D:\Westminster\ExpenseManagement\ExpenseManagement\bin\Debug\NLog.xml
 D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.GraphForm.resources
+D:\Westminster\ExpenseManagement\ExpenseManagement\obj\Debug\ExpenseManagement.View_and_Controller.ChangePassword.resources

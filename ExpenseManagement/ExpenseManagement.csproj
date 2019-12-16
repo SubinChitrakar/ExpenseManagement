@@ -81,6 +81,12 @@
     <Compile Include="Utilities\ReportDetails.cs" />
     <Compile Include="Utilities\UserSession.cs" />
     <Compile Include="Utilities\Validator.cs" />
+    <Compile Include="View and Controller\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View and Controller\ChangePassword.Designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="View and Controller\ContactActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,9 @@
     <None Include="Resources\Images\transaction.png" />
     <None Include="Resources\Images\Report.png" />
     <None Include="Resources\Images\Prediction.png" />
+    <EmbeddedResource Include="View and Controller\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View and Controller\ContactActionForm.resx">
       <DependentUpon>ContactActionForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -86,6 +86,40 @@ namespace ExpenseManagement.Repository
             return MessageStatus;
         }
 
+        public MessageStatus UpdateUserPassword(User user)
+        {
+            Query = "UPDATE USERS SET [Password] = @Password WHERE  [Id]= @UserId";
+            try
+            {
+                SqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(Query, SqlConnection);
+                sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = user.Password;
+                sqlCommand.Parameters.Add("@UserId", SqlDbType.VarChar).Value = user.Id;
+
+                var i = sqlCommand.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    MessageStatus.Message = "User Updated Successfully!!";
+                    MessageStatus.ErrorStatus = false;
+                }
+                else
+                    throw new Exception("Error, Data Not Added!");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+                MessageStatus.Message = ex.Message;
+                MessageStatus.ErrorStatus = true;
+            }
+            finally
+            {
+                SqlConnection.Close();
+            }
+            return MessageStatus;
+        }
+
+
         //Get Username
         public User GetUserFromUsername(string username)
         {

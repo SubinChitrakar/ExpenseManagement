@@ -396,7 +396,9 @@ namespace ExpenseManagement.View_and_Controller
 
         private void BtnChangePassword_Click(object sender, EventArgs e)
         {
-
+            ChangePassword changePassword = new ChangePassword();
+            changePassword.Activate();
+            changePassword.Show();
         }
 
         private async void _createTransactions(DateTime selectedTime)
