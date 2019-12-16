@@ -57,7 +57,7 @@ namespace ExpenseManagement.View_and_Controller
             TransactionListView.Items.Clear();
             foreach (Transaction normalTransaction in listOfNormalTransaction)
             {
-                ListViewItem listView = new ListViewItem(new string[] { normalTransaction.Name, normalTransaction.Type, normalTransaction.Amount.ToString(), normalTransaction.TransactionDate.ToString() })
+                ListViewItem listView = new ListViewItem(new string[] { normalTransaction.Name, normalTransaction.Type, normalTransaction.Amount.ToString("£0.00"), normalTransaction.TransactionDate.ToString() })
                 {
                     Tag = normalTransaction
                 };
@@ -72,7 +72,7 @@ namespace ExpenseManagement.View_and_Controller
             TransactionListView.Items.Clear();
             foreach (RecurringTransaction recurringTransaction in listOfRecurringTransaction)
             {
-                ListViewItem listView = new ListViewItem(new string[] { recurringTransaction.Name, recurringTransaction.Type, recurringTransaction.Amount.ToString(), recurringTransaction.TransactionDate.ToString() })
+                ListViewItem listView = new ListViewItem(new string[] { recurringTransaction.Name, recurringTransaction.Type, recurringTransaction.Amount.ToString("£0.00"), recurringTransaction.TransactionDate.ToString() })
                 {
                     Tag = recurringTransaction
                 };
