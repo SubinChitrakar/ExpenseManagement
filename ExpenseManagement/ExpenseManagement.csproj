@@ -155,6 +155,7 @@
     <Compile Include="View and Controller\TransactionListForm.Designer.cs">
       <DependentUpon>TransactionListForm.cs</DependentUpon>
     </Compile>
+    <None Include="Resources\Images\NoOfEvent.png" />
     <None Include="Resources\Images\Settings.png" />
     <None Include="Resources\Images\Password.png" />
     <None Include="Resources\Images\transaction.png" />
@@ -232,6 +233,8 @@
     <None Include="Resources\Images\Contacts.png" />
     <None Include="Resources\Images\Events.png" />
     <None Include="Resources\Images\Logout.png" />
+    <None Include="Resources\Images\Expense.png" />
+    <None Include="Resources\Images\Income.png" />
     <Content Include="Resources\Images\money.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

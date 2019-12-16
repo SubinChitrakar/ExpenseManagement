@@ -41,21 +41,22 @@
             // LblMessage
             // 
             this.LblMessage.AutoSize = true;
+            this.LblMessage.BackColor = System.Drawing.Color.Transparent;
             this.LblMessage.Depth = 0;
             this.LblMessage.Font = new System.Drawing.Font("Roboto", 11F);
             this.LblMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.LblMessage.Location = new System.Drawing.Point(12, 28);
+            this.LblMessage.Location = new System.Drawing.Point(12, 97);
             this.LblMessage.MouseState = MaterialSkin.MouseState.HOVER;
             this.LblMessage.Name = "LblMessage";
             this.LblMessage.Size = new System.Drawing.Size(88, 24);
-            this.LblMessage.TabIndex = 0;
+            this.LblMessage.TabIndex = 2;
             this.LblMessage.Text = "Message";
             // 
             // NotificationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 88);
+            this.ClientSize = new System.Drawing.Size(397, 151);
             this.Controls.Add(this.LblMessage);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

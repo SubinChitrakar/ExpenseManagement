@@ -56,25 +56,28 @@
             this.TimerEvents = new System.Windows.Forms.Timer(this.components);
             this.TimerSettings = new System.Windows.Forms.Timer(this.components);
             this.DPickerSelectDate = new System.Windows.Forms.MonthCalendar();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.LblExpenseValue = new System.Windows.Forms.Label();
             this.LblTotalExpense = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.LblIncomeValue = new System.Windows.Forms.Label();
-            this.LblTotalIncome = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.LblEventsValue = new System.Windows.Forms.Label();
-            this.LblNoOfEvents = new System.Windows.Forms.Label();
             this.EventPanel = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.LblTotalIncome = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.LblNoOfEvents = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.headingPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.MenuPanel.SuspendLayout();
             this.PanelTransaction.SuspendLayout();
             this.PanelEvent.SuspendLayout();
             this.SettingsPanel.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // RecurringBackground
@@ -416,107 +419,23 @@
             // DPickerSelectDate
             // 
             this.DPickerSelectDate.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DPickerSelectDate.Location = new System.Drawing.Point(255, 174);
+            this.DPickerSelectDate.Location = new System.Drawing.Point(263, 286);
             this.DPickerSelectDate.MaxSelectionCount = 1;
             this.DPickerSelectDate.Name = "DPickerSelectDate";
             this.DPickerSelectDate.TabIndex = 18;
             this.DPickerSelectDate.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.DPickerSelectDate_DateSelected);
             // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel4.Controls.Add(this.LblExpenseValue);
-            this.panel4.Controls.Add(this.LblTotalExpense);
-            this.panel4.Location = new System.Drawing.Point(255, 396);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(298, 57);
-            this.panel4.TabIndex = 21;
-            // 
-            // LblExpenseValue
-            // 
-            this.LblExpenseValue.AutoSize = true;
-            this.LblExpenseValue.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblExpenseValue.ForeColor = System.Drawing.Color.Red;
-            this.LblExpenseValue.Location = new System.Drawing.Point(221, 18);
-            this.LblExpenseValue.Name = "LblExpenseValue";
-            this.LblExpenseValue.Size = new System.Drawing.Size(60, 22);
-            this.LblExpenseValue.TabIndex = 1;
-            this.LblExpenseValue.Text = "label3";
-            // 
             // LblTotalExpense
             // 
             this.LblTotalExpense.AutoSize = true;
-            this.LblTotalExpense.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblTotalExpense.ForeColor = System.Drawing.Color.Black;
-            this.LblTotalExpense.Location = new System.Drawing.Point(33, 19);
+            this.LblTotalExpense.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTotalExpense.ForeColor = System.Drawing.Color.White;
+            this.LblTotalExpense.Location = new System.Drawing.Point(23, 56);
             this.LblTotalExpense.Name = "LblTotalExpense";
-            this.LblTotalExpense.Size = new System.Drawing.Size(116, 21);
-            this.LblTotalExpense.TabIndex = 0;
-            this.LblTotalExpense.Text = "Total Expense";
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel5.Controls.Add(this.LblIncomeValue);
-            this.panel5.Controls.Add(this.LblTotalIncome);
-            this.panel5.Location = new System.Drawing.Point(255, 459);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(298, 57);
-            this.panel5.TabIndex = 22;
-            // 
-            // LblIncomeValue
-            // 
-            this.LblIncomeValue.AutoSize = true;
-            this.LblIncomeValue.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblIncomeValue.ForeColor = System.Drawing.Color.ForestGreen;
-            this.LblIncomeValue.Location = new System.Drawing.Point(221, 18);
-            this.LblIncomeValue.Name = "LblIncomeValue";
-            this.LblIncomeValue.Size = new System.Drawing.Size(60, 22);
-            this.LblIncomeValue.TabIndex = 2;
-            this.LblIncomeValue.Text = "label3";
-            // 
-            // LblTotalIncome
-            // 
-            this.LblTotalIncome.AutoSize = true;
-            this.LblTotalIncome.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblTotalIncome.ForeColor = System.Drawing.Color.Black;
-            this.LblTotalIncome.Location = new System.Drawing.Point(33, 19);
-            this.LblTotalIncome.Name = "LblTotalIncome";
-            this.LblTotalIncome.Size = new System.Drawing.Size(109, 21);
-            this.LblTotalIncome.TabIndex = 1;
-            this.LblTotalIncome.Text = "Total Income";
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel6.Controls.Add(this.LblEventsValue);
-            this.panel6.Controls.Add(this.LblNoOfEvents);
-            this.panel6.Location = new System.Drawing.Point(255, 522);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(298, 57);
-            this.panel6.TabIndex = 23;
-            // 
-            // LblEventsValue
-            // 
-            this.LblEventsValue.AutoSize = true;
-            this.LblEventsValue.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblEventsValue.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.LblEventsValue.Location = new System.Drawing.Point(221, 18);
-            this.LblEventsValue.Name = "LblEventsValue";
-            this.LblEventsValue.Size = new System.Drawing.Size(60, 22);
-            this.LblEventsValue.TabIndex = 3;
-            this.LblEventsValue.Text = "label4";
-            // 
-            // LblNoOfEvents
-            // 
-            this.LblNoOfEvents.AutoSize = true;
-            this.LblNoOfEvents.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblNoOfEvents.ForeColor = System.Drawing.Color.Black;
-            this.LblNoOfEvents.Location = new System.Drawing.Point(33, 19);
-            this.LblNoOfEvents.Name = "LblNoOfEvents";
-            this.LblNoOfEvents.Size = new System.Drawing.Size(114, 21);
-            this.LblNoOfEvents.TabIndex = 1;
-            this.LblNoOfEvents.Text = "No. of Events";
+            this.LblTotalExpense.Size = new System.Drawing.Size(50, 22);
+            this.LblTotalExpense.TabIndex = 1;
+            this.LblTotalExpense.Text = "£100";
+            this.LblTotalExpense.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EventPanel
             // 
@@ -528,15 +447,99 @@
             this.EventPanel.Size = new System.Drawing.Size(240, 635);
             this.EventPanel.TabIndex = 24;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(67)))), ((int)(((byte)(54)))));
+            this.panel2.Controls.Add(this.LblTotalExpense);
+            this.panel2.Controls.Add(this.pictureBox3);
+            this.panel2.Location = new System.Drawing.Point(269, 174);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(93, 92);
+            this.panel2.TabIndex = 26;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::ExpenseManagement.Properties.Resources.Expense;
+            this.pictureBox3.Location = new System.Drawing.Point(27, 13);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 25;
+            this.pictureBox3.TabStop = false;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(107)))));
+            this.panel4.Controls.Add(this.LblTotalIncome);
+            this.panel4.Controls.Add(this.pictureBox2);
+            this.panel4.Location = new System.Drawing.Point(368, 174);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(93, 92);
+            this.panel4.TabIndex = 27;
+            // 
+            // LblTotalIncome
+            // 
+            this.LblTotalIncome.AutoSize = true;
+            this.LblTotalIncome.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTotalIncome.ForeColor = System.Drawing.Color.White;
+            this.LblTotalIncome.Location = new System.Drawing.Point(23, 56);
+            this.LblTotalIncome.Name = "LblTotalIncome";
+            this.LblTotalIncome.Size = new System.Drawing.Size(50, 22);
+            this.LblTotalIncome.TabIndex = 1;
+            this.LblTotalIncome.Text = "£100";
+            this.LblTotalIncome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ExpenseManagement.Properties.Resources.Income;
+            this.pictureBox2.Location = new System.Drawing.Point(27, 13);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 25;
+            this.pictureBox2.TabStop = false;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            this.panel5.Controls.Add(this.LblNoOfEvents);
+            this.panel5.Controls.Add(this.pictureBox5);
+            this.panel5.Location = new System.Drawing.Point(467, 174);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(93, 92);
+            this.panel5.TabIndex = 28;
+            // 
+            // LblNoOfEvents
+            // 
+            this.LblNoOfEvents.AutoSize = true;
+            this.LblNoOfEvents.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblNoOfEvents.ForeColor = System.Drawing.Color.White;
+            this.LblNoOfEvents.Location = new System.Drawing.Point(38, 56);
+            this.LblNoOfEvents.Name = "LblNoOfEvents";
+            this.LblNoOfEvents.Size = new System.Drawing.Size(20, 22);
+            this.LblNoOfEvents.TabIndex = 1;
+            this.LblNoOfEvents.Text = "1";
+            this.LblNoOfEvents.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::ExpenseManagement.Properties.Resources.NoOfEvent;
+            this.pictureBox5.Location = new System.Drawing.Point(27, 13);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 25;
+            this.pictureBox5.TabStop = false;
+            // 
             // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1240, 828);
-            this.Controls.Add(this.EventPanel);
-            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.EventPanel);
             this.Controls.Add(this.DPickerSelectDate);
             this.Controls.Add(this.headingPanel);
             this.Controls.Add(this.MenuPanel);
@@ -554,12 +557,15 @@
             this.PanelTransaction.ResumeLayout(false);
             this.PanelEvent.ResumeLayout(false);
             this.SettingsPanel.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -591,15 +597,15 @@
         private System.Windows.Forms.Button BtnChangePassword;
         private System.Windows.Forms.Button BtnSettings;
         private System.Windows.Forms.MonthCalendar DPickerSelectDate;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label LblTotalExpense;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label LblTotalIncome;
-        private System.Windows.Forms.Label LblExpenseValue;
-        private System.Windows.Forms.Label LblIncomeValue;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label LblEventsValue;
-        private System.Windows.Forms.Label LblNoOfEvents;
         private System.Windows.Forms.Panel EventPanel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label LblTotalIncome;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label LblNoOfEvents;
+        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }

@@ -23,8 +23,8 @@ namespace ExpenseManagement.View_and_Controller
         private Panel _transactionPanel = new Panel();
         private int _height;
         private int _width;
-        private int _totalExpense;
-        private int _totalIncome;
+        private double _totalExpense;
+        private double _totalIncome;
 
         public DashboardForm()
         {
@@ -46,11 +46,11 @@ namespace ExpenseManagement.View_and_Controller
             if (UserSession.signIn)
             {
                 _createEvents(DateTime.Now);
-                _createTransactions();
+                _createTransactions(DateTime.Now);
                 LblUserName.Text = UserSession.UserData.UserName;
                 if (!RecurringBackground.IsBusy)
                     RecurringBackground.RunWorkerAsync();
-                
+
             }
             else
             {
@@ -399,8 +399,14 @@ namespace ExpenseManagement.View_and_Controller
 
         }
 
-        private void _createTransactions()
+        private async void _createTransactions(DateTime selectedTime)
         {
+            NormalTransactionRepository normalTransactionRepository = new NormalTransactionRepository();
+            List<Transaction> listOfTransaction = await Task.Run(() => normalTransactionRepository.GetTransactionFromDate(selectedTime, UserSession.UserData.Id));
+
+            _totalIncome = 0;
+            _totalExpense = 0;
+
             _transactionPanel.BackColor = SystemColors.ControlLight;
             _transactionPanel.Location = new Point(430, 140);
             _transactionPanel.Name = "transactionPanel";
@@ -415,7 +421,7 @@ namespace ExpenseManagement.View_and_Controller
                 AutoSize = true,
                 BackColor = Color.Transparent,
                 Font = new Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                Location = new Point(10,10),
+                Location = new Point(10, 10),
                 Size = new Size(155, 33),
                 Text = "Transactions"
             };
@@ -429,8 +435,70 @@ namespace ExpenseManagement.View_and_Controller
                 Size = new Size(_transactionPanel.Width - 20, 2)
             };
             _transactionPanel.Controls.Add(line);
-        }
 
+            int count = 1;
+            foreach (Transaction transaction in listOfTransaction)
+            {
+                Panel eachTransaction = new Panel
+                {
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                    BackColor = Color.White,
+                    Size = new Size(290, 80),
+                    Location = new Point(10, count * 55)
+                };
+                _transactionPanel.Controls.Add(eachTransaction);
+
+                Label lblTransactionName = new Label
+                {
+                    Font = new Font("Times New Roman", 18F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                    AutoSize = true,
+                    Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                    Location = new Point(5, 20),
+                    Size = new Size(100, 100),
+                    Text = transaction.Name
+                };
+                eachTransaction.Controls.Add(lblTransactionName);
+
+                Label lblTransactionType = new Label
+                {
+                    Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                    AutoSize = true,
+                    Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                    Location = new Point(10, 50),
+                    Size = new Size(100, 100),
+                    Text = transaction.Type
+                };
+                eachTransaction.Controls.Add(lblTransactionType);
+
+                Label lblAmount = new Label
+                {
+                    Font = new Font("Times New Roman", 22F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                    AutoSize = true,
+                    Anchor = AnchorStyles.Right | AnchorStyles.Top,
+                    Location = new Point(200, 25),
+                    Size = new Size(100, 100),
+                    Text = "£" + transaction.Amount
+                };
+                eachTransaction.Controls.Add(lblAmount);
+
+
+                if (transaction.Type.Equals("Expense"))
+                {
+                    _totalExpense += transaction.Amount;
+                    lblAmount.ForeColor = Color.FromArgb(244, 67, 54);
+                    lblTransactionType.ForeColor = Color.FromArgb(244, 67, 54);
+                }
+                else
+                {
+                    _totalIncome += transaction.Amount;
+                    lblAmount.ForeColor = Color.FromArgb(0, 121, 107);
+                    lblTransactionType.ForeColor = Color.FromArgb(0, 121, 107);
+                }
+                LblTotalExpense.Text = "£" + _totalExpense;
+                LblTotalIncome.Text = "£" + _totalIncome;
+                count++;
+            }
+        }
 
         private void DashboardForm_SizeChanged(object sender, EventArgs e)
         {
@@ -440,7 +508,7 @@ namespace ExpenseManagement.View_and_Controller
             {
                 _width = Convert.ToInt32(this.Width / 1.7);
             }
-            else if(this.Width >1020 && this.Width < 1200)
+            else if (this.Width > 1020 && this.Width < 1200)
             {
                 _width = Convert.ToInt32(this.Width / 2.6);
             }
@@ -456,7 +524,7 @@ namespace ExpenseManagement.View_and_Controller
         private void DPickerSelectDate_DateSelected(object sender, DateRangeEventArgs e)
         {
             _createEvents(DPickerSelectDate.SelectionEnd);
-            _createTransactions();
+            _createTransactions(DPickerSelectDate.SelectionEnd);
         }
 
         private async void _createEvents(DateTime selectedTime)
@@ -464,7 +532,7 @@ namespace ExpenseManagement.View_and_Controller
             EventRepository eventRepository = new EventRepository();
             List<Event> listOfEvent = await Task.Run(() => eventRepository.GetEvents(selectedTime, UserSession.UserData.Id));
 
-            LblEventsValue.Text = Convert.ToString(listOfEvent.Count);
+            LblNoOfEvents.Text = Convert.ToString(listOfEvent.Count);
             EventPanel.Controls.Clear();
 
             Label lblEventHeading = new Label
@@ -489,7 +557,7 @@ namespace ExpenseManagement.View_and_Controller
             EventPanel.Controls.Add(line);
 
             int count = 1;
-            foreach(Event dateEvent in listOfEvent)
+            foreach (Event dateEvent in listOfEvent)
             {
                 Panel eachEvent = new Panel
                 {
@@ -500,15 +568,15 @@ namespace ExpenseManagement.View_and_Controller
                 };
                 EventPanel.Controls.Add(eachEvent);
 
-                Label label = new Label
+                Label lblEventName = new Label
                 {
+                    Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
                     AutoSize = true,
                     Location = new Point(10, 18),
                     Size = new Size(100, 17),
-                    TabIndex = 0,
                     Text = dateEvent.Name
                 };
-                eachEvent.Controls.Add(label);
+                eachEvent.Controls.Add(lblEventName);
                 count++;
             }
         }

@@ -48,7 +48,7 @@ namespace ExpenseManagement.View_and_Controller
             {
                 prediction = totalOfRecurringTransaction;
             }
-            MessageBox.Show("Predicted Expense for "+ DPickerDate.Value.ToShortDateString() + " : £" + prediction, "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Predicted Expense for "+ DPickerDate.Value.ToShortDateString()+ " : £" + prediction.ToString("0.00"), "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private double _getAverage(List<Transaction> transactionList)

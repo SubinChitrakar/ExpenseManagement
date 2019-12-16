@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ExpenseManagement.View_and_Controller
 {
-    public partial class NotificationForm : Form
+    public partial class NotificationForm : MaterialForm
     {
         public NotificationForm(string message)
         {
